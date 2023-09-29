@@ -52,3 +52,21 @@ Requirements:
 model: The model will handle the backend information functionality and rules. In our case the Member, Item and Contract class (maybe a data handling class? )
 controller: The controller will handle operation requested by the user such as deleting, adding or whatever. It takes info from the model and sends to the view to display it to the user.
 view: The view will be responsilbe for displaying all information in the console to the user. Mostly handling print statements in this system I think.
+
+
+### The UI
+
+Welcome to the stuff lending system!
+
+1. Member   ---------------------------------------------------------------> 1. Create Member -------------------------------------------------> 1. Name
+2. Item     ---------------------------------                                2. List Members (simple) --------> 1. Delete member                 2. Email
+3. Contract -----------                      |                               3. List Members (verbose way)      2. Change member information     3. Phone
+4. Advance Day         |                     |                                                                  3. Show full information
+5. Quit                |                     |
+                       |                     |
+                       |                      1. Create Item ---------------------------------------> 1. Name
+                       |                      2. List Items ---------> 1. Delete Item                 2. Category
+                       |                                               2. Change Information          3. Short Description
+                       |                                               3. View full information
+                       | 
+                        1. New Contract --------> 1.                                          
