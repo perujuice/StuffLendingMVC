@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * This class will handle member information.
@@ -9,15 +10,17 @@ import java.util.List;
 public class Member {
     private String name;
     private String email;
-    private int phoneNr;
+    private String phoneNr;
     // Generate a unique member ID.
+    private String memberID;
+    private int credits;
     // Owned Items
     // private List<Item> ownedItems = new ArrayList<>();
 
-    public Member(String new_name, String new_email, int new_phoneNr) {
-        name = new_name;
-        email = new_email;
-        phoneNr = new_phoneNr;
+    public Member(String name, String email, String phoneNr) {
+        this.name = name;
+        this.email = email;
+        this.phoneNr = phoneNr;
     }
 
     // We can do it like this to make sure the view only depoends on the model.
@@ -26,12 +29,35 @@ public class Member {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getEmail() {
         return email;
     }
 
-    public int getPhoneNr() {
+    public void setEmail(String name) {
+        this.email = email;
+    }
+
+    public String getPhoneNr() {
         return phoneNr;
     }
 
+    public void setPhoneNr(String phoneNr) {
+        this.phoneNr = phoneNr;
+    }
+
+    public String getMemberId() {
+        return memberID;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
 }

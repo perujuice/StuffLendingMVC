@@ -1,5 +1,7 @@
 package view;
 
+import controller.MemberController;
+import model.Member;
 import java.util.Scanner;
 
 public class UI {
@@ -26,8 +28,25 @@ public class UI {
 
             switch (choice) {
                 case 1:
-                    // Call a method to handle Member Management
-                    handleMemberManagement();
+                    // Member Management
+                    System.out.println("Creating a new member...\n");
+
+                    System.out.print("Enter the member's name: ");
+                    String name = scanner.nextLine();
+
+                    System.out.print("Enter the member's email: ");
+                    String email = scanner.nextLine();
+
+                    System.out.print("Enter the member's phone number: ");
+                    String phoneNr = scanner.nextLine();
+
+                    // creat instance create a new member
+                    MemberController memberController = new MemberController();
+
+                    Member newMember = memberController.createMember(name, email, phoneNr);
+
+                    // Print a confirmatiom message
+                    System.out.println("New member created with Member ID: " + newMember.getMemberId());
                     break;
 
                 case 2:
