@@ -1,8 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 /**
  * This class will handle member information.
@@ -10,17 +8,18 @@ import java.util.UUID;
 public class Member {
     private String name;
     private String email;
-    private String phoneNr;
+    private int phoneNr;
     // Generate a unique member ID.
     private String memberID;
     private int credits;
     // Owned Items
     // private List<Item> ownedItems = new ArrayList<>();
 
-    public Member(String name, String email, String phoneNr) {
-        this.name = name;
-        this.email = email;
-        this.phoneNr = phoneNr;
+    public Member(String a_name, String a_email, int a_phoneNr) {
+        this.name = a_name;
+        this.email = a_email;
+        this.phoneNr = a_phoneNr;
+        this.memberID = generateMemberID();
     }
 
     // We can do it like this to make sure the view only depoends on the model.
@@ -37,17 +36,31 @@ public class Member {
         return email;
     }
 
-    public void setEmail(String name) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPhoneNr() {
+    public int getPhoneNr() {
         return phoneNr;
     }
 
-    public void setPhoneNr(String phoneNr) {
+    public void setPhoneNr(int phoneNr) {
         this.phoneNr = phoneNr;
     }
+
+    private String generateMemberID() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        char[] memberID = new char[6];
+
+        for (int i = 0; i < 6; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            memberID[i] = characters.charAt(randomIndex);
+        }
+
+        return new String(memberID);
+    }
+
 
     public String getMemberId() {
         return memberID;

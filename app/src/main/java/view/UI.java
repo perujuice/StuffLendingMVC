@@ -38,7 +38,7 @@ public class UI {
                     String email = scanner.nextLine();
 
                     System.out.print("Enter the member's phone number: ");
-                    String phoneNr = scanner.nextLine();
+                    int phoneNr = scanner.nextInt();
 
                     // creat instance create a new member
                     MemberController memberController = new MemberController();

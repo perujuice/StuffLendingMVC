@@ -13,7 +13,7 @@ public class MemberController {
         members = new ArrayList<>();
     }
 
-    public Member createMember(String name, String email, String phoneNr) {
+    public Member createMember(String name, String email, int phoneNr) {
         Member newMember = new Member(name, email, phoneNr);
         members.add(newMember); // Add the new member to the list
         return newMember;
