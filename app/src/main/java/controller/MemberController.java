@@ -10,12 +10,46 @@ public class MemberController {
 
     public MemberController() {
         // start list of members
-        members = new ArrayList<>();
+        this.members = new ArrayList<>();
     }
 
     public Member createMember(String name, String email, int phoneNr) {
-        Member newMember = new Member(name, email, phoneNr);
-        members.add(newMember); // Add the new member to the list
-        return newMember;
+        // check for uniqueness of variables
+        if (isEmailUnique(email) && isPhoneNrUnique(phoneNr)) {
+            Member newMember = new Member(name, email, phoneNr);
+            members.add(newMember); // Add the new member to the list
+            return newMember;
+        } else {
+            System.out.println("Email or Phone number is not unique! ");
+            return null;
+        }
+    }
+
+    private boolean isEmailUnique(String email) {
+        for (Member member : members) {
+            if (member.getEmail() != null && member.getEmail().equals(email)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isPhoneNrUnique(int phoneNr) {
+        for (Member member : members) {
+            if (member.getPhoneNr() == phoneNr) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public List<String> getAllMemberNames() {
+        List<String> memberNames = new ArrayList<>();
+    
+        for (Member member : members) {
+            memberNames.add(member.getName());
+        }
+    
+        return memberNames;
     }
 }

@@ -2,10 +2,13 @@ package view;
 
 import controller.MemberController;
 import model.Member;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class UI {
     private Scanner scanner;
+    MemberController memberController = new MemberController();
 
     public UI() {
         scanner = new Scanner(System.in);
@@ -29,24 +32,7 @@ public class UI {
             switch (choice) {
                 case 1:
                     // Member Management
-                    System.out.println("Creating a new member...\n");
-
-                    System.out.print("Enter the member's name: ");
-                    String name = scanner.nextLine();
-
-                    System.out.print("Enter the member's email: ");
-                    String email = scanner.nextLine();
-
-                    System.out.print("Enter the member's phone number: ");
-                    int phoneNr = scanner.nextInt();
-
-                    // creat instance create a new member
-                    MemberController memberController = new MemberController();
-
-                    Member newMember = memberController.createMember(name, email, phoneNr);
-
-                    // Print a confirmatiom message
-                    System.out.println("New member created with Member ID: " + newMember.getMemberId());
+                    handleMemberManagement();
                     break;
 
                 case 2:
@@ -89,6 +75,53 @@ public class UI {
     private void handleMemberManagement() {
         System.out.println("Member Management:");
         // member management logic
+        while (true) {
+            System.out.println("\nMember Management Menu:");
+            System.out.println("1. Create Member");
+            System.out.println("2. List all memebers");
+            System.out.println("3. Back");
+
+            System.out.print("\nEnter your choice: ");
+
+            int choice = getIntInput();
+
+            switch (choice) {
+                case 1:
+                    //Create Member.
+                    System.out.println("Creating a new member...\n");
+                    System.out.print("Enter the member's name: ");
+                    String name = scanner.nextLine();
+
+                    System.out.print("Enter the member's email: ");
+                    String email = scanner.nextLine();
+
+                    System.out.print("Enter the member's phone number: ");
+                    int phoneNr = scanner.nextInt();
+
+                    scanner.nextLine();
+                    // creat instance create a new member
+                    //MemberController memberController = new MemberController();
+                    Member newMember = memberController.createMember(name, email, phoneNr);
+
+                    // Print a confirmatiom message
+                    System.out.println("New member created with Member ID: " + newMember.getMemberId());
+                    break;
+                
+                case 2:
+                    List<String> allMemberNames = memberController.getAllMemberNames();
+                    
+                    // Now 'allMemberNames' contains all member names
+                    for (String member_name : allMemberNames) {
+                        // Display the member name as needed
+                        System.out.println("Name: " + member_name);
+                    }
+                    break;
+
+                case 3:
+                    displayMenu();
+                    break;
+            }
+        }
     }
 
     private void handleItemManagement() {
@@ -104,10 +137,5 @@ public class UI {
     private void advanceTime() {
         System.out.println("Advancing Time:");
         // time advancement logic
-    }
-
-    public static void main(String[] args) {
-        UI mainMenu = new UI();
-        mainMenu.displayMenu();
     }
 }
