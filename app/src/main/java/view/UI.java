@@ -34,22 +34,18 @@ public class UI {
                     // Member Management
                     handleMemberManagement();
                     break;
-
                 case 2:
                     // Call a method to handle Item Management
                     handleItemManagement();
                     break;
-
                 case 3:
                     // Call a method to handle Contract Management
                     handleContractManagement();
                     break;
-
                 case 4:
                     // Call a method to handle advancing time
                     advanceTime();
                     break;
-
                 case 5:
                     System.out.println("Exiting the application.");
                     scanner.close(); // Close the scanner before exiting
@@ -77,9 +73,12 @@ public class UI {
         // member management logic
         while (true) {
             System.out.println("\nMember Management Menu:");
-            System.out.println("1. Create Member");
-            System.out.println("2. List all memebers");
-            System.out.println("3. Back");
+            System.out.println("1. Create member");
+            System.out.println("2. Delete member");
+            System.out.println("3. Change member information");
+            System.out.println("4. View member information");
+            System.out.println("5. List all memebers");
+            System.out.println("6. Back");
 
             System.out.print("\nEnter your choice: ");
 
@@ -108,6 +107,16 @@ public class UI {
                     break;
                 
                 case 2:
+                    //Deletes a member
+                    System.out.print("Enter the member's ID to be deleted: ");
+                    String memberID = scanner.nextLine();
+                    memberController.deleteMember(memberID);
+                    System.out.println("Member successfully deleted! ");
+                    break;
+
+
+                case 3:
+                    //list all members
                     List<String> allMemberNames = memberController.getAllMemberNames();
                     
                     // Now 'allMemberNames' contains all member names
@@ -116,17 +125,38 @@ public class UI {
                         System.out.println("Name: " + member_name);
                     }
                     break;
-
-                case 3:
+                
+                case 6:
                     displayMenu();
                     break;
             }
         }
     }
 
+
     private void handleItemManagement() {
         System.out.println("Item Management:");
         // item management logic
+        while (true) {
+            System.out.println("\nItem Management Menu:");
+            System.out.println("1. Create Item");
+            System.out.println("2. List all Items");
+            System.out.println("3. Back");
+
+            System.out.print("\nEnter your choice: ");
+
+            int choice = getIntInput();
+
+            switch (choice) {
+                case 1:
+                    // Create Item.
+                    System.out.println("Creating a new Item...\n");
+                    System.out.print("Enter the items's name: ");
+                    String name = scanner.nextLine();
+            }
+        
+        }
+
     }
 
     private void handleContractManagement() {

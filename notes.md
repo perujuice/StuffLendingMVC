@@ -69,4 +69,4 @@ Welcome to the stuff lending system!
                        |                                               2. Change Information          3. Short Description
                        |                                               3. View full information
                        | 
-                        1. New Contract --------> 1.                                          
+                        1. New Contract --------> 1. 
