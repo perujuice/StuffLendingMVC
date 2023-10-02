@@ -52,4 +52,14 @@ public class MemberController {
     
         return memberNames;
     }
+
+    public boolean deleteMember(String memberID) {
+        for (Member member : members) {
+            if (member.getMemberId().equals(memberID)) {
+                members.remove(member);
+                return true; // Member deleted successfully
+            }
+        }
+        return false; // Member not found
+    }
 }
