@@ -53,6 +53,8 @@ public class MemberController {
         return memberNames;
     }
 
+    //Probably needs to be modified once we implement everything for the items
+    //Since when a member is deleted the items belonging to that member should be deleted as well.
     public boolean deleteMember(String memberID) {
         for (Member member : members) {
             if (member.getMemberId().equals(memberID)) {
