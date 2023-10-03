@@ -45,7 +45,6 @@ public class MemberController {
 
     public List<String> getAllMemberNames() {
         List<String> memberNames = new ArrayList<>();
-    
         for (Member member : members) {
             memberNames.add(member.getName());
         }
@@ -63,5 +62,53 @@ public class MemberController {
             }
         }
         return false; // Member not found
+    }
+
+    public Member searchMember(String memberID) {
+        for (Member member : members) {
+            if (member.getMemberId().equals(memberID)) {
+                return member;
+            }
+        }
+		return null; // member not found
+    }
+
+    public void printMemberInfo(String memberId) {
+        Member member = searchMember(memberId);
+        if (member != null) {
+            System.out.println("\nMember Information:");
+            System.out.println("Name: " + member.getName());
+            System.out.println("Email: " + member.getEmail());
+            System.out.println("Phone Number: " + member.getPhoneNr());
+        } else {
+            System.out.println("Member with ID " + memberId + " not found.");
+        }
+    }
+
+    public boolean updateMemberName(String memberId, String newName) {
+        Member memberToUpdate = searchMember(memberId);
+        if (memberToUpdate != null) {
+            memberToUpdate.setName(newName); // Use the existing setter
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateMemberEmail(String memberId, String newEmail) {
+        Member memberToUpdate = searchMember(memberId);
+        if (memberToUpdate != null) {
+            memberToUpdate.setEmail(newEmail); // Use the existing setter
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateMemberPhoneNr(String memberId, int newPhoneNr) {
+        Member memberToUpdate = searchMember(memberId);
+        if (memberToUpdate != null) {
+            memberToUpdate.setPhoneNr(newPhoneNr); // Use the existing setter
+            return true;
+        }
+        return false;
     }
 }

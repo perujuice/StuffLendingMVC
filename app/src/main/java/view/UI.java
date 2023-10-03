@@ -75,8 +75,8 @@ public class UI {
             System.out.println("\nMember Management Menu:");
             System.out.println("1. Create member");
             System.out.println("2. Delete member");
-            System.out.println("3. Change member information");
-            System.out.println("4. View member information");
+            System.out.println("3. View member information");
+            System.out.println("4. Change member information");
             System.out.println("5. List all memebers");
             System.out.println("6. Back");
 
@@ -107,15 +107,26 @@ public class UI {
                     break;
                 
                 case 2:
-                    //Deletes a member
+                    //Deletes a member by member ID
                     System.out.print("Enter the member's ID to be deleted: ");
-                    String memberID = scanner.nextLine();
-                    memberController.deleteMember(memberID);
+                    String mDeleteID = scanner.nextLine();
+                    memberController.deleteMember(mDeleteID);
                     System.out.println("Member successfully deleted! ");
                     break;
 
 
                 case 3:
+                    // View member information
+                    //  This probably has to be updated to show more information!
+                    System.out.print("Enter the member's ID to view information: ");
+                    String mViewID = scanner.nextLine();
+                    memberController.printMemberInfo(mViewID);
+                
+                case 4:
+                    //Change member information by member ID
+                    changeMemberInfo();
+                    break;
+                case 5:
                     //list all members
                     List<String> allMemberNames = memberController.getAllMemberNames();
                     
@@ -125,7 +136,7 @@ public class UI {
                         System.out.println("Name: " + member_name);
                     }
                     break;
-                
+
                 case 6:
                     displayMenu();
                     break;
@@ -162,6 +173,47 @@ public class UI {
     private void handleContractManagement() {
         System.out.println("Contract Management:");
         // contract management logic
+    }
+
+    private void changeMemberInfo() {
+        System.out.print("Enter the member's ID to change information: ");
+        String mChangeID = scanner.nextLine();
+        memberController.printMemberInfo(mChangeID);
+
+            while (true) {
+            System.out.println("\nWhat information would you like to change? ");
+            System.out.println("1. Change name");
+            System.out.println("2. Change Email");
+            System.out.println("3. Change Phone Number");
+            System.out.println("4. Back");
+            
+            System.out.print("\nEnter your choice: ");
+
+            int choice = getIntInput();
+            switch (choice) {
+                case 1:
+                    //change the name
+                    System.out.print("Enter new name: ");
+                    String new_name = scanner.nextLine();
+                    memberController.updateMemberName(mChangeID, new_name);
+                    break;
+                case 2:
+                    //change the email
+                    System.out.print("Enter new email: ");
+                    String new_email = scanner.nextLine();
+                    memberController.updateMemberEmail(mChangeID, new_email);
+                    break;
+                case 3:
+                    //change the phone number
+                    System.out.print("Enter new phone number: ");
+                    int new_phoneNr = scanner.nextInt();
+                    memberController.updateMemberPhoneNr(mChangeID, new_phoneNr);
+                    break;
+                case 4:
+                    handleMemberManagement();
+                    break;
+            }
+        }
     }
 
     private void advanceTime() {
