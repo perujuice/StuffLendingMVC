@@ -36,7 +36,7 @@ public class UI {
           break;
         case 2:
           // Call a method to handle Item Management
-          new ItemManagement(scanner).handleItemManagement();
+          new ItemManagement(scanner, memberController).handleItemManagement();
           break;
         case 3:
           // Call a method to handle Contract Management

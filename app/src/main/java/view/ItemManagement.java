@@ -13,9 +13,10 @@ public class ItemManagement {
     private ItemController itemController;
     private MemberController memberController;
 
-    public ItemManagement(Scanner scanner) {
+    public ItemManagement(Scanner scanner, MemberController memberController) {
         this.scanner = scanner;
         this.itemController = new ItemController();
+        this.memberController = memberController;
     }
 
     public void handleItemManagement() {
