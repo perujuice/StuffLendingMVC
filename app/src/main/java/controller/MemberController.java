@@ -71,7 +71,7 @@ public class MemberController {
   //Since when a member is deleted the items belonging to that member should be deleted as well.
 
   /**
-   * Method to delete a membver.
+   * Method to delete a member.
 
    * @param memberId Id of member passed in.
    * @return  Returns a boolean to verify if it worked.
