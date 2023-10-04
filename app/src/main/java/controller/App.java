@@ -1,6 +1,9 @@
 package controller;
 
+import view.MemberManagement;
 import view.UI;
+
+import java.util.Scanner;
 
 /**
  * Responsible for staring the application.
@@ -8,13 +11,16 @@ import view.UI;
 public class App {
   /**
    * Application starting point.
-
+   *
    * @param args command line arguments.
    */
+
   public static void main(String[] args) {
-    // adapt to start the application in your way
-    UI ui = new UI();
-    ui.data();
+    Scanner scanner = new Scanner(System.in);
+    MemberController memberController = new MemberController();
+    MemberManagement memberManagement = new MemberManagement(scanner, memberController);
+    memberManagement.data();
+    UI ui = new UI(scanner, memberController);
     ui.displayMenu();
   }
 }
