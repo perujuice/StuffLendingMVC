@@ -14,6 +14,7 @@ public class App {
   public static void main(String[] args) {
     // adapt to start the application in your way
     UI ui = new UI();
+    ui.data();
     ui.displayMenu();
   }
 }

@@ -28,6 +28,7 @@ public class MemberController {
     if (isEmailUnique(email) && isPhoneNrUnique(phoneNr)) {
       Member newMember = new Member(name, email, phoneNr);
       members.add(newMember); // Add the new member to the list
+      System.out.println("Member added to the list: " + newMember.getMemberId());
       return newMember;
     } else {
       System.out.println("Email or Phone number is not unique! ");
@@ -94,7 +95,9 @@ public class MemberController {
    * @return Returns a member if found.
    */
   public Member searchMember(String memberId) {
+    System.out.println("Searching for memberId: " + memberId);
     for (Member member : members) {
+      System.out.println("Checking memberId: " + member.getMemberId());
       if (member.getMemberId().equals(memberId)) {
         return member;
       }
@@ -114,6 +117,8 @@ public class MemberController {
       System.out.println("Name: " + member.getName());
       System.out.println("Email: " + member.getEmail());
       System.out.println("Phone Number: " + member.getPhoneNr());
+      System.out.println("Number of owned Items: " + member.getOwnedItemCount());
+      System.out.println("Credits: " + member.getCredits());
     } else {
       System.out.println("Member with ID " + memberId + " not found.");
     }

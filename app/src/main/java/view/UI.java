@@ -3,7 +3,7 @@ package view;
 import controller.ItemController;
 import controller.MemberController;
 import java.util.List;
-
+import model.Item;
 import model.ItemCategory;
 import model.Member;
 import java.util.Scanner;
@@ -118,27 +118,28 @@ public class UI {
                   break;
 
 
-      case 3:
-        // View member information
-        //  This probably has to be updated to show more information!
-        System.out.print("Enter the member's ID to view information: ");
-        String mViewID = scanner.nextLine();
-        memberController.printMemberInfo(mViewID);
-      
-      case 4:
-        //Change member information by member ID
-        changeMemberInfo();
-        break;
-      case 5:
-        //list all members
-        List<String> allMemberNames = memberController.getAllMemberNames();
-        
-        // Now 'allMemberNames' contains all member names
-        for (String member_name : allMemberNames) {
-            // Display the member name as needed
-            System.out.println("Name: " + member_name);
-        }
-        break;
+                case 3:
+                  // View member information
+                  //  This probably has to be updated to show more information!
+                  System.out.print("Enter the member's ID to view information: ");
+                  String mViewID = scanner.nextLine();
+                  memberController.printMemberInfo(mViewID);
+                  break;
+                
+                case 4:
+                  //Change member information by member ID
+                  changeMemberInfo();
+                  break;
+                case 5:
+                  //list all members
+                  List<String> allMemberNames = memberController.getAllMemberNames();
+                  
+                  // Now 'allMemberNames' contains all member names
+                  for (String member_name : allMemberNames) {
+                      // Display the member name as needed
+                      System.out.println("Name: " + member_name);
+                  }
+                  break;
 
               case 6:
                   displayMenu();
@@ -174,13 +175,13 @@ public class UI {
 
             scanner.nextLine();
 
-            System.out.println("Enter Item Name: ");
+            System.out.print("Enter Item Name: ");
             String name = scanner.nextLine();
 
-            System.out.println("Enter Item Description: ");
+            System.out.print("Enter Item Description: ");
             String description = scanner.nextLine();
 
-            System.out.println("Enter Cost Per Day: ");
+            System.out.print("Enter Cost Per Day: ");
             int costPerDay = scanner.nextInt();
 
             scanner.nextLine();
@@ -192,6 +193,16 @@ public class UI {
           } 
           break;
         case 2:
+          List<String> allItems = itemController.getAllItems();
+          
+          //
+          for (String Items : allItems) {
+              // Display the member name as needed
+              System.out.println("Item: " + Items);
+          }
+          break;
+        case 3:
+          displayMenu();
           
       }
     }
@@ -281,4 +292,16 @@ public class UI {
         System.out.println("Advancing Time:");
         // time advancement logic
     }
+  
+  public void data() {
+    Member member1 = memberController.createMember("John", "john@example.com", 1234567890);
+    Member member2 = memberController.createMember("Alice", "alice@example.com", 986543210);
+    Member member3 = memberController.createMember("Bob", "bob@example.com", 555555555);
+    Member member4 = memberController.createMember("Eve", "eve@example.com", 999999999);
+    Member member5 = memberController.createMember("Charlie", "charlie@example.com", 777777777);
+    Member member6 = memberController.createMember("Mallory", "mallory@example.com", 888888888);
+
+    //Item item1 = itemController.createItem(ItemCategory.TOOL, "Hammer", "Works fine! ", 100, member1.getMemberId());
+    //Item item2 = itemController.createItem(ItemCategory.VEHICLE, "Car", "nice car! ", 500, member2.getMemberId());
+  }
 }

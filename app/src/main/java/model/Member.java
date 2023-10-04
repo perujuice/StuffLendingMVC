@@ -91,4 +91,8 @@ public class Member {
         ownedItems.add(item);
         this.credits += 100;
     }
+
+    public int getOwnedItemCount() {
+        return ownedItems.size();
+    }
 }
