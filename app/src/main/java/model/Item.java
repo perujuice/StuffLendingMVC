@@ -11,6 +11,7 @@ public class Item {
   private String shortDesc;
   private ItemCategory category;
   private Member owner; //Reference to the specific member that owns the item.
+  private int costPerDay;
   private Random random = new Random();
   //private int costPerDay;
   // Date of creation.
@@ -30,7 +31,7 @@ public class Item {
     this.shortDesc = newShordDesc;
     this.category = newCategory;
     this.itemId = generateItemId();
-    //this.costPerDay = newCostPerDay;
+    this.costPerDay = newCostPerDay;
   }
 
   public void setName(String name) {
@@ -55,6 +56,14 @@ public class Item {
 
   public ItemCategory getCategory() {
     return category;
+  }
+
+  public void setCostPerDay(int costPerDay) {
+    this.costPerDay = costPerDay;
+  }
+
+  public int getCostPerDay() {
+    return costPerDay;
   }
 
   private String generateItemId() {

@@ -38,7 +38,8 @@ public class ItemManagement {
       System.out.println("1. Create Item");
       System.out.println("2. List all Items");
       System.out.println("3. Delete Item");
-      System.out.println("4. Back");
+      System.out.println("4. Change an item information ");
+      System.out.println("5. Back");
 
       System.out.print("\nEnter your choice: ");
 
@@ -68,7 +69,8 @@ public class ItemManagement {
 
             scanner.nextLine();
 
-            itemController.createItem(category, name, description, costPerDay, memberId);
+            Item newItem = itemController.createItem(category, name, description, costPerDay, memberId);
+            System.out.println("Item ID: " + newItem.getItemId());
             System.out.println("Item created successfully.");
           } else {
             System.out.println("Member not found with the specified memberId.");
@@ -92,6 +94,9 @@ public class ItemManagement {
           System.out.println(itemDelete.getName() + "successfully deleted! ");
           break;
         case 4:
+          // Change Item information.
+          changeItemInfo();
+        case 5:
           return;
         default:
           throw new IllegalArgumentException("Invalid choice.");
@@ -146,6 +151,57 @@ public class ItemManagement {
         return ItemCategory.OTHER;
       default:
         throw new IllegalArgumentException("Invalid choice.");
+    }
+  }
+
+  private void changeItemInfo() {
+    System.out.print("Enter the Item's ID to change information: ");
+    String changeId = scanner.nextLine();
+    itemController.printItemInfo(changeId);
+
+    while (true) {
+      System.out.println("\nWhat information would you like to change? ");
+      System.out.println("1. Change name");
+      System.out.println("2. Change description");
+      System.out.println("3. Change category");
+      System.out.println("4. Change cost per day");
+      System.out.println("5. Back");
+
+      System.out.print("\nEnter your choice: ");
+
+      int choice = getIntInput();
+      switch (choice) {
+        case 1:
+          // change the name
+          System.out.print("Enter new name: ");
+          String newName = scanner.nextLine();
+          itemController.updateItemName(changeId, newName);
+          break;
+        case 2:
+          // change the descritpion
+          System.out.print("Select new Category: ");
+          String newDesc = scanner.nextLine();
+          itemController.updateItemDesc(changeId, newDesc);
+          break;
+        case 3:
+          // change the Category
+          ItemCategory newCategory = getCategoryFromUserInput();
+          System.out.println("New Category: " + newCategory);
+          itemController.updateItemCategory(changeId, newCategory);
+          scanner.nextLine();
+          break;
+        case 4:
+          // Change cost per day of item.
+          System.out.print("Enter new cost per day: ");
+          int newCost = scanner.nextInt();
+          scanner.nextLine();
+          itemController.updateCostPerDay(changeId, newCost);
+          break;
+        case 5:
+          return;
+        default:
+          throw new IllegalArgumentException("Invalid input for changing item info.");
+      }
     }
   }
 }

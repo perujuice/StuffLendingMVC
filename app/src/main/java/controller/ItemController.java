@@ -72,6 +72,19 @@ public class ItemController {
     return null; // Item not found
   }
 
+  public void printItemInfo(String itemId) {
+    Item item = searchItem(itemId);
+    if (item != null) {
+      System.out.println("\nItem Information:");
+      System.out.println("Name: " + item.getName());
+      System.out.println("Short Description: " + item.getShortDescription());
+      System.out.println("Category: " + item.getCategory());
+      System.out.println("Cost per day: " + item.getCostPerDay());
+    } else {
+      System.out.println("Item with ID " + itemId + " not found.");
+    }
+  }
+
   /**
    * Method to get all Items.
 
@@ -86,8 +99,42 @@ public class ItemController {
     }
 
     return itemsWithIds;
-}
+  }
 
+  public boolean updateItemName(String itemId, String newName) {
+    Item itemToUpdate = searchItem(itemId);
+    if (itemToUpdate != null) {
+      itemToUpdate.setName(newName); // Use the existing setter
+      return true;
+    }
+    return false;
+  }
 
+  public boolean updateItemDesc(String itemId, String newDesc) {
+    Item itemToUpdate = searchItem(itemId);
+    if (itemToUpdate != null) {
+      itemToUpdate.setShortDescription(newDesc); // Use the existing setter
+      return true;
+    }
+    return false;
+  }
+
+  public boolean updateItemCategory(String itemId, ItemCategory newCategory) {
+    Item itemToUpdate = searchItem(itemId);
+    if (itemToUpdate != null) {
+      itemToUpdate.setCategory(newCategory);
+      return true;
+    }
+    return false;
+  }
+
+  public boolean updateCostPerDay(String itemId, int costPerDay) {
+    Item itemToUpdate = searchItem(itemId);
+    if (itemToUpdate != null) {
+      itemToUpdate.setCostPerDay(costPerDay);
+      return true;
+    }
+    return false;
+  }
 
 }
