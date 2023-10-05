@@ -11,17 +11,26 @@ public class Item {
   private String shortDesc;
   private ItemCategory category;
   private Member owner; //Reference to the specific member that owns the item.
-  private int costPerDay;
+  private Random random = new Random();
+  //private int costPerDay;
   // Date of creation.
   // Cost per day to lend the item.
 
-  public Item(ItemCategory new_category, String new_name, String new_shordDesc, int new_costPerDay) {
-    this.name = new_name;
-    this.shortDesc = new_shordDesc;
-    this.category = new_category;
-    this.itemId = generateItemID();
-    this.costPerDay = new_costPerDay;
 
+  /**
+   * Item constructor.
+
+   * @param newCategory Category.
+   * @param newName Name.
+   * @param newShordDesc Short description.
+   * @param newCostPerDay Cost per day.
+   */
+  public Item(ItemCategory newCategory, String newName, String newShordDesc, int newCostPerDay) {
+    this.name = newName;
+    this.shortDesc = newShordDesc;
+    this.category = newCategory;
+    this.itemId = generateItemId();
+    //this.costPerDay = newCostPerDay;
   }
 
   public void setName(String name) {
@@ -48,9 +57,8 @@ public class Item {
     return category;
   }
 
-  private String generateItemID() {
+  private String generateItemId() {
     String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    Random random = new Random();
     char[] itemId = new char[6];
 
     for (int i = 0; i < 6; i++) {
@@ -79,4 +87,4 @@ public class Item {
     return owner;
   }
 
- }
+}

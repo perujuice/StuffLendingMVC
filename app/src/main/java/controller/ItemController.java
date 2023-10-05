@@ -1,23 +1,42 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Item;
 import model.ItemCategory;
 import model.Member;
-import java.util.ArrayList;
-import java.util.List;
 
+
+/**
+ * Class to handle Item methods.
+ */
 public class ItemController {
   private List<Item> items;
-  MemberController memberController = new MemberController();
+  private MemberController memberController;
+  //MemberController memberController = new MemberController();
 
-  public ItemController() {
+  /**
+   * Constructor for item methods.
+
+   * @param memberController Instance of controller for member passed in.
+   */
+  public ItemController(MemberController memberController) {
     // start a list of items.
     this.items = new ArrayList<>();
+    this.memberController = memberController;
   }
 
+  /**
+   * Method to create Item.
 
+   * @param category Category of item.
+   * @param name  Name of item.
+   * @param shortDesc Short description of an item.
+   * @param costPerDay Cost per day to borrow an item.
+   * @param memberId Member who owns the item.
+   * @return New Item.
+   */
   public Item createItem(ItemCategory category, String name, String shortDesc, int costPerDay, String memberId) {
-    System.out.println("Received memberId: " + memberId);
     Member owner = memberController.searchMember(memberId);
 
     if (owner != null) {
@@ -31,6 +50,11 @@ public class ItemController {
     }
   }
 
+  /**
+   * Method to get all Items.
+
+   * @return Names of items.
+   */
   public List<String> getAllItems() {
     List<String> itemNames = new ArrayList<>();
     for (Item item : items) {

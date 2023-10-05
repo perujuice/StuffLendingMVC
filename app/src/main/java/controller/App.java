@@ -1,6 +1,6 @@
 package controller;
 
-import view.UI;
+import view.UserInterface;
 
 /**
  * Responsible for staring the application.
@@ -13,8 +13,8 @@ public class App {
    */
   public static void main(String[] args) {
     // adapt to start the application in your way
-    UI ui = new UI();
-    ui.data();
+    UserInterface ui = new UserInterface(System.in);
+    //ui.data();
     ui.displayMenu();
   }
 }

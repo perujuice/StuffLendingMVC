@@ -95,9 +95,7 @@ public class MemberController {
    * @return Returns a member if found.
    */
   public Member searchMember(String memberId) {
-    System.out.println("Searching for memberId: " + memberId);
     for (Member member : members) {
-      System.out.println("Checking memberId: " + member.getMemberId());
       if (member.getMemberId().equals(memberId)) {
         return member;
       }
@@ -105,7 +103,7 @@ public class MemberController {
     return null; // member not found
   }
 
-  /**
+  /**8PTE0X
    * Prints all member info.
 
    * @param memberId Member Id passed in.
