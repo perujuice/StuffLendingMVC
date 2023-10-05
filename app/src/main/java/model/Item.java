@@ -79,12 +79,14 @@ public class Item {
    * @param owner The specific member.
    */
   public void setOwner(Member owner) {
-    this.owner = owner;
+    // Create a copy of the owner object before assigning it
+    this.owner = new Member(owner.getName(), owner.getEmail(), owner.getPhoneNr());
     owner.addItem(this);
   }
 
   public Member getOwner() {
-    return owner;
+    // Return a new copy of the owner object
+    return new Member(owner.getName(), owner.getEmail(), owner.getPhoneNr());
   }
 
 }

@@ -18,12 +18,12 @@ public class ItemController {
   /**
    * Constructor for item methods.
 
-   * @param memberController Instance of controller for member passed in.
+   * @param originalController Instance of controller for member passed in.
    */
-  public ItemController(MemberController memberController) {
+  public ItemController(MemberController originalController) {
     // start a list of items.
     this.items = new ArrayList<>();
-    this.memberController = memberController;
+    this.memberController = new MemberController(originalController);
   }
 
   /**

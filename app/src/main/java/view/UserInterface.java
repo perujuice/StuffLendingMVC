@@ -1,18 +1,28 @@
 package view;
 
+import controller.MemberController;
 import java.util.Scanner;
 
-import controller.MemberController;
-
-public class UI {
+/**
+ * Main UI class.
+ */
+public class UserInterface {
   private Scanner scanner;
   private MemberController memberController;
 
-  public UI(Scanner scanner, MemberController memberController) {
-    this.scanner = scanner;
-    this.memberController = memberController;
+  /**
+   * Constructor for the main UI.
+
+   * @param memberController Member controller instance.
+   */
+  public UserInterface(MemberController memberController) {
+    this.scanner = new Scanner(System.in, "UTF-8");
+    this.memberController = new MemberController();
   }
 
+  /**
+   * Main display menu.
+   */
   public void displayMenu() {
     System.out.println("Welcome to the Stuff Lending System!");
 
@@ -31,12 +41,12 @@ public class UI {
       switch (choice) {
         case 1:
           // Member Management
-          MemberManagement memberManagement = new MemberManagement(scanner, memberController);
+          MemberManagement memberManagement = new MemberManagement(memberController);
           memberManagement.handleMemberManagement();
           break;
         case 2:
           // Call a method to handle Item Management
-          new ItemManagement(scanner, memberController).handleItemManagement();
+          new ItemManagement(memberController).handleItemManagement();
           break;
         case 3:
           // Call a method to handle Contract Management
@@ -47,12 +57,11 @@ public class UI {
           new TimeManagement().advanceTime();
           break;
         case 5:
-          System.out.println("Exiting the application.");
-          scanner.close(); // Close the scanner before exiting
-          System.exit(0);
-
+          System.out.println("Exiting the application...");
+          scanner.close();
+          throw new RuntimeException("Application has been terminated.");
         default:
-          System.out.println("Invalid Choice. Please enter a valid option.");
+          throw new IllegalArgumentException("Invalid input from user. ");
       }
     }
   }

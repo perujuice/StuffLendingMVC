@@ -15,6 +15,11 @@ public class MemberController {
     this.members = new ArrayList<>();
   }
 
+  // Copy constructor
+  public MemberController(MemberController other) {
+    this.members = new ArrayList<>(other.members);
+  }
+
   /**
    * Method to create a new member.
 

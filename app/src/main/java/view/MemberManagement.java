@@ -1,21 +1,31 @@
 package view;
 
 import controller.MemberController;
-import model.Member;
-
 import java.util.List;
 import java.util.Scanner;
+import model.Member;
 
+/**
+ * Class for member UI.
+ */
 public class MemberManagement {
   private Scanner scanner;
   private MemberController memberController;
 
-  public MemberManagement(Scanner scanner, MemberController memberController) {
-    this.scanner = scanner;
-    this.memberController = memberController;
+  /**
+   * Constructor for member UI class.
+
+   * @param originalController Member controller instance passed for persistance.
+   */
+  public MemberManagement(MemberController originalController) {
+    this.scanner = new Scanner(System.in, "UTF-8");
+    this.memberController = new MemberController(originalController);
 
   }
 
+  /**
+   * Method for user input.
+   */
   public void handleMemberManagement() {
     System.out.println("Member Management:");
     // member management logic
@@ -37,13 +47,13 @@ public class MemberManagement {
           // Create Member.
           System.out.println("Creating a new member...\n");
           System.out.print("Enter the member's name: ");
-          String name = scanner.nextLine();
+          final String name = scanner.nextLine();
 
           System.out.print("Enter the member's email: ");
-          String email = scanner.nextLine();
+          final String email = scanner.nextLine();
 
           System.out.print("Enter the member's phone number: ");
-          int phoneNr = scanner.nextInt();
+          final int phoneNr = scanner.nextInt();
 
           scanner.nextLine();
           // creat instance create a new member
@@ -57,8 +67,8 @@ public class MemberManagement {
         case 2:
           // Deletes a member by member ID
           System.out.print("Enter the member's ID to be deleted: ");
-          String mDeleteID = scanner.nextLine();
-          memberController.deleteMember(mDeleteID);
+          String deleteId = scanner.nextLine();
+          memberController.deleteMember(deleteId);
           System.out.println("Member successfully deleted! ");
           break;
 
@@ -66,8 +76,8 @@ public class MemberManagement {
           // View member information
           // This probably has to be updated to show more information!
           System.out.print("Enter the member's ID to view information: ");
-          String mViewID = scanner.nextLine();
-          memberController.printMemberInfo(mViewID);
+          String viewId = scanner.nextLine();
+          memberController.printMemberInfo(viewId);
           break;
 
         case 4:
@@ -79,14 +89,16 @@ public class MemberManagement {
           List<String> allMemberNames = memberController.getAllMemberNames();
 
           // Now 'allMemberNames' contains all member names
-          for (String member_name : allMemberNames) {
+          for (String memberName : allMemberNames) {
             // Display the member name as needed
-            System.out.println("Name: " + member_name);
+            System.out.println("Name: " + memberName);
           }
           break;
 
         case 6:
           return;
+        default:
+          throw new IllegalArgumentException("Invalid choice.");
       }
     }
   }
@@ -103,8 +115,8 @@ public class MemberManagement {
 
   private void changeMemberInfo() {
     System.out.print("Enter the member's ID to change information: ");
-    String mChangeID = scanner.nextLine();
-    memberController.printMemberInfo(mChangeID);
+    String changeId = scanner.nextLine();
+    memberController.printMemberInfo(changeId);
 
     while (true) {
       System.out.println("\nWhat information would you like to change? ");
@@ -120,27 +132,32 @@ public class MemberManagement {
         case 1:
           // change the name
           System.out.print("Enter new name: ");
-          String new_name = scanner.nextLine();
-          memberController.updateMemberName(mChangeID, new_name);
+          String newName = scanner.nextLine();
+          memberController.updateMemberName(changeId, newName);
           break;
         case 2:
           // change the email
           System.out.print("Enter new email: ");
-          String new_email = scanner.nextLine();
-          memberController.updateMemberEmail(mChangeID, new_email);
+          String newEmail = scanner.nextLine();
+          memberController.updateMemberEmail(changeId, newEmail);
           break;
         case 3:
           // change the phone number
           System.out.print("Enter new phone number: ");
-          int new_phoneNr = scanner.nextInt();
-          memberController.updateMemberPhoneNr(mChangeID, new_phoneNr);
+          int newPhoneNr = scanner.nextInt();
+          memberController.updateMemberPhoneNr(changeId, newPhoneNr);
           break;
         case 4:
           return;
+        default:
+          throw new IllegalArgumentException("Invalid input.");
       }
     }
   }
 
+  /**
+   * This is just some data for persistance.
+   */
   public void data() {
     memberController.createMember("John", "john@example.com", 1234567890);
     memberController.createMember("Alice", "alice@example.com", 986543210);
