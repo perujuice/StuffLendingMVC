@@ -15,7 +15,7 @@ public class ItemManagement {
 
     public ItemManagement(Scanner scanner, MemberController memberController) {
         this.scanner = scanner;
-        this.itemController = new ItemController();
+        this.itemController = new ItemController(memberController);
         this.memberController = memberController;
     }
 
