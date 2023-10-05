@@ -1,5 +1,6 @@
 package view;
 
+import controller.ItemController;
 import controller.MemberController;
 import java.util.Scanner;
 
@@ -9,15 +10,18 @@ import java.util.Scanner;
 public class UserInterface {
   private Scanner scanner;
   private MemberController memberController;
+  private ItemController itemController;
 
   /**
    * Constructor for the main UI.
 
    * @param memberController Member controller instance.
    */
-  public UserInterface(MemberController memberController) {
+  public UserInterface(MemberController memberController, ItemController itemController) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.memberController = memberController;
+    this.itemController = itemController;
+
   }
 
   /**
@@ -46,7 +50,7 @@ public class UserInterface {
           break;
         case 2:
           // Call a method to handle Item Management
-          ItemManagement itemManagement = new ItemManagement(memberController);
+          ItemManagement itemManagement = new ItemManagement(memberController, itemController);
           itemManagement.handleItemManagement();
           break;
         case 3:

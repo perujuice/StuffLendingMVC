@@ -21,9 +21,9 @@ public class ItemManagement {
 
     * @param originalController Member controller instance passed in.
     */
-  public ItemManagement(MemberController originalController) {
+  public ItemManagement(MemberController originalController, ItemController itemController) {
     this.scanner = new Scanner(System.in, "UTF-8");
-    this.itemController = new ItemController(originalController);
+    this.itemController = itemController;
     this.memberController = originalController;
   }
 
