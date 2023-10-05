@@ -1,8 +1,12 @@
 package view;
 
+import controller.ItemController;
 import controller.MemberController;
 import java.util.List;
 import java.util.Scanner;
+
+import model.Item;
+import model.ItemCategory;
 import model.Member;
 
 /**
@@ -11,15 +15,17 @@ import model.Member;
 public class MemberManagement {
   private Scanner scanner;
   private MemberController memberController;
+  private ItemController itemController;
 
   /**
    * Constructor for member UI class.
 
    * @param originalController Member controller instance passed for persistance.
    */
-  public MemberManagement(MemberController originalController) {
+  public MemberManagement(MemberController originalController, ItemController itemController) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.memberController = originalController;
+    this.itemController = itemController;
 
   }
 
@@ -159,16 +165,28 @@ public class MemberManagement {
    * This is just some data for persistance.
    */
   public void data() {
-    memberController.createMember("John", "john@example.com", 1234567890);
-    memberController.createMember("Alice", "alice@example.com", 986543210);
-    memberController.createMember("Bob", "bob@example.com", 555555555);
-    memberController.createMember("Eve", "eve@example.com", 999999999);
-    memberController.createMember("Charlie", "charlie@example.com", 777777777);
-    memberController.createMember("Mallory", "mallory@example.com", 888888888);
+    Member member1 = memberController.createMember("John", "john@example.com", 1234567890);
+    Member member2 = memberController.createMember("Alice", "alice@example.com", 986543210);
+    Member member3 = memberController.createMember("Bob", "bob@example.com", 555555555);
+    Member member4 = memberController.createMember("Eve", "eve@example.com", 999999999);
+    Member member5 = memberController.createMember("Charlie", "charlie@example.com", 777777777);
+    Member member6 = memberController.createMember("Mallory", "mallory@example.com", 888888888);
 
-    // Item item1 = itemController.createItem(ItemCategory.TOOL, "Hammer", "Works
-    // fine! ", 100, member1.getMemberId());
-    // Item item2 = itemController.createItem(ItemCategory.VEHICLE, "Car", "nice
-    // car! ", 500, member2.getMemberId());
+    itemController.createItem(ItemCategory.TOOL, "Hammer", "Works fine! ", 100, member1.getMemberId());
+    itemController.createItem(ItemCategory.TOOL, "Hammer", "Works fine! ", 100, member2.getMemberId());
+    itemController.createItem(ItemCategory.VEHICLE, "Car", "Runs smoothly", 500, member1.getMemberId());
+    itemController.createItem(ItemCategory.GAME, "Board Game", "Fun for the family", 20, member4.getMemberId());
+    itemController.createItem(ItemCategory.TOY, "Action Figure", "Collectible toy", 15, member3.getMemberId());
+    itemController.createItem(ItemCategory.SPORT, "Basketball", "High-quality ball", 30, member2.getMemberId());
+    itemController.createItem(ItemCategory.OTHER, "Book", "Bestseller novel", 10, member5.getMemberId());
+    itemController.createItem(ItemCategory.TOOL, "Drill", "Powerful drill", 150, member6.getMemberId());
+    itemController.createItem(ItemCategory.VEHICLE, "Bicycle", "Great for commuting", 200, member4.getMemberId());
+    itemController.createItem(ItemCategory.GAME, "Video Game", "Exciting gameplay", 40, member2.getMemberId());
+    itemController.createItem(ItemCategory.TOY, "Puzzle", "Challenging puzzle", 25, member6.getMemberId());
+    itemController.createItem(ItemCategory.SPORT, "Soccer Ball", "Official size", 25, member3.getMemberId());
+    itemController.createItem(ItemCategory.OTHER, "Cookware Set", "High-quality pots", 75, member4.getMemberId());
+    itemController.createItem(ItemCategory.TOOL, "Screwdriver Set", "Versatile tools", 30, member3.getMemberId());
+    itemController.createItem(ItemCategory.VEHICLE, "Scooter", "Fuel-efficient", 300, member6.getMemberId());
+    itemController.createItem(ItemCategory.GAME, "Chess Set", "Classic strategy game", 15, member1.getMemberId());
   }
 }

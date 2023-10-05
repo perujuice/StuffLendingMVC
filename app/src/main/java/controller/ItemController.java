@@ -13,7 +13,6 @@ import model.Member;
 public class ItemController {
   private List<Item> items;
   private MemberController memberController;
-  //MemberController memberController = new MemberController();
 
   /**
    * Constructor for item methods.
@@ -94,7 +93,7 @@ public class ItemController {
     List<String> itemsWithIds = new ArrayList<>();
     for (Item item : items) {
         String itemInfo = "Item ID: " + item.getItemId() + ", Item Name: "
-         + item.getName() + "OwnerID: " + item.getOwner().getMemberId();
+         + item.getName() + ", OwnerID: " + "Item owner: " + item.getOwner().getMemberId();
         itemsWithIds.add(itemInfo);
     }
 

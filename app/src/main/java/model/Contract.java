@@ -4,32 +4,73 @@ package model;
  * This class will handle the lending contract information.
  */
 public class Contract {
-  //private Member member; //these are just some ideas for attributes for now.
-  //private Item item;
-  private String startDate;
-  private String endDate;
+  private TimeManager timeManager;
+  private int nextContractId = 1;
 
-  /**
-   * Constructor for contract.
+  private int contractId;
+  private int startDate;
+  private int endDate;
+  private Member borrower;
+  private Member lender;
+  private Item item;
+  private double totalCost;
 
-   * @param newMember Member.
-   * @param newItem Item.
-   * @param newStartDate Start date.
-   * @param newEndDate End date.
-   */
-  public Contract(Member newMember, Item newItem, String newStartDate, String newEndDate) {
-    //member = newMember;
-    //item = newItem;
-    startDate = newStartDate;
-    endDate = newEndDate;
+  
+  public Contract(Member newLender, Member newBorrower, Item newItem, int newStartDate, int newEndDate) {
+    this.contractId = nextContractId++;
+    this.lender = newLender;
+    this.borrower = newBorrower;
+    this.item = newItem;
+    this.startDate = newStartDate;
+    this.endDate = newEndDate;
+    this.totalCost = calculateTotalCost();
   }
 
+  private double calculateTotalCost() {
+    int diffInDays = (endDate - startDate);
+    double pricePerDay = item.getCostPerDay();
+    return diffInDays * pricePerDay;
+  }
 
-  public String getStartDate() {
+  public double getTotalCost() {
+    return totalCost;
+  }
+
+  public int getContractId() {
+    return contractId;
+  }
+
+  public Member getLender() {
+    return lender;
+  }
+
+  public Member getBorrower() {
+    return borrower;
+  }
+
+  public Item getItem() {
+    return item;
+  }
+
+  public void setStartDate() {
+    this.startDate = timeManager.getCurrentDay();
+  }
+
+  public int getStartDate() {
     return startDate;
   }
 
-  public String getEndDate() {
+  public void setEndDate(int endDate) {
+    this.endDate = endDate;
+  }
+
+  public int getEndDate() {
     return endDate;
+  }
+
+  public boolean isValid() {
+    // Check if the contract is valid (e.g., lender has enough credits, item is available)
+    return lender.getCredits() >= totalCost;
+    //&& item.isAvailable(startDate, endDate);
   }
 }

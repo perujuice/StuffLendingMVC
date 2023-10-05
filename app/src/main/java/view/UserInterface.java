@@ -2,6 +2,8 @@ package view;
 
 import controller.ItemController;
 import controller.MemberController;
+import model.TimeManager;
+
 import java.util.Scanner;
 
 /**
@@ -11,6 +13,7 @@ public class UserInterface {
   private Scanner scanner;
   private MemberController memberController;
   private ItemController itemController;
+  private TimeManager time;
 
   /**
    * Constructor for the main UI.
@@ -21,6 +24,7 @@ public class UserInterface {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.memberController = memberController;
     this.itemController = itemController;
+    this.time = new TimeManager();
 
   }
 
@@ -29,6 +33,7 @@ public class UserInterface {
    */
   public void displayMenu() {
     System.out.println("Welcome to the Stuff Lending System!");
+    System.out.println("Current day: " + time.getCurrentDay());
 
     while (true) {
       System.out.println("\nMain Menu:");
@@ -45,7 +50,7 @@ public class UserInterface {
       switch (choice) {
         case 1:
           // Member Management
-          MemberManagement memberManagement = new MemberManagement(memberController);
+          MemberManagement memberManagement = new MemberManagement(memberController, itemController);
           memberManagement.handleMemberManagement();
           break;
         case 2:
@@ -55,11 +60,12 @@ public class UserInterface {
           break;
         case 3:
           // Call a method to handle Contract Management
-          new ContractManagement().handleContractManagement();
+          new ContractManagement(memberController, itemController, time).handleContractManagement();
           break;
         case 4:
           // Call a method to handle advancing time
-          new TimeManagement().advanceTime();
+          time.advanceDay();
+          System.out.println("Current day: " + time.getCurrentDay());
           break;
         case 5:
           System.out.println("Exiting the application...");

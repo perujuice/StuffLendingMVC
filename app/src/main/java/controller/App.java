@@ -1,5 +1,6 @@
 package controller;
 
+import view.ItemManagement;
 import view.MemberManagement;
 import view.UserInterface;
 
@@ -16,8 +17,8 @@ public class App {
   public static void main(String[] args) {
 
     MemberController memberController = new MemberController();
-    MemberManagement memberManagement = new MemberManagement(memberController);
     ItemController itemController = new ItemController(memberController);
+    MemberManagement memberManagement = new MemberManagement(memberController, itemController);
     memberManagement.data();
     UserInterface ui = new UserInterface(memberController, itemController);
     ui.displayMenu();
