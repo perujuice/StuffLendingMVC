@@ -80,13 +80,18 @@ public class Item {
    */
   public void setOwner(Member owner) {
     // Create a copy of the owner object before assigning it
-    this.owner = new Member(owner.getName(), owner.getEmail(), owner.getPhoneNr());
+    this.owner = owner;
     owner.addItem(this);
   }
 
   public Member getOwner() {
     // Return a new copy of the owner object
-    return new Member(owner.getName(), owner.getEmail(), owner.getPhoneNr());
+    return this.owner;
   }
+
+  public void DeleteFromOwner(Member owner) {
+    owner.removeOwnedItem(this);
+  }
+
 
 }

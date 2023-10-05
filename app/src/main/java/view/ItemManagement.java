@@ -4,6 +4,7 @@ import controller.ItemController;
 import controller.MemberController;
 import java.util.List;
 import java.util.Scanner;
+import model.Item;
 import model.ItemCategory;
 import model.Member;
 
@@ -22,8 +23,8 @@ public class ItemManagement {
     */
   public ItemManagement(MemberController originalController) {
     this.scanner = new Scanner(System.in, "UTF-8");
-    this.itemController = new ItemController(new MemberController(originalController));
-    this.memberController = new MemberController(originalController);
+    this.itemController = new ItemController(originalController);
+    this.memberController = originalController;
   }
 
   /**
@@ -36,7 +37,8 @@ public class ItemManagement {
       System.out.println("\nItem Management Menu:");
       System.out.println("1. Create Item");
       System.out.println("2. List all Items");
-      System.out.println("3. Back");
+      System.out.println("3. Delete Item");
+      System.out.println("4. Back");
 
       System.out.print("\nEnter your choice: ");
 
@@ -81,6 +83,15 @@ public class ItemManagement {
           }
           break;
         case 3:
+          // Deletes an item by item ID
+          System.out.print("Enter the items's ID to be deleted: ");
+          String deleteId = scanner.nextLine();
+          Item itemDelete = itemController.searchItem(deleteId);
+          Member itemowner = itemDelete.getOwner();
+          itemController.deleteItem(deleteId, itemowner.getMemberId());
+          System.out.println(itemDelete.getName() + "successfully deleted! ");
+          break;
+        case 4:
           return;
         default:
           throw new IllegalArgumentException("Invalid choice.");

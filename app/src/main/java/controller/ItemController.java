@@ -23,10 +23,10 @@ public class ItemController {
   public ItemController(MemberController originalController) {
     // start a list of items.
     this.items = new ArrayList<>();
-    this.memberController = new MemberController(originalController);
+    this.memberController = originalController;
   }
 
-  /**
+  /**TPHMCX
    * Method to create Item.
 
    * @param category Category of item.
@@ -50,19 +50,43 @@ public class ItemController {
     }
   }
 
+  public boolean deleteItem(String itemId, String memberId) {
+    Member owner = memberController.searchMember(memberId);
+    System.out.println(owner.getName());
+    for (Item item : items) {
+      if (item.getItemId().equals(itemId)) {
+        items.remove(item);
+        item.DeleteFromOwner(owner);
+        return true; // Item deleted successfully
+      }
+    }
+    return false; // Item not found
+  }
+
+  public Item searchItem(String itemId) {
+    for (Item item : items) {
+      if (item.getItemId().equals(itemId)) {
+        return item;
+      }
+    }
+    return null; // Item not found
+  }
+
   /**
    * Method to get all Items.
 
    * @return Names of items.
    */
   public List<String> getAllItems() {
-    List<String> itemNames = new ArrayList<>();
+    List<String> itemsWithIds = new ArrayList<>();
     for (Item item : items) {
-      itemNames.add(item.getName());
+        String itemInfo = "Item ID: " + item.getItemId() + ", Item Name: "
+         + item.getName() + "OwnerID: " + item.getOwner().getMemberId();
+        itemsWithIds.add(itemInfo);
     }
 
-    return itemNames;
-  }
+    return itemsWithIds;
+}
 
 
 

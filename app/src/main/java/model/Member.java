@@ -102,4 +102,8 @@ public class Member {
   public int getOwnedItemCount() {
     return ownedItems.size();
   }
+
+  public void removeOwnedItem(Item item) {
+    ownedItems.remove(item);
+}
 }

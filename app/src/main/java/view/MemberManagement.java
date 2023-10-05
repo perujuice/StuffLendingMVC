@@ -19,7 +19,7 @@ public class MemberManagement {
    */
   public MemberManagement(MemberController originalController) {
     this.scanner = new Scanner(System.in, "UTF-8");
-    this.memberController = new MemberController(originalController);
+    this.memberController = originalController;
 
   }
 

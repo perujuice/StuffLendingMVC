@@ -17,7 +17,7 @@ public class UserInterface {
    */
   public UserInterface(MemberController memberController) {
     this.scanner = new Scanner(System.in, "UTF-8");
-    this.memberController = new MemberController();
+    this.memberController = memberController;
   }
 
   /**
@@ -46,7 +46,8 @@ public class UserInterface {
           break;
         case 2:
           // Call a method to handle Item Management
-          new ItemManagement(memberController).handleItemManagement();
+          ItemManagement itemManagement = new ItemManagement(memberController);
+          itemManagement.handleItemManagement();
           break;
         case 3:
           // Call a method to handle Contract Management
