@@ -7,15 +7,14 @@ import model.Item;
 import model.Member;
 import model.TimeManager;
 
-
 public class ContractController {
   private List<Contract> contracts;
   private MemberController memberController;
   private ItemController itemController;
   private TimeManager timeManager;
 
-
-  public ContractController(MemberController originalController, ItemController itemController, TimeManager timeManager) {
+  public ContractController(MemberController originalController, ItemController itemController,
+      TimeManager timeManager) {
     this.contracts = new ArrayList<>();
     this.memberController = originalController;
     this.itemController = itemController;
@@ -24,16 +23,33 @@ public class ContractController {
 
   public Contract createContract(Member borrower, Member lender, Item item, int endDate) {
     int startDate = timeManager.getCurrentDay();
-    
-    Contract contract = new Contract(lender, borrower, item, startDate, endDate);
 
-    if (contract.isValid()) {
+    // Calculate the cost of the contract
+    int numberOfDays = endDate - startDate;
+    int cost = numberOfDays * item.getCostPerDay();
+
+    // Check if the lender has enough credits and the item is available
+    if (lender.getCredits() >= cost && item.isAvailable(startDate, endDate)) {
+      // Deduct the cost from the lender's credits and add it to the borrower's
+      // credits
+      lender.deductCredits(cost);
+      borrower.addCredits(cost);
+
+      // Create the contract and update item availability
+      Contract contract = new Contract(lender, borrower, item, startDate, endDate);
       contracts.add(contract);
+      item.addContract(contract);
+
       return contract;
     } else {
-      System.out.println("Contract is not valid. Lender does not have enough credits.");
+      System.out.println("Contract is not valid. Lender does not have enough credits or the item is not available.");
       return null;
     }
+  }
+
+  // list all contracts
+  public List<Contract> getAllContracts() {
+    return contracts;
   }
 
 }

@@ -16,15 +16,15 @@ public class Member {
   private int credits;
   private List<Item> ownedItems;
   private Random random = new Random();
-  //private String creationDate;
+  // private String creationDate;
   // Owned Items
   // private List<Item> ownedItems = new ArrayList<>();
 
   /**
    * Constructor for member.
-
-   * @param newName New name.
-   * @param newEmail New email.
+   * 
+   * @param newName    New name.
+   * @param newEmail   New email.
    * @param newPhoneNr New phone number.
    */
   public Member(String newName, String newEmail, int newPhoneNr) {
@@ -34,7 +34,7 @@ public class Member {
     this.memberId = generateMemberId();
     this.ownedItems = new ArrayList<>();
     this.credits = 0;
-    //this.creationDate = getCurrentDateTime();
+    // this.creationDate = getCurrentDateTime();
   }
 
   // We can do it like this to make sure the view only depoends on the model.
@@ -63,7 +63,6 @@ public class Member {
     this.phoneNr = phoneNr;
   }
 
-  
   private String generateMemberId() {
     String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     char[] memberId = new char[6];
@@ -76,9 +75,16 @@ public class Member {
     return new String(memberId);
   }
 
-
   public String getMemberId() {
     return memberId;
+  }
+
+  public void addCredits(int amount) {
+    credits += amount;
+  }
+
+  public void deductCredits(int amount) {
+    credits -= amount;
   }
 
   public int getCredits() {
@@ -90,10 +96,10 @@ public class Member {
   }
 
   /**
-  * Links items to its owner.
-
-  * @param item The item owned by the member.
-  */
+   * Links items to its owner.
+   * 
+   * @param item The item owned by the member.
+   */
   public void addItem(Item item) {
     ownedItems.add(item);
     this.credits += 100;
@@ -105,5 +111,5 @@ public class Member {
 
   public void removeOwnedItem(Item item) {
     ownedItems.remove(item);
-}
+  }
 }

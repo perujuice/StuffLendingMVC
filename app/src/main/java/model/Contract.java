@@ -15,7 +15,6 @@ public class Contract {
   private Item item;
   private double totalCost;
 
-  
   public Contract(Member newLender, Member newBorrower, Item newItem, int newStartDate, int newEndDate) {
     this.contractId = nextContractId++;
     this.lender = newLender;
@@ -24,12 +23,17 @@ public class Contract {
     this.startDate = newStartDate;
     this.endDate = newEndDate;
     this.totalCost = calculateTotalCost();
+    this.timeManager = timeManager;
   }
 
   private double calculateTotalCost() {
     int diffInDays = (endDate - startDate);
     double pricePerDay = item.getCostPerDay();
     return diffInDays * pricePerDay;
+  }
+
+  public boolean overlaps(int newStartDate, int newEndDate) {
+    return startDate <= newEndDate && endDate >= newStartDate;
   }
 
   public double getTotalCost() {
@@ -69,8 +73,9 @@ public class Contract {
   }
 
   public boolean isValid() {
-    // Check if the contract is valid (e.g., lender has enough credits, item is available)
+    // Check if the contract is valid (e.g., lender has enough credits, item is
+    // available)
     return lender.getCredits() >= totalCost;
-    //&& item.isAvailable(startDate, endDate);
+    // && item.isAvailable(startDate, endDate);
   }
 }

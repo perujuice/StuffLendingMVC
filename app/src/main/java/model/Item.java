@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,20 +12,20 @@ public class Item {
   private String name;
   private String shortDesc;
   private ItemCategory category;
-  private Member owner; //Reference to the specific member that owns the item.
+  private Member owner; // Reference to the specific member that owns the item.
   private int costPerDay;
   private Random random = new Random();
-  //private int costPerDay;
+  private List<Contract> contracts;
+  // private int costPerDay;
   // Date of creation.
   // Cost per day to lend the item.
 
-
   /**
    * Item constructor.
-
-   * @param newCategory Category.
-   * @param newName Name.
-   * @param newShordDesc Short description.
+   * 
+   * @param newCategory   Category.
+   * @param newName       Name.
+   * @param newShordDesc  Short description.
    * @param newCostPerDay Cost per day.
    */
   public Item(ItemCategory newCategory, String newName, String newShordDesc, int newCostPerDay) {
@@ -32,6 +34,7 @@ public class Item {
     this.category = newCategory;
     this.itemId = generateItemId();
     this.costPerDay = newCostPerDay;
+    contracts = new ArrayList<>();
   }
 
   public void setName(String name) {
@@ -82,9 +85,23 @@ public class Item {
     return itemId;
   }
 
+  public void addContract(Contract contract) {
+    contracts.add(contract); // Add a contract to the list
+  }
+
+  public boolean isAvailable(int startDate, int endDate) {
+    for (Contract contract : contracts) {
+      // Check if the item is unavailable during the specified time period
+      if (contract.overlaps(startDate, endDate)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /**
    * Link the item to its owner.
-
+   * 
    * @param owner The specific member.
    */
   public void setOwner(Member owner) {
@@ -101,6 +118,5 @@ public class Item {
   public void DeleteFromOwner(Member owner) {
     owner.removeOwnedItem(this);
   }
-
 
 }

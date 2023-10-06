@@ -1,5 +1,6 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
 import controller.ContractController;
 import controller.ItemController;
@@ -45,37 +46,61 @@ public class ContractManagement {
       switch (choice) {
         case 1:
           // Create Contract.
-          System.out.println("Creating a new Item...\n");
+          System.out.println("Creating a new contract...\n");
           System.out.print("Enter member ID of the Borrower: ");
           String borrowerMemberId = scanner.nextLine();
-          Member borrower = memberController.searchMember(borrowerMemberId); // 5V4E78
+          Member borrower = memberController.searchMember(borrowerMemberId);
 
           if (borrower != null) {
             System.out.print("Enter Item ID of the item to borrow: ");
             final String itemId = scanner.nextLine();
 
             System.out.print("Enter the day of return: ");
-            final int endDate = scanner.nextInt();
-
-            scanner.nextLine();
+            final int endDate = getIntInput();
 
             Item item = itemController.searchItem(itemId);
-            Member lender = item.getOwner();
+            if (item != null) {
+              Member lender = item.getOwner();
 
-            Contract newContract = contractController.createContract(borrower, lender, item, endDate);
-            if (newContract != null) {
-              System.out.println("Item ID: " + newContract.getContractId());
+              Contract newContract = contractController.createContract(borrower, lender, item, endDate);
+              if (newContract != null) {
+                System.out.println("Contract created successfully. Contract ID: " + newContract.getContractId());
+              } else {
+                System.out.println(
+                    "Failed to create a contract. Check if the lender has enough credits or the item is not available.");
+              }
             } else {
-              System.out.println("Failed to create a contract. Check if the lender has enough credits.");
+              System.out.println("Item not found with the specified item ID.");
             }
           } else {
-            System.out.println("Borrower not found with the specified memberId.");
+            System.out.println("Borrower not found with the specified member ID.");
           }
           break;
         case 2:
+          listAllContracts();
           return;
         default:
           throw new IllegalArgumentException("Invalid choice.");
+      }
+    }
+  }
+
+  private void listAllContracts() {
+    List<Contract> contracts = contractController.getAllContracts();
+
+    if (contracts.isEmpty()) {
+      System.out.println("No contracts found.");
+    } else {
+      System.out.println("\nList of all contracts:");
+      for (Contract contract : contracts) {
+        System.out.println("Contract ID: " + contract.getContractId());
+        System.out.println("Lender: " + contract.getLender().getName());
+        System.out.println("Borrower: " + contract.getBorrower().getName());
+        System.out.println("Item: " + contract.getItem().getName());
+        System.out.println("Start Date: " + contract.getStartDate());
+        System.out.println("End Date: " + contract.getEndDate());
+        System.out.println("Total Cost: " + contract.getTotalCost());
+        System.out.println();
       }
     }
   }
