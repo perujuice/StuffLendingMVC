@@ -6,7 +6,6 @@ import model.Item;
 import model.ItemCategory;
 import model.Member;
 
-
 /**
  * Class to handle Item methods.
  */
@@ -16,30 +15,29 @@ public class ItemController {
 
   /**
    * Constructor for item methods.
-
+   *
    * @param originalController Instance of controller for member passed in.
    */
   public ItemController(MemberController originalController) {
-    // start a list of items.
     this.items = new ArrayList<>();
     this.memberController = originalController;
   }
 
-  /**TPHMCX
+  /**
    * Method to create Item.
-
-   * @param category Category of item.
-   * @param name  Name of item.
-   * @param shortDesc Short description of an item.
+   *
+   * @param category   Category of item.
+   * @param name       Name of item.
+   * @param shortDesc  Short description of an item.
    * @param costPerDay Cost per day to borrow an item.
-   * @param memberId Member who owns the item.
+   * @param memberId   Member who owns the item.
    * @return New Item.
    */
   public Item createItem(ItemCategory category, String name, String shortDesc, int costPerDay, String memberId) {
     Member owner = memberController.searchMember(memberId);
 
     if (owner != null) {
-      Item newItem  = new Item(category, name, shortDesc, costPerDay);
+      Item newItem = new Item(category, name, shortDesc, costPerDay);
       newItem.setOwner(owner);
       items.add(0, newItem);
       return newItem;
@@ -49,6 +47,13 @@ public class ItemController {
     }
   }
 
+  /**
+   * Method to delete an Item.
+   *
+   * @param itemId   The ID of the item to delete.
+   * @param memberId Member who owns the item.
+   * @return True if the item is deleted successfully, false otherwise.
+   */
   public boolean deleteItem(String itemId, String memberId) {
     Member owner = memberController.searchMember(memberId);
     System.out.println(owner.getName());
@@ -62,6 +67,12 @@ public class ItemController {
     return false; // Item not found
   }
 
+  /**
+   * Method to search for an item by its ID.
+   *
+   * @param itemId The ID of the item to search for.
+   * @return The found item or null if not found.
+   */
   public Item searchItem(String itemId) {
     for (Item item : items) {
       if (item.getItemId().equals(itemId)) {
@@ -71,6 +82,11 @@ public class ItemController {
     return null; // Item not found
   }
 
+  /**
+   * Method to print information about an item.
+   *
+   * @param itemId The ID of the item to retrieve information for.
+   */
   public void printItemInfo(String itemId) {
     Item item = searchItem(itemId);
     if (item != null) {
@@ -86,20 +102,27 @@ public class ItemController {
 
   /**
    * Method to get all Items.
-
+   * 
    * @return Names of items.
    */
   public List<String> getAllItems() {
     List<String> itemsWithIds = new ArrayList<>();
     for (Item item : items) {
-        String itemInfo = "Item ID: " + item.getItemId() + ", Item Name: "
-         + item.getName() + ", OwnerID: " + "Item owner: " + item.getOwner().getMemberId();
-        itemsWithIds.add(itemInfo);
+      String itemInfo = "Item ID: " + item.getItemId() + ", Item Name: "
+          + item.getName() + ", OwnerID: " + "Item owner: " + item.getOwner().getMemberId();
+      itemsWithIds.add(itemInfo);
     }
 
     return itemsWithIds;
   }
 
+  /**
+   * Method to update the name of an item.
+   *
+   * @param itemId  The ID of the item to update.
+   * @param newName The new name for the item.
+   * @return True if the item name is updated successfully, false otherwise.
+   */
   public boolean updateItemName(String itemId, String newName) {
     Item itemToUpdate = searchItem(itemId);
     if (itemToUpdate != null) {
@@ -109,6 +132,14 @@ public class ItemController {
     return false;
   }
 
+  /**
+   * Method to update the short description of an item.
+   *
+   * @param itemId  The ID of the item to update.
+   * @param newDesc The new short description for the item.
+   * @return True if the item description is updated successfully, false
+   *         otherwise.
+   */
   public boolean updateItemDesc(String itemId, String newDesc) {
     Item itemToUpdate = searchItem(itemId);
     if (itemToUpdate != null) {
@@ -118,6 +149,13 @@ public class ItemController {
     return false;
   }
 
+  /**
+   * Method to update the category of an item.
+   *
+   * @param itemId      The ID of the item to update.
+   * @param newCategory The new category for the item.
+   * @return True if the item category is updated successfully, false otherwise.
+   */
   public boolean updateItemCategory(String itemId, ItemCategory newCategory) {
     Item itemToUpdate = searchItem(itemId);
     if (itemToUpdate != null) {

@@ -1,10 +1,12 @@
 package model;
 
 /**
- * This class will handle the lending contract information.
+ * This class represents a lending contract between a lender, a borrower, and an
+ * item.
+ * It contains information about the contract, such as start and end dates,
+ * total cost, and involved members and items.
  */
 public class Contract {
-  private TimeManager timeManager;
   private int nextContractId = 1;
 
   private int contractId;
@@ -15,6 +17,15 @@ public class Contract {
   private Item item;
   private double totalCost;
 
+  /**
+   * Constructs a new lending contract with the specified details.
+   *
+   * @param newLender    The member who is lending the item.
+   * @param newBorrower  The member who is borrowing the item.
+   * @param newItem      The item being borrowed.
+   * @param newStartDate The start date of the contract.
+   * @param newEndDate   The end date of the contract.
+   */
   public Contract(Member newLender, Member newBorrower, Item newItem, int newStartDate, int newEndDate) {
     this.contractId = nextContractId++;
     this.lender = newLender;
@@ -23,7 +34,6 @@ public class Contract {
     this.startDate = newStartDate;
     this.endDate = newEndDate;
     this.totalCost = calculateTotalCost();
-    this.timeManager = timeManager;
   }
 
   private double calculateTotalCost() {
@@ -45,19 +55,25 @@ public class Contract {
   }
 
   public Member getLender() {
-    return lender;
+    // Return a copy of the lender object to avoid exposing the internal
+    // representation
+    return new Member(lender);
   }
 
   public Member getBorrower() {
-    return borrower;
+    // Return a copy of the borrower object to avoid exposing the internal
+    // representation
+    return new Member(borrower);
   }
 
   public Item getItem() {
-    return item;
+    // Return a copy of the item object to avoid exposing the internal
+    // representation
+    return new Item(item);
   }
 
-  public void setStartDate() {
-    this.startDate = timeManager.getCurrentDay();
+  public void setStartDate(int currentDay) {
+    this.startDate = currentDay;
   }
 
   public int getStartDate() {

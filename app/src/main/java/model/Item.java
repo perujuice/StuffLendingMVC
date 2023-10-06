@@ -37,6 +37,9 @@ public class Item {
     contracts = new ArrayList<>();
   }
 
+  public Item(Item item) {
+  }
+
   public void setName(String name) {
     this.name = name;
   }

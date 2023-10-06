@@ -1,7 +1,5 @@
 package view;
 
-import java.util.List;
-import java.util.Scanner;
 import controller.ContractController;
 import controller.ItemController;
 import controller.MemberController;
@@ -9,6 +7,8 @@ import model.Contract;
 import model.Item;
 import model.Member;
 import model.TimeManager;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Class for contract UI stuff.
@@ -29,10 +29,11 @@ public class ContractManagement {
 
   }
 
+  /**
+   * Handles the contract management user interface.
+   */
   public void handleContractManagement() {
     System.out.println("Contract Management:");
-
-    // Contract management logic
 
     while (true) {
       System.out.println("\nContract Management Menu:");
@@ -78,13 +79,18 @@ public class ContractManagement {
           break;
         case 2:
           listAllContracts();
-          return;
+          break;
+        case 3:
+          return; // Go back to the main menu.
         default:
-          throw new IllegalArgumentException("Invalid choice.");
+          System.out.println("Invalid choice. Please try again.");
       }
     }
   }
 
+  /**
+   * Lists all contracts.
+   */
   private void listAllContracts() {
     List<Contract> contracts = contractController.getAllContracts();
 
@@ -105,6 +111,11 @@ public class ContractManagement {
     }
   }
 
+  /**
+   * Reads an integer input from the user.
+   *
+   * @return The integer input from the user.
+   */
   private int getIntInput() {
     int input = -1;
     try {

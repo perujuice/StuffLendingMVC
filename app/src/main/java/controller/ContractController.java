@@ -7,12 +7,24 @@ import model.Item;
 import model.Member;
 import model.TimeManager;
 
+/**
+ * This class is responsible for managing contracts between members and items.
+ * It allows the creation of contracts and retrieval of contract information.
+ */
 public class ContractController {
   private List<Contract> contracts;
   private MemberController memberController;
   private ItemController itemController;
   private TimeManager timeManager;
 
+  /**
+   * Constructs a new ContractController with the specified dependencies.
+   *
+   * @param originalController The MemberController used for managing members.
+   * @param itemController     The ItemController used for managing items.
+   * @param timeManager        The TimeManager used for handling time-related
+   *                           operations.
+   */
   public ContractController(MemberController originalController, ItemController itemController,
       TimeManager timeManager) {
     this.contracts = new ArrayList<>();
@@ -21,6 +33,16 @@ public class ContractController {
     this.timeManager = timeManager;
   }
 
+  /**
+   * Creates a new contract between a borrower and a lender for a specific item.
+   *
+   * @param borrower The borrower who is borrowing the item.
+   * @param lender   The lender who is lending the item.
+   * @param item     The item being borrowed.
+   * @param endDate  The end date of the contract.
+   * @return The created Contract object if the contract is valid, or null
+   *         otherwise.
+   */
   public Contract createContract(Member borrower, Member lender, Item item, int endDate) {
     int startDate = timeManager.getCurrentDay();
 

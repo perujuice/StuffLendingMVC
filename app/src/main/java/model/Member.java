@@ -37,6 +37,9 @@ public class Member {
     // this.creationDate = getCurrentDateTime();
   }
 
+  public Member(Member borrower) {
+  }
+
   // We can do it like this to make sure the view only depoends on the model.
   // So no toString method should be in the model package.
   public String getName() {

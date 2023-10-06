@@ -1,6 +1,5 @@
 package controller;
 
-import view.ItemManagement;
 import view.MemberManagement;
 import view.UserInterface;
 
