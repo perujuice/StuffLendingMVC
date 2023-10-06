@@ -23,8 +23,9 @@ public class ContractManagement {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.itemController = itemController;
     this.memberController = originalController;
-    this.contractController = new ContractController(originalController, itemController, timeManager);
     this.timeManager = time;
+    this.contractController = new ContractController(originalController, itemController, timeManager);
+
   }
 
   public void handleContractManagement() {
@@ -47,12 +48,12 @@ public class ContractManagement {
           System.out.println("Creating a new Item...\n");
           System.out.print("Enter member ID of the Borrower: ");
           String borrowerMemberId = scanner.nextLine();
-          Member borrower = memberController.searchMember(borrowerMemberId); //5V4E78
+          Member borrower = memberController.searchMember(borrowerMemberId); // 5V4E78
 
           if (borrower != null) {
             System.out.print("Enter Item ID of the item to borrow: ");
             final String itemId = scanner.nextLine();
-            
+
             System.out.print("Enter the day of return: ");
             final int endDate = scanner.nextInt();
 
@@ -62,15 +63,18 @@ public class ContractManagement {
             Member lender = item.getOwner();
 
             Contract newContract = contractController.createContract(borrower, lender, item, endDate);
-            System.out.println("Item ID: " + newContract.getContractId());
-
+            if (newContract != null) {
+              System.out.println("Item ID: " + newContract.getContractId());
+            } else {
+              System.out.println("Failed to create a contract. Check if the lender has enough credits.");
+            }
           } else {
             System.out.println("Borrower not found with the specified memberId.");
           }
-            break;
-          case 2:
-            return;
-          default:
+          break;
+        case 2:
+          return;
+        default:
           throw new IllegalArgumentException("Invalid choice.");
       }
     }

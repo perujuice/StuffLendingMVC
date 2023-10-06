@@ -17,7 +17,7 @@ public class UserInterface {
 
   /**
    * Constructor for the main UI.
-
+   * 
    * @param memberController Member controller instance.
    */
   public UserInterface(MemberController memberController, ItemController itemController) {
