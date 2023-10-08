@@ -2,11 +2,13 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.Member;
 
-/**
- * Controller class for member methods.
+/**.
+ * 
  */
+
 public class MemberController {
   private List<Member> members;
 
@@ -15,30 +17,37 @@ public class MemberController {
     this.members = new ArrayList<>();
   }
 
-  // Copy constructor
-  public MemberController(MemberController other) {
-    this.members = new ArrayList<>(other.members);
-  }
-
-  /**
-   * Method to create a new member.
-
-   * @param name Member name.
-   * @param email Member email.
-   * @param phoneNr Member phone number.
-   * @return Returns the member.
+  /**.
+   * To create or add new members
+   *
+   * @param name
+   *
+   * @param email
+   *
+   * @param phoneNr
+   *
+   * @return
+   *
    */
   public Member createMember(String name, String email, int phoneNr) {
     // check for uniqueness of variables
     if (isEmailUnique(email) && isPhoneNrUnique(phoneNr)) {
       Member newMember = new Member(name, email, phoneNr);
       members.add(newMember); // Add the new member to the list
-      System.out.println("Member added to the list: " + newMember.getMemberId());
       return newMember;
     } else {
       System.out.println("Email or Phone number is not unique! ");
       return null;
     }
+  }
+
+  // To delete a member
+  public void deleteMember(String memberId) {
+    members = members.stream().filter(m -> !m.getMemberId().equals(memberId)).collect(Collectors.toList());
+  }
+
+  public Member findMemberById(String memberId) {
+    return members.stream().filter(m -> m.getMemberId().equals(memberId)).findFirst().orElse(null);
   }
 
   private boolean isEmailUnique(String email) {
@@ -59,120 +68,18 @@ public class MemberController {
     return true;
   }
 
-  /**
-   * A method to get all members.
-
-   * @return Returns a list of member names.
+  /**.
+   *
+   * @return
+   *
    */
   public List<String> getAllMemberNames() {
     List<String> memberNames = new ArrayList<>();
+
     for (Member member : members) {
       memberNames.add(member.getName());
     }
 
     return memberNames;
-  }
-
-  //Probably needs to be modified once we implement everything for the items
-  //Since when a member is deleted the items belonging to that member should be deleted as well.
-
-  /**
-   * Method to delete a member.
-
-   * @param memberId Id of member passed in.
-   * @return  Returns a boolean to verify if it worked.
-   */
-  public boolean deleteMember(String memberId) {
-    for (Member member : members) {
-      if (member.getMemberId().equals(memberId)) {
-        members.remove(member);
-        return true; // Member deleted successfully
-      }
-    }
-    return false; // Member not found
-  }
-
-
-  /**
-   * A method to search for members.
-
-   * @param memberId Id of a member to search.
-   * @return Returns a member if found.
-   */
-  public Member searchMember(String memberId) {
-    for (Member member : members) {
-      if (member.getMemberId().equals(memberId)) {
-        return member;
-      }
-    }
-    return null; // member not found
-  }
-
-  /**8PTE0X
-   * Prints all member info.
-
-   * @param memberId Member Id passed in.
-   */
-  public void printMemberInfo(String memberId) {
-    Member member = searchMember(memberId);
-    if (member != null) {
-      System.out.println("\nMember Information:");
-      System.out.println("Name: " + member.getName());
-      System.out.println("Email: " + member.getEmail());
-      System.out.println("Phone Number: " + member.getPhoneNr());
-      System.out.println("Number of owned Items: " + member.getOwnedItemCount());
-      System.out.println("Credits: " + member.getCredits());
-    } else {
-      System.out.println("Member with ID " + memberId + " not found.");
-    }
-  }
-
-
-  /**
-   * Method to update member name.
-
-   * @param memberId Member ID parameter.
-   * @param newName New name for the member.
-   * @return Returns a boolean.
-   */
-  public boolean updateMemberName(String memberId, String newName) {
-    Member memberToUpdate = searchMember(memberId);
-    if (memberToUpdate != null) {
-      memberToUpdate.setName(newName); // Use the existing setter
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Method to update member email.
-
-   * @param memberId Member ID parameter.
-   * @param newEmail  Member email for the member.
-   * @return Returns a boolean.
-   */
-  public boolean updateMemberEmail(String memberId, String newEmail) {
-    Member memberToUpdate = searchMember(memberId);
-    if (memberToUpdate != null) {
-      memberToUpdate.setEmail(newEmail); // Use the existing setter
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Method to update phone numbers.
-
-   * @param memberId Member ID parameter.
-   * @param newPhoneNr Phone number to be changed.
-   * @return Returns a boolean.
-   */
-  public boolean updateMemberPhoneNr(String memberId, int newPhoneNr) {
-    Member memberToUpdate = searchMember(memberId);
-    if (memberToUpdate != null) {
-      memberToUpdate.setPhoneNr(newPhoneNr); // Use the existing setter
-      return true;
-    }
-    return false;
   }
 }

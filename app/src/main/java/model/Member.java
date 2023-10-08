@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -14,30 +12,23 @@ public class Member {
   // Generate a unique member ID.
   private String memberId;
   private int credits;
-  private List<Item> ownedItems;
-  private Random random = new Random();
-  // private String creationDate;
   // Owned Items
   // private List<Item> ownedItems = new ArrayList<>();
 
-  /**
-   * Constructor for member.
+  /**.
+   *
+   * @param aname
+   *
+   * @param aemail
    * 
-   * @param newName    New name.
-   * @param newEmail   New email.
-   * @param newPhoneNr New phone number.
+   * @param memberId2
+   * 
    */
-  public Member(String newName, String newEmail, int newPhoneNr) {
-    this.name = newName;
-    this.email = newEmail;
-    this.phoneNr = newPhoneNr;
+  public Member(String aname, String aemail, int memberId2) {
+    this.name = aname;
+    this.email = aemail;
+    this.phoneNr = memberId2;
     this.memberId = generateMemberId();
-    this.ownedItems = new ArrayList<>();
-    this.credits = 0;
-    // this.creationDate = getCurrentDateTime();
-  }
-
-  public Member(Member borrower) {
   }
 
   // We can do it like this to make sure the view only depoends on the model.
@@ -68,6 +59,7 @@ public class Member {
 
   private String generateMemberId() {
     String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    Random random = new Random();
     char[] memberId = new char[6];
 
     for (int i = 0; i < 6; i++) {
@@ -82,14 +74,6 @@ public class Member {
     return memberId;
   }
 
-  public void addCredits(int amount) {
-    credits += amount;
-  }
-
-  public void deductCredits(int amount) {
-    credits -= amount;
-  }
-
   public int getCredits() {
     return credits;
   }
@@ -98,21 +82,6 @@ public class Member {
     this.credits = credits;
   }
 
-  /**
-   * Links items to its owner.
-   * 
-   * @param item The item owned by the member.
-   */
-  public void addItem(Item item) {
-    ownedItems.add(item);
-    this.credits += 100;
-  }
-
-  public int getOwnedItemCount() {
-    return ownedItems.size();
-  }
-
-  public void removeOwnedItem(Item item) {
-    ownedItems.remove(item);
+  public void editName(String newName) {
   }
 }
