@@ -2,7 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import model.Contract;
 import model.Item;
 import model.Member;
 
@@ -89,12 +89,26 @@ public class MemberController {
                 System.out.println("  Item Description: " + item.getShortDescription());
                 System.out.println("  Item Cost Per Day: " + item.getCostPerDay());
                 // Add more item details as needed
+                // Check if the item has active contracts
+                List<Contract> activeContracts = item.getContracts();
+                if (!activeContracts.isEmpty()) {
+                    System.out.println("  Item is currently lent out to:");
+
+                    // Display information about the borrowers and time periods
+                    for (Contract contract : activeContracts) {
+                        System.out.println("    Borrower: " + contract.getBorrower().getName());
+                        System.out.println("    Start Date: " + contract.getStartDate());
+                        System.out.println("    End Date: " + contract.getEndDate());
+                    }
+                } else {
+                    System.out.println("  This item is not currently lent out.");
+                }
             }
         } else {
             System.out.println("This member does not own any items.");
         }
     }
-  }
+}
 
   /**
    * Method to delete a member.

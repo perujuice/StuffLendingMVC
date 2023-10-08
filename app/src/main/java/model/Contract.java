@@ -42,7 +42,7 @@ public class Contract {
     return diffInDays * pricePerDay;
   }
 
-  public boolean overlaps(int newStartDate, int newEndDate) {
+  public boolean isActive(int newStartDate, int newEndDate) {
     return startDate <= newEndDate && endDate >= newStartDate;
   }
 

@@ -95,7 +95,7 @@ public class Item {
   public boolean isAvailable(int startDate, int endDate) {
     for (Contract contract : contracts) {
       // Check if the item is unavailable during the specified time period
-      if (contract.overlaps(startDate, endDate)) {
+      if (contract.isActive(startDate, endDate)) {
         return false;
       }
     }
