@@ -13,6 +13,8 @@ import model.TimeManager;
  */
 public class ContractController {
   private List<Contract> contracts;
+  private MemberController memberController;
+  private ItemController itemController;
   private TimeManager timeManager;
 
   /**
@@ -26,6 +28,8 @@ public class ContractController {
   public ContractController(MemberController originalController, ItemController itemController,
       TimeManager timeManager) {
     this.contracts = new ArrayList<>();
+    this.memberController = originalController;
+    this.itemController = itemController;
     this.timeManager = timeManager;
   }
 
@@ -71,3 +75,4 @@ public class ContractController {
   }
 
 }
+

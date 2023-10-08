@@ -2,18 +2,13 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
 
 import model.Item;
-=======
-import java.util.stream.Collectors;
->>>>>>> ca32481c4092c530e1ebc90b32e6fe391c8363d3
 import model.Member;
 
-/**.
- * 
+/**
+ * Controller class for member methods.
  */
-
 public class MemberController {
   private List<Member> members;
 
@@ -22,37 +17,30 @@ public class MemberController {
     this.members = new ArrayList<>();
   }
 
-  /**.
-   * To create or add new members
-   *
-   * @param name
-   *
-   * @param email
-   *
-   * @param phoneNr
-   *
-   * @return
-   *
+  // Copy constructor
+  public MemberController(MemberController other) {
+    this.members = new ArrayList<>(other.members);
+  }
+
+  /**
+   * Method to create a new member.
+
+   * @param name Member name.
+   * @param email Member email.
+   * @param phoneNr Member phone number.
+   * @return Returns the member.
    */
   public Member createMember(String name, String email, int phoneNr) {
     // check for uniqueness of variables
     if (isEmailUnique(email) && isPhoneNrUnique(phoneNr)) {
       Member newMember = new Member(name, email, phoneNr);
       members.add(newMember); // Add the new member to the list
+      System.out.println("Member added to the list: " + newMember.getMemberId());
       return newMember;
     } else {
       System.out.println("Email or Phone number is not unique! ");
       return null;
     }
-  }
-
-  // To delete a member
-  public void deleteMember(String memberId) {
-    members = members.stream().filter(m -> !m.getMemberId().equals(memberId)).collect(Collectors.toList());
-  }
-
-  public Member findMemberById(String memberId) {
-    return members.stream().filter(m -> m.getMemberId().equals(memberId)).findFirst().orElse(null);
   }
 
   private boolean isEmailUnique(String email) {
@@ -73,25 +61,18 @@ public class MemberController {
     return true;
   }
 
-  /**.
-   *
-   * @return
-   *
-   */
-<<<<<<< HEAD
-  public void printAllMemberInfo() {
-=======
-  public List<String> getAllMemberNames() {
-    List<String> memberNames = new ArrayList<>();
+  /**
+   * A method to get all members.
 
->>>>>>> ca32481c4092c530e1ebc90b32e6fe391c8363d3
+   * @return Returns a list of member names.
+   */
+  public void printAllMemberInfo() {
     for (Member member : members) {
         String memberId = member.getMemberId();
         System.out.println("\nMember Information for ID " + memberId + ":");
         printMemberInfo(memberId);
     }
   }
-<<<<<<< HEAD
 
   public void listAllMembersVerbose() {
     for (Member member : members) {
@@ -214,6 +195,4 @@ public class MemberController {
     }
     return false;
   }
-=======
->>>>>>> ca32481c4092c530e1ebc90b32e6fe391c8363d3
 }
