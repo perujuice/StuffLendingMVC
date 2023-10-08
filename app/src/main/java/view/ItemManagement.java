@@ -4,6 +4,8 @@ import controller.ItemController;
 import controller.MemberController;
 import java.util.List;
 import java.util.Scanner;
+
+import model.Contract;
 import model.Item;
 import model.ItemCategory;
 import model.Member;
@@ -18,9 +20,9 @@ public class ItemManagement {
 
   /**
    * Construcor for item ui.
-
-    * @param originalController Member controller instance passed in.
-    */
+   * 
+   * @param originalController Member controller instance passed in.
+   */
   public ItemManagement(MemberController originalController, ItemController itemController) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.itemController = itemController;
@@ -39,7 +41,8 @@ public class ItemManagement {
       System.out.println("2. List all Items");
       System.out.println("3. Delete Item");
       System.out.println("4. Change an item information ");
-      System.out.println("5. Back");
+      System.out.println("5. View an item Information");
+      System.out.println("6. Back");
 
       System.out.print("\nEnter your choice: ");
 
@@ -97,7 +100,11 @@ public class ItemManagement {
           // Change Item information.
           changeItemInfo();
         case 5:
+          viewItemInformation();
+          break;
+        case 6:
           return;
+
         default:
           throw new IllegalArgumentException("Invalid choice.");
 
@@ -118,7 +125,7 @@ public class ItemManagement {
 
   /**
    * Mehtod to promt user for a category choice.
-
+   * 
    * @return Returns the category.
    */
   public ItemCategory getCategoryFromUserInput() {
@@ -202,6 +209,41 @@ public class ItemManagement {
         default:
           throw new IllegalArgumentException("Invalid input for changing item info.");
       }
+    }
+  }
+
+  /**
+   * Method to view an item's information including its contracts (historical and
+   * future).
+   */
+  public void viewItemInformation() {
+    System.out.print("Enter the Item's ID to view information: ");
+    String itemId = scanner.nextLine();
+    Item item = itemController.searchItem(itemId);
+
+    if (item != null) {
+      // Display item information
+      itemController.printItemInfo(itemId);
+
+      // Display item's contracts
+      List<Contract> contracts = item.getContracts();
+      if (!contracts.isEmpty()) {
+        System.out.println("\n Contracts for this Item:");
+
+        for (Contract contract : contracts) {
+          System.out.println("Contract ID: " + contract.getContractId());
+          System.out.println("Lender: " + contract.getLender().getName());
+          System.out.println("Borrower: " + contract.getBorrower().getName());
+          System.out.println("Start Date: " + contract.getStartDate());
+          System.out.println("End Date: " + contract.getEndDate());
+          System.out.println("Total Cost: " + contract.getTotalCost());
+          System.out.println();
+        }
+      } else {
+        System.out.println("No contracts found for this item.");
+      }
+    } else {
+      System.out.println("Item with ID " + itemId + " not found.");
     }
   }
 }

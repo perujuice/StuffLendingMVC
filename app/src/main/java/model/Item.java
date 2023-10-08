@@ -122,4 +122,8 @@ public class Item {
     owner.removeOwnedItem(this);
   }
 
+  public List<Contract> getContracts() {
+    return contracts;
+  }
+
 }
