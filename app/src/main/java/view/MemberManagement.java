@@ -41,8 +41,9 @@ public class MemberManagement {
       System.out.println("2. Delete member");
       System.out.println("3. View member information");
       System.out.println("4. Change member information");
-      System.out.println("5. List all memebers");
-      System.out.println("6. Back");
+      System.out.println("5. List all memebers in a simple way");
+      System.out.println("6. List all members in a verbose way ");
+      System.out.println("7. Back");
 
       System.out.print("\nEnter your choice: ");
 
@@ -91,17 +92,13 @@ public class MemberManagement {
           changeMemberInfo();
           break;
         case 5:
-          // list all members
-          List<String> allMemberNames = memberController.getAllMemberNames();
-
-          // Now 'allMemberNames' contains all member names
-          for (String memberName : allMemberNames) {
-            // Display the member name as needed
-            System.out.println("Name: " + memberName);
-          }
+          // list all member info in a simple way.
+          memberController.printAllMemberInfo();
           break;
-
         case 6:
+          memberController.listAllMembersVerbose();
+          break;
+        case 7:
           return;
         default:
           throw new IllegalArgumentException("Invalid choice.");

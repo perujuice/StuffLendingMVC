@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Item;
 import model.Member;
 
 /**
@@ -64,17 +66,35 @@ public class MemberController {
 
    * @return Returns a list of member names.
    */
-  public List<String> getAllMemberNames() {
-    List<String> memberNames = new ArrayList<>();
+  public void printAllMemberInfo() {
     for (Member member : members) {
-      memberNames.add(member.getName());
+        String memberId = member.getMemberId();
+        System.out.println("\nMember Information for ID " + memberId + ":");
+        printMemberInfo(memberId);
     }
-
-    return memberNames;
   }
 
-  //Probably needs to be modified once we implement everything for the items
-  //Since when a member is deleted the items belonging to that member should be deleted as well.
+  public void listAllMembersVerbose() {
+    for (Member member : members) {
+        System.out.println("\nMember Information:");
+        System.out.println("Name: " + member.getName());
+
+        // List owned items for this member
+        List<Item> ownedItems = member.getOwnedItems();
+        if (!ownedItems.isEmpty()) {
+            System.out.println("Owned Items:");
+            for (Item item : ownedItems) {
+                System.out.println("  \nItem Name: " + item.getName());
+                System.out.println("  Item Category: " + item.getCategory());
+                System.out.println("  Item Description: " + item.getShortDescription());
+                System.out.println("  Item Cost Per Day: " + item.getCostPerDay());
+                // Add more item details as needed
+            }
+        } else {
+            System.out.println("This member does not own any items.");
+        }
+    }
+  }
 
   /**
    * Method to delete a member.

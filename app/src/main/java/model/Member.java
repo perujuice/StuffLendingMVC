@@ -108,6 +108,10 @@ public class Member {
     this.credits += 100;
   }
 
+  public List<Item> getOwnedItems() {
+    return this.ownedItems;
+  }
+
   public int getOwnedItemCount() {
     return ownedItems.size();
   }
