@@ -1,5 +1,6 @@
 package controller;
 
+import model.TimeManager;
 import view.MemberManagement;
 import view.UserInterface;
 
@@ -14,9 +15,9 @@ public class App {
    */
 
   public static void main(String[] args) {
-
-    MemberController memberController = new MemberController();
-    ItemController itemController = new ItemController(memberController);
+    TimeManager timeManager = new TimeManager();
+    MemberController memberController = new MemberController(timeManager);
+    ItemController itemController = new ItemController(memberController, timeManager);
     MemberManagement memberManagement = new MemberManagement(memberController, itemController);
     memberManagement.data();
     UserInterface ui = new UserInterface(memberController, itemController);

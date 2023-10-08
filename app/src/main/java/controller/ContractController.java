@@ -13,8 +13,6 @@ import model.TimeManager;
  */
 public class ContractController {
   private List<Contract> contracts;
-  private MemberController memberController;
-  private ItemController itemController;
   private TimeManager timeManager;
 
   /**
@@ -25,11 +23,8 @@ public class ContractController {
    * @param timeManager        The TimeManager used for handling time-related
    *                           operations.
    */
-  public ContractController(MemberController originalController, ItemController itemController,
-      TimeManager timeManager) {
+  public ContractController(TimeManager timeManager) {
     this.contracts = new ArrayList<>();
-    this.memberController = originalController;
-    this.itemController = itemController;
     this.timeManager = timeManager;
   }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import model.Item;
 import model.ItemCategory;
 import model.Member;
+import model.TimeManager;
 
 /**
  * Class to handle Item methods.
@@ -12,15 +13,17 @@ import model.Member;
 public class ItemController {
   private List<Item> items;
   private MemberController memberController;
+  private TimeManager time;
 
   /**
    * Constructor for item methods.
    *
    * @param originalController Instance of controller for member passed in.
    */
-  public ItemController(MemberController originalController) {
+  public ItemController(MemberController originalController, TimeManager time) {
     this.items = new ArrayList<>();
     this.memberController = originalController;
+    this.time = time;
   }
 
   /**
@@ -40,6 +43,8 @@ public class ItemController {
       Item newItem = new Item(category, name, shortDesc, costPerDay);
       newItem.setOwner(owner);
       items.add(0, newItem);
+      int dateOfCreation = time.getCurrentDay();
+      System.out.println("Date of creation: " + dateOfCreation);
       return newItem;
     } else {
       System.out.println("Member not found with the specified memberId.");

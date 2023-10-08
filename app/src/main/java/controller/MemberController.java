@@ -5,21 +5,24 @@ import java.util.List;
 import model.Contract;
 import model.Item;
 import model.Member;
+import model.TimeManager;
 
 /**
  * Controller class for member methods.
  */
 public class MemberController {
   private List<Member> members;
+  TimeManager time;
 
-  public MemberController() {
+  public MemberController(TimeManager time) {
     // start list of members
     this.members = new ArrayList<>();
+    this.time = time;
   }
 
   // Copy constructor
   public MemberController(MemberController other) {
-    this.members = new ArrayList<>(other.members);
+    this.members = new ArrayList<>(other.members);;
   }
 
   /**
@@ -35,7 +38,8 @@ public class MemberController {
     if (isEmailUnique(email) && isPhoneNrUnique(phoneNr)) {
       Member newMember = new Member(name, email, phoneNr);
       members.add(newMember); // Add the new member to the list
-      System.out.println("Member added to the list: " + newMember.getMemberId());
+      int dayOfCreation = time.getCurrentDay();
+      System.out.println("Member added to the list: " + newMember.getMemberId() + " Date of creation: " + dayOfCreation);
       return newMember;
     } else {
       System.out.println("Email or Phone number is not unique! ");

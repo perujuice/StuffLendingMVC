@@ -7,7 +7,6 @@ import model.Contract;
 import model.Item;
 import model.Member;
 import model.TimeManager;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -25,7 +24,7 @@ public class ContractManagement {
     this.itemController = itemController;
     this.memberController = originalController;
     this.timeManager = time;
-    this.contractController = new ContractController(originalController, itemController, timeManager);
+    this.contractController = new ContractController(timeManager);
 
   }
 
