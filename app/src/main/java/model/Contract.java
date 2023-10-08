@@ -57,19 +57,19 @@ public class Contract {
   public Member getLender() {
     // Return a copy of the lender object to avoid exposing the internal
     // representation
-    return new Member(lender);
+    return this.lender;
   }
 
   public Member getBorrower() {
     // Return a copy of the borrower object to avoid exposing the internal
     // representation
-    return new Member(borrower);
+    return this.borrower;
   }
 
   public Item getItem() {
     // Return a copy of the item object to avoid exposing the internal
     // representation
-    return new Item(item);
+    return this.item;
   }
 
   public void setStartDate(int currentDay) {

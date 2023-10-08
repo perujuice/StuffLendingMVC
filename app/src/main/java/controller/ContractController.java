@@ -74,5 +74,25 @@ public class ContractController {
     return contracts;
   }
 
+  public void listAllContracts() {
+    List<Contract> contracts = getAllContracts();
+
+    if (contracts.isEmpty()) {
+      System.out.println("No contracts found.");
+    } else {
+      System.out.println("\nList of all contracts:");
+      for (Contract contract : contracts) {
+        System.out.println("Contract ID: " + contract.getContractId());
+        System.out.println("Lender: " + contract.getLender().getName());
+        System.out.println("Borrower: " + contract.getBorrower().getName());
+        System.out.println("Item: " + contract.getItem().getName());
+        System.out.println("Start Date: " + contract.getStartDate());
+        System.out.println("End Date: " + contract.getEndDate());
+        System.out.println("Total Cost: " + contract.getTotalCost());
+        System.out.println();
+      }
+    }
+  }
+
 }
 
