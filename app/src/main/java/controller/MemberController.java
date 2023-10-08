@@ -14,15 +14,15 @@ public class MemberController {
   private List<Member> members;
   TimeManager time;
 
+  /**
+   * Constructor for member controller.
+
+   * @param time Time is passed in.
+   */
   public MemberController(TimeManager time) {
     // start list of members
     this.members = new ArrayList<>();
     this.time = time;
-  }
-
-  // Copy constructor
-  public MemberController(MemberController other) {
-    this.members = new ArrayList<>(other.members);;
   }
 
   /**
@@ -39,7 +39,8 @@ public class MemberController {
       Member newMember = new Member(name, email, phoneNr);
       members.add(newMember); // Add the new member to the list
       int dayOfCreation = time.getCurrentDay();
-      System.out.println("Member added to the list: " + newMember.getMemberId() + " Date of creation: " + dayOfCreation);
+      System.out.println("Member added to the list: " + newMember.getMemberId()
+          + " Date of creation: " + dayOfCreation);
       return newMember;
     } else {
       System.out.println("Email or Phone number is not unique! ");
@@ -66,53 +67,54 @@ public class MemberController {
   }
 
   /**
-   * A method to get all members.
-
-   * @return Returns a list of member names.
+   * Prints all member info.
    */
   public void printAllMemberInfo() {
     for (Member member : members) {
-        String memberId = member.getMemberId();
-        System.out.println("\nMember Information for ID " + memberId + ":");
-        printMemberInfo(memberId);
+      String memberId = member.getMemberId();
+      System.out.println("\nMember Information for ID " + memberId + ":");
+      printMemberInfo(memberId);
     }
   }
 
+  /**
+   * Lists all members.
+   */
   public void listAllMembersVerbose() {
     for (Member member : members) {
-        System.out.println("\nMember Information:");
-        System.out.println("Name: " + member.getName());
+      System.out.println("\nMember Information:");
+      System.out.println("Name: " + member.getName());
 
-        // List owned items for this member
-        List<Item> ownedItems = member.getOwnedItems();
-        if (!ownedItems.isEmpty()) {
-            System.out.println("Owned Items:");
-            for (Item item : ownedItems) {
-                System.out.println("  \nItem Name: " + item.getName());
-                System.out.println("  Item Category: " + item.getCategory());
-                System.out.println("  Item Description: " + item.getShortDescription());
-                System.out.println("  Item Cost Per Day: " + item.getCostPerDay());
-                // Add more item details as needed
-                // Check if the item has active contracts
-                List<Contract> activeContracts = item.getContracts();
-                if (!activeContracts.isEmpty()) {
-                    System.out.println("  Item is currently lent out to:");
+      // List owned items for this member
+      List<Item> ownedItems = member.getOwnedItems();
+      if (!ownedItems.isEmpty()) {
+        System.out.println("Owned Items:");
+        for (Item item : ownedItems) {
+          System.out.println("  \nItem Name: " + item.getName());
+          System.out.println("  Item Category: " + item.getCategory());
+          System.out.println("  Item Description: " + item.getShortDescription());
+          System.out.println("  Item Cost Per Day: " + item.getCostPerDay());
+          // Add more item details as needed
+          // Check if the item has active contracts
+          List<Contract> activeContracts = item.getContracts();
+          if (!activeContracts.isEmpty()) {
+            System.out.println("  Item is currently lent out to:");
 
-                    // Display information about the borrowers and time periods
-                    for (Contract contract : activeContracts) {
-                        System.out.println("    Borrower: " + contract.getBorrower().getName());
-                        System.out.println("    Start Date: " + contract.getStartDate());
-                        System.out.println("    End Date: " + contract.getEndDate());
-                    }
-                } else {
-                    System.out.println("  This item is not currently lent out.");
-                }
+            // Display information about the borrowers and time periods
+            for (Contract contract : activeContracts) {
+              System.out.println("    Borrower: " + contract.getBorrower().getName());
+              System.out.println("    Start Date: " + contract.getStartDate());
+              System.out.println("    End Date: " + contract.getEndDate());
             }
-        } else {
-            System.out.println("This member does not own any items.");
+          } else {
+            System.out.println("  This item is not currently lent out.");
+          }
         }
+      } else {
+        System.out.println("This member does not own any items.");
+      }
     }
-}
+  }
 
   /**
    * Method to delete a member.

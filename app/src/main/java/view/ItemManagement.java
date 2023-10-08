@@ -4,7 +4,6 @@ import controller.ItemController;
 import controller.MemberController;
 import java.util.List;
 import java.util.Scanner;
-
 import model.Contract;
 import model.Item;
 import model.ItemCategory;
@@ -20,7 +19,7 @@ public class ItemManagement {
 
   /**
    * Construcor for item ui.
-   * 
+
    * @param originalController Member controller instance passed in.
    */
   public ItemManagement(MemberController originalController, ItemController itemController) {
@@ -126,7 +125,7 @@ public class ItemManagement {
 
   /**
    * Mehtod to promt user for a category choice.
-   * 
+
    * @return Returns the category.
    */
   public ItemCategory getCategoryFromUserInput() {

@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Class for handling time.
+ */
 public class TimeManager {
   private int currentDay;
 

@@ -2,9 +2,8 @@ package view;
 
 import controller.ItemController;
 import controller.MemberController;
-import model.TimeManager;
-
 import java.util.Scanner;
+import model.TimeManager;
 
 /**
  * Main UI class.
@@ -17,7 +16,7 @@ public class UserInterface {
 
   /**
    * Constructor for the main UI.
-   * 
+
    * @param memberController Member controller instance.
    */
   public UserInterface(MemberController memberController, ItemController itemController) {

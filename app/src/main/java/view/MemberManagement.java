@@ -2,10 +2,7 @@ package view;
 
 import controller.ItemController;
 import controller.MemberController;
-import java.util.List;
 import java.util.Scanner;
-
-import model.Item;
 import model.ItemCategory;
 import model.Member;
 

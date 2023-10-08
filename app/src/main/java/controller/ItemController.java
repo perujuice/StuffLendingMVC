@@ -65,7 +65,7 @@ public class ItemController {
     for (Item item : items) {
       if (item.getItemId().equals(itemId)) {
         items.remove(item);
-        item.DeleteFromOwner(owner);
+        item.deleteFromOwner(owner);
         return true; // Item deleted successfully
       }
     }
@@ -107,7 +107,7 @@ public class ItemController {
 
   /**
    * Method to get all Items.
-   * 
+
    * @return Names of items.
    */
   public List<String> getAllItems() {
@@ -170,6 +170,13 @@ public class ItemController {
     return false;
   }
 
+  /**
+   * Method to update the cost per day.
+
+   * @param itemId Item ID passed.
+   * @param costPerDay Cost per day.
+   * @return Returns a boolean.
+   */
   public boolean updateCostPerDay(String itemId, int costPerDay) {
     Item itemToUpdate = searchItem(itemId);
     if (itemToUpdate != null) {

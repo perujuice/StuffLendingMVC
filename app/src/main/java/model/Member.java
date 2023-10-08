@@ -11,18 +11,14 @@ public class Member {
   private String name;
   private String email;
   private int phoneNr;
-  // Generate a unique member ID.
   private String memberId;
   private int credits;
   private List<Item> ownedItems;
   private Random random = new Random();
-  // private String creationDate;
-  // Owned Items
-  // private List<Item> ownedItems = new ArrayList<>();
 
   /**
    * Constructor for member.
-   * 
+
    * @param newName    New name.
    * @param newEmail   New email.
    * @param newPhoneNr New phone number.
@@ -100,7 +96,7 @@ public class Member {
 
   /**
    * Links items to its owner.
-   * 
+
    * @param item The item owned by the member.
    */
   public void addItem(Item item) {

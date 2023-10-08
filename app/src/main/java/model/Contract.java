@@ -54,21 +54,25 @@ public class Contract {
     return contractId;
   }
 
+  /**
+   * Method to get lender.
+
+   * @return The lender.
+   */
   public Member getLender() {
-    // Return a copy of the lender object to avoid exposing the internal
-    // representation
     return this.lender;
   }
 
+  /**
+   * Gets the borrower.
+
+   * @return Borrower.
+   */
   public Member getBorrower() {
-    // Return a copy of the borrower object to avoid exposing the internal
-    // representation
     return this.borrower;
   }
 
   public Item getItem() {
-    // Return a copy of the item object to avoid exposing the internal
-    // representation
     return this.item;
   }
 
@@ -88,6 +92,11 @@ public class Contract {
     return endDate;
   }
 
+  /**
+   * Method to check for validity of contract.
+
+   * @return Boolean.
+   */
   public boolean isValid() {
     // Check if the contract is valid (e.g., lender has enough credits, item is
     // available)

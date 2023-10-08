@@ -17,9 +17,7 @@ public class ContractController {
 
   /**
    * Constructs a new ContractController with the specified dependencies.
-   *
-   * @param originalController The MemberController used for managing members.
-   * @param itemController     The ItemController used for managing items.
+
    * @param timeManager        The TimeManager used for handling time-related
    *                           operations.
    */
@@ -69,6 +67,9 @@ public class ContractController {
     return contracts;
   }
 
+  /**
+   * Method to list all contracts.
+   */
   public void listAllContracts() {
     List<Contract> contracts = getAllContracts();
 

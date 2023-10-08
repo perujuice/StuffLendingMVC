@@ -3,11 +3,11 @@ package view;
 import controller.ContractController;
 import controller.ItemController;
 import controller.MemberController;
+import java.util.Scanner;
 import model.Contract;
 import model.Item;
 import model.Member;
 import model.TimeManager;
-import java.util.Scanner;
 
 /**
  * Class for contract UI stuff.
@@ -19,6 +19,13 @@ public class ContractManagement {
   private ContractController contractController;
   private TimeManager timeManager;
 
+  /**
+   * Constructor for contract management.
+
+   * @param originalController Pass in the member controller.
+   * @param itemController Pass in the item controller.
+   * @param time Pass in the time.
+   */
   public ContractManagement(MemberController originalController, ItemController itemController, TimeManager time) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.itemController = itemController;
@@ -67,7 +74,8 @@ public class ContractManagement {
                 System.out.println("Contract created successfully. Contract ID: " + newContract.getContractId());
               } else {
                 System.out.println(
-                    "Failed to create a contract. Check if the lender has enough credits or the item is not available.");
+                    "Failed to create a contract."
+                      + "Check if the lender has enough credits or the item is not available.");
               }
             } else {
               System.out.println("Item not found with the specified item ID.");

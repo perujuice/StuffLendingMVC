@@ -22,7 +22,7 @@ public class Item {
 
   /**
    * Item constructor.
-   * 
+
    * @param newCategory   Category.
    * @param newName       Name.
    * @param newShordDesc  Short description.
@@ -92,6 +92,13 @@ public class Item {
     contracts.add(contract); // Add a contract to the list
   }
 
+  /**
+   * Checks if item is available.
+
+   * @param startDate The start day.
+   * @param endDate The end day.
+   * @return Boolean.
+   */
   public boolean isAvailable(int startDate, int endDate) {
     for (Contract contract : contracts) {
       // Check if the item is unavailable during the specified time period
@@ -104,7 +111,7 @@ public class Item {
 
   /**
    * Link the item to its owner.
-   * 
+
    * @param owner The specific member.
    */
   public void setOwner(Member owner) {
@@ -118,7 +125,7 @@ public class Item {
     return this.owner;
   }
 
-  public void DeleteFromOwner(Member owner) {
+  public void deleteFromOwner(Member owner) {
     owner.removeOwnedItem(this);
   }
 
