@@ -99,6 +99,7 @@ public class ItemManagement {
         case 4:
           // Change Item information.
           changeItemInfo();
+          break;
         case 5:
           viewItemInformation();
           break;
@@ -186,7 +187,7 @@ public class ItemManagement {
           break;
         case 2:
           // change the descritpion
-          System.out.print("Select new Category: ");
+          System.out.print("Enter new description of item: ");
           String newDesc = scanner.nextLine();
           itemController.updateItemDesc(changeId, newDesc);
           break;

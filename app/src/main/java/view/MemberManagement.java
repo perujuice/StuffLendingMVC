@@ -152,6 +152,7 @@ public class MemberManagement {
           System.out.print("Enter new phone number: ");
           int newPhoneNr = scanner.nextInt();
           memberController.updateMemberPhoneNr(changeId, newPhoneNr);
+          scanner.nextLine(); // Just to consumer the next line.
           break;
         case 4:
           return;
