@@ -1,14 +1,28 @@
-# Boatclub OO-Design
+# Stuff lending System OO-Design
 This document describes the design according to the requirements presented in assignment 2.
 
 ## Architectural Overview
 The application uses the model-view-controller (MVC) architectural pattern. The view is passive and gets called from the controller. The view may only read information from the model, not directly change it.
 
-![class diagram](img/package_diagram.jpg)
-
 ## Detailed Design
 ### Class Diagram
-Please provide at least one class diagram according to the assignment requirments.
+
+![class diagram](img/class-diagram.jpeg)
+
 
 ### Sequence Diagram
-Please provide at least one sequence diagram according to the assignment requirments.
+
+![sequence diagram](img/sequence_diagram.png)
+
+This sequence diagram illustrates the process of creating a new member in a system with interactions between various components:
+
+
+### Object Diagram
+![object diagram](img/object_diagram.jpg)
+
+The User interacts with the UserInterface to provide input and receive output.
+The UserInterface communicates with the MemberManagement for user-related actions.
+The MemberManagement interacts with the MemberController for member-related operations.
+The MemberController may interact with the Member class to perform actions on member data.
+The MemberController may also interact with the TimeManager class for time-related operations.
+The App class oversees the overall flow of the application but is not directly connected to individual objects in this representation.
