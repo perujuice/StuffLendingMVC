@@ -7,7 +7,6 @@ import java.util.Scanner;
 import model.Contract;
 import model.Item;
 import model.Member;
-import model.TimeManager;
 
 /**
  * Class for contract UI stuff.
@@ -17,7 +16,6 @@ public class ContractManagement {
   private ItemController itemController;
   private MemberController memberController;
   private ContractController contractController;
-  private TimeManager timeManager;
 
   /**
    * Constructor for contract management.
@@ -26,12 +24,11 @@ public class ContractManagement {
    * @param itemController Pass in the item controller.
    * @param time Pass in the time.
    */
-  public ContractManagement(MemberController originalController, ItemController itemController, TimeManager time) {
+  public ContractManagement(MemberController originalController, ItemController itemController, ContractController contractController) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.itemController = itemController;
     this.memberController = originalController;
-    this.timeManager = time;
-    this.contractController = new ContractController(timeManager);
+    this.contractController = contractController;
 
   }
 

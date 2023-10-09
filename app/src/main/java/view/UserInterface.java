@@ -1,5 +1,6 @@
 package view;
 
+import controller.ContractController;
 import controller.ItemController;
 import controller.MemberController;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class UserInterface {
   private Scanner scanner;
   private MemberController memberController;
   private ItemController itemController;
+  private ContractController contractController;
   private TimeManager time;
 
   /**
@@ -19,10 +21,11 @@ public class UserInterface {
 
    * @param memberController Member controller instance.
    */
-  public UserInterface(MemberController memberController, ItemController itemController) {
+  public UserInterface(MemberController memberController, ItemController itemController, ContractController contractController) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.memberController = memberController;
     this.itemController = itemController;
+    this.contractController = contractController;
     this.time = new TimeManager();
 
   }
@@ -49,7 +52,7 @@ public class UserInterface {
       switch (choice) {
         case 1:
           // Member Management
-          MemberManagement memberManagement = new MemberManagement(memberController, itemController);
+          MemberManagement memberManagement = new MemberManagement(memberController);
           memberManagement.handleMemberManagement();
           break;
         case 2:
@@ -59,7 +62,7 @@ public class UserInterface {
           break;
         case 3:
           // Call a method to handle Contract Management
-          new ContractManagement(memberController, itemController, time).handleContractManagement();
+          new ContractManagement(memberController, itemController, contractController).handleContractManagement();
           break;
         case 4:
           // Call a method to handle advancing time

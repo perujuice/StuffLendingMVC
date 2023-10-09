@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 /**
  * This class represents a lending contract between a lender, a borrower, and an
  * item.
@@ -7,15 +9,14 @@ package model;
  * total cost, and involved members and items.
  */
 public class Contract {
-  private int nextContractId = 1;
-
-  private int contractId;
   private int startDate;
   private int endDate;
   private Member borrower;
   private Member lender;
   private Item item;
   private double totalCost;
+  private String contractId;
+  private Random random = new Random();
 
   /**
    * Constructs a new lending contract with the specified details.
@@ -27,13 +28,13 @@ public class Contract {
    * @param newEndDate   The end date of the contract.
    */
   public Contract(Member newLender, Member newBorrower, Item newItem, int newStartDate, int newEndDate) {
-    this.contractId = nextContractId++;
     this.lender = newLender;
     this.borrower = newBorrower;
     this.item = newItem;
     this.startDate = newStartDate;
     this.endDate = newEndDate;
     this.totalCost = calculateTotalCost();
+    this.contractId = generateItemId();
   }
 
   private double calculateTotalCost() {
@@ -50,7 +51,18 @@ public class Contract {
     return totalCost;
   }
 
-  public int getContractId() {
+  private String generateItemId() {
+    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    char[] contractId = new char[6];
+
+    for (int i = 0; i < 6; i++) {
+      int randomIndex = random.nextInt(characters.length());
+      contractId[i] = characters.charAt(randomIndex);
+    }
+
+    return new String(contractId);
+  }
+  public String getContractId() {
     return contractId;
   }
 
