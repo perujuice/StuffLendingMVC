@@ -12,7 +12,7 @@ import model.Member;
 /**
  * Class for Item UI.
  */
-public class ItemManagement {
+public class ItemView {
   private Scanner scanner;
   private ItemController itemController;
   private MemberController memberController;
@@ -22,7 +22,7 @@ public class ItemManagement {
 
    * @param originalController Member controller instance passed in.
    */
-  public ItemManagement(MemberController originalController, ItemController itemController) {
+  public ItemView(MemberController originalController, ItemController itemController) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.itemController = itemController;
     this.memberController = originalController;
@@ -31,21 +31,27 @@ public class ItemManagement {
   /**
    * Method that handles user inpur.
    */
-  public void handleItemManagement() {
-    System.out.println("Item Management:");
-    // item management logic
-    while (true) {
-      System.out.println("\nItem Management Menu:");
-      System.out.println("1. Create Item");
-      System.out.println("2. List all Items");
-      System.out.println("3. Delete Item");
-      System.out.println("4. Change an item information ");
-      System.out.println("5. View an item Information");
-      System.out.println("6. Back");
+  public void displayItemMenu() {
+    System.out.println("\nItem Management Menu:");
 
-      System.out.print("\nEnter your choice: ");
+    System.out.println("1. Create Item");
+    System.out.println("2. List all Items");
+    System.out.println("3. Delete Item");
+    System.out.println("4. Change an item information ");
+    System.out.println("5. View an item Information");
+    System.out.println("6. Back");
 
-      int choice = getIntInput();
+    System.out.print("\nEnter your choice: ");
+  }
+
+  public void displayChange() {
+    System.out.println("\nWhat information would you like to change? ");
+    System.out.println("1. Change name");
+    System.out.println("2. Change description");
+    System.out.println("3. Change category");
+    System.out.println("4. Change cost per day");
+    System.out.println("5. Back");
+  }
 
       switch (choice) {
         case 1:
@@ -113,7 +119,7 @@ public class ItemManagement {
 
   }
 
-  private int getIntInput() {
+  public int getIntInput() {
     int input = -1;
     try {
       input = Integer.parseInt(scanner.nextLine());

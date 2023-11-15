@@ -9,7 +9,7 @@ import model.TimeManager;
 /**
  * Main UI class.
  */
-public class UserInterface {
+public class MainView {
   private Scanner scanner;
   private MemberController memberController;
   private ItemController itemController;
@@ -21,7 +21,8 @@ public class UserInterface {
 
    * @param memberController Member controller instance.
    */
-  public UserInterface(MemberController memberController, ItemController itemController, ContractController contractController) {
+  public MainView(MemberController memberController, 
+      ItemController itemController, ContractController contractController) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.memberController = memberController;
     this.itemController = itemController;
@@ -33,6 +34,21 @@ public class UserInterface {
   /**
    * Main display menu.
    */
+  public void displayMainMenu() {
+    System.out.println("Welcome to the Stuff Lending System!");
+    System.out.println("Current day: " + time.getCurrentDay());
+
+    System.out.println("\nMain Menu:");
+    System.out.println("1. Member Management");
+    System.out.println("2. Item Management");
+    System.out.println("3. Contract Management");
+    System.out.println("4. Advance Time");
+    System.out.println("5. Exit");
+
+    System.out.print("\nEnter your choice: ");
+  }
+
+
   public void displayMenu() {
     System.out.println("Welcome to the Stuff Lending System!");
     System.out.println("Current day: " + time.getCurrentDay());
@@ -52,17 +68,17 @@ public class UserInterface {
       switch (choice) {
         case 1:
           // Member Management
-          MemberManagement memberManagement = new MemberManagement(memberController);
+          MemberView memberManagement = new MemberView(memberController);
           memberManagement.handleMemberManagement();
           break;
         case 2:
           // Call a method to handle Item Management
-          ItemManagement itemManagement = new ItemManagement(memberController, itemController);
+          ItemView itemManagement = new ItemView(memberController, itemController);
           itemManagement.handleItemManagement();
           break;
         case 3:
           // Call a method to handle Contract Management
-          new ContractManagement(memberController, itemController, contractController).handleContractManagement();
+          new ContractView(memberController, itemController, contractController).handleContractManagement();
           break;
         case 4:
           // Call a method to handle advancing time
@@ -79,7 +95,7 @@ public class UserInterface {
     }
   }
 
-  private int getIntInput() {
+  public int getIntInput() {
     int input = -1;
     try {
       input = Integer.parseInt(scanner.nextLine());

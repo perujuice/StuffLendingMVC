@@ -11,7 +11,7 @@ import model.Member;
 /**
  * Class for contract UI stuff.
  */
-public class ContractManagement {
+public class ContractView {
   private Scanner scanner;
   private ItemController itemController;
   private MemberController memberController;
@@ -22,9 +22,9 @@ public class ContractManagement {
 
    * @param originalController Pass in the member controller.
    * @param itemController Pass in the item controller.
-   * @param time Pass in the time.
    */
-  public ContractManagement(MemberController originalController, ItemController itemController, ContractController contractController) {
+  public ContractView(MemberController originalController,
+      ItemController itemController, ContractController contractController) {
     this.scanner = new Scanner(System.in, "UTF-8");
     this.itemController = itemController;
     this.memberController = originalController;
@@ -97,7 +97,7 @@ public class ContractManagement {
    *
    * @return The integer input from the user.
    */
-  private int getIntInput() {
+  public int getIntInput() {
     int input = -1;
     try {
       input = Integer.parseInt(scanner.nextLine());
