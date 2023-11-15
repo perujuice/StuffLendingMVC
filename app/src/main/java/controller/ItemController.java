@@ -1,189 +1,110 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import model.Item;
-import model.ItemCategory;
-import model.Member;
-import model.TimeManager;
+import view.ItemView;
 
 /**
  * Class to handle Item methods.
  */
 public class ItemController {
-  private List<Item> items;
-  private MemberController memberController;
-  private TimeManager time;
+  ItemView view;
 
-  /**
-   * Constructor for item methods.
-   *
-   * @param originalController Instance of controller for member passed in.
-   */
-  public ItemController(MemberController originalController, TimeManager time) {
-    this.items = new ArrayList<>();
-    this.memberController = originalController;
-    this.time = time;
+  private enum ItemOptions {
+    CREATE_ITEM,
+    LIST_ITEMS,
+    DELETE,
+    CHANGE, 
+    VIEW,
+    BACK;
   }
 
-  /**
-   * Method to create Item.
-   *
-   * @param category   Category of item.
-   * @param name       Name of item.
-   * @param shortDesc  Short description of an item.
-   * @param costPerDay Cost per day to borrow an item.
-   * @param memberId   Member who owns the item.
-   * @return New Item.
-   */
-  public Item createItem(ItemCategory category, String name, String shortDesc, int costPerDay, String memberId) {
-    Member owner = memberController.searchMember(memberId);
+  private enum ChangeItemInfo {
+    NAME,
+    DESC,
+    CATEGORY,
+    COST,
+    BACK;
+  }
 
-    if (owner != null) {
-      Item newItem = new Item(category, name, shortDesc, costPerDay);
-      newItem.setOwner(owner);
-      items.add(0, newItem);
-      int dateOfCreation = time.getCurrentDay();
-      System.out.println("Date of creation: " + dateOfCreation);
-      return newItem;
-    } else {
-      System.out.println("Member not found with the specified memberId.");
-      return null;
+  public void handleItemManagement() {
+    view.displayItemMenu();
+
+    ItemOptions option = displayItemManagementMenu();
+
+    switch (option) {
+      case CREATE_ITEM:
+        break;
+      case LIST_ITEMS:
+        break;
+      case DELETE:
+        break;
+      case CHANGE:
+        break;
+      case VIEW:
+        break;
+      case BACK:
+        break;
+      default:
+        throw new IllegalArgumentException("Wrong user input! ");
     }
   }
 
-  /**
-   * Method to delete an Item.
-   *
-   * @param itemId   The ID of the item to delete.
-   * @param memberId Member who owns the item.
-   * @return True if the item is deleted successfully, false otherwise.
-   */
-  public boolean deleteItem(String itemId, String memberId) {
-    Member owner = memberController.searchMember(memberId);
-    System.out.println(owner.getName());
-    for (Item item : items) {
-      if (item.getItemId().equals(itemId)) {
-        items.remove(item);
-        item.deleteFromOwner(owner);
-        return true; // Item deleted successfully
-      }
-    }
-    return false; // Item not found
-  }
+  private ItemOptions displayItemManagementMenu() {
+    int selectedOption = view.getIntInput();
 
-  /**
-   * Method to search for an item by its ID.
-   *
-   * @param itemId The ID of the item to search for.
-   * @return The found item or null if not found.
-   */
-  public Item searchItem(String itemId) {
-    for (Item item : items) {
-      if (item.getItemId().equals(itemId)) {
-        return item;
-      }
-    }
-    return null; // Item not found
-  }
-
-  /**
-   * Method to print information about an item.
-   *
-   * @param itemId The ID of the item to retrieve information for.
-   */
-  public void printItemInfo(String itemId) {
-    Item item = searchItem(itemId);
-    if (item != null) {
-      System.out.println("\nItem Information:");
-      System.out.println("Name: " + item.getName());
-      System.out.println("Short Description: " + item.getShortDescription());
-      System.out.println("Category: " + item.getCategory());
-      System.out.println("Cost per day: " + item.getCostPerDay());
-    } else {
-      System.out.println("Item with ID " + itemId + " not found.");
+    switch (selectedOption) {
+      case 1:
+        return ItemOptions.CREATE_ITEM;
+      case 2:
+        return ItemOptions.LIST_ITEMS;
+      case 3:
+        return ItemOptions.DELETE;
+      case 4:
+        return ItemOptions.CHANGE;
+      case 5:
+        return ItemOptions.VIEW;
+      case 6:
+        return ItemOptions.BACK;
+      default:
+        return null;
     }
   }
 
-  /**
-   * Method to get all Items.
-
-   * @return Names of items.
-   */
-  public List<String> getAllItems() {
-    List<String> itemsWithIds = new ArrayList<>();
-    for (Item item : items) {
-      String itemInfo = "Item ID: " + item.getItemId() + ", Item Name: "
-          + item.getName() + ", OwnerID: " + "Item owner: " + item.getOwner().getMemberId();
-      itemsWithIds.add(itemInfo);
+  private void changeItemInfo() {
+    view.displayChange();
+    ChangeItemInfo option = displayItemChange();
+    
+    switch (option) {
+      case NAME:
+        break;
+      case DESC:
+        break;
+      case CATEGORY:
+        break;
+      case COST:
+        break;
+      case BACK:
+        break;
+      default:
+        throw new IllegalArgumentException("Invalid intput! ");
     }
-
-    return itemsWithIds;
   }
 
-  /**
-   * Method to update the name of an item.
-   *
-   * @param itemId  The ID of the item to update.
-   * @param newName The new name for the item.
-   * @return True if the item name is updated successfully, false otherwise.
-   */
-  public boolean updateItemName(String itemId, String newName) {
-    Item itemToUpdate = searchItem(itemId);
-    if (itemToUpdate != null) {
-      itemToUpdate.setName(newName); // Use the existing setter
-      return true;
+  private ChangeItemInfo displayItemChange() {
+    int selectedOption = view.getIntInput();
+
+    switch (selectedOption) {
+      case 1:
+        return ChangeItemInfo.NAME;
+      case 2:
+        return ChangeItemInfo.DESC;
+      case 3:
+        return ChangeItemInfo.CATEGORY;
+      case 4:
+        return ChangeItemInfo.COST;
+      case 5:
+        return ChangeItemInfo.BACK;
+      default:
+        throw new IllegalArgumentException("Wrong input! ");
     }
-    return false;
   }
-
-  /**
-   * Method to update the short description of an item.
-   *
-   * @param itemId  The ID of the item to update.
-   * @param newDesc The new short description for the item.
-   * @return True if the item description is updated successfully, false
-   *         otherwise.
-   */
-  public boolean updateItemDesc(String itemId, String newDesc) {
-    Item itemToUpdate = searchItem(itemId);
-    if (itemToUpdate != null) {
-      itemToUpdate.setShortDescription(newDesc); // Use the existing setter
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Method to update the category of an item.
-   *
-   * @param itemId      The ID of the item to update.
-   * @param newCategory The new category for the item.
-   * @return True if the item category is updated successfully, false otherwise.
-   */
-  public boolean updateItemCategory(String itemId, ItemCategory newCategory) {
-    Item itemToUpdate = searchItem(itemId);
-    if (itemToUpdate != null) {
-      itemToUpdate.setCategory(newCategory);
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Method to update the cost per day.
-
-   * @param itemId Item ID passed.
-   * @param costPerDay Cost per day.
-   * @return Returns a boolean.
-   */
-  public boolean updateCostPerDay(String itemId, int costPerDay) {
-    Item itemToUpdate = searchItem(itemId);
-    if (itemToUpdate != null) {
-      itemToUpdate.setCostPerDay(costPerDay);
-      return true;
-    }
-    return false;
-  }
-
 }
