@@ -1,6 +1,6 @@
 package controller;
 
-
+import model.TimeManager;
 import view.MainView;
 
 /**
@@ -11,6 +11,7 @@ public class UserInterface {
   MemberController member;
   ItemController item;
   ContractController contract;
+  TimeManager time;
 
   private enum MainMenuOptions {
     MEMBER_MANAGEMENT,
@@ -20,8 +21,14 @@ public class UserInterface {
     EXIT;
   }
 
-  public boolean mainMenu() {
+  public UserInterface() {
+    member = new MemberController();
+    contract = new ContractController();
+    item = new ItemController();
+    time = new TimeManager();
+  }
 
+  public boolean mainMenu() {
     view.displayMainMenu();
 
     MainMenuOptions option = displayMainMenuOptions();
@@ -31,12 +38,14 @@ public class UserInterface {
         member.handleMemberManagement();
         break;
       case ITEM_MANAGEMENT:
-        //item.handleItemManagement();
+        item.handleItemManagement();
         break;
       case CONTRACT_MANAGEMENT:
-        //contract.handleContractManagement();
+        contract.handleContractManagement();
         break;
       case ADVANCE_TIME:
+        time.advanceDay();
+        view.displayTime();
         break;
       case EXIT:
         break;

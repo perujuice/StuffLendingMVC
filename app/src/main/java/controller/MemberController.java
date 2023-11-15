@@ -90,6 +90,8 @@ public class MemberController {
         break;
       case EMAIL:
         break;
+      case PHONE:
+        break;
       case BACK:
         break;
       default:
@@ -107,6 +109,8 @@ public class MemberController {
       case 2:
         return ChangeMemberInfo.EMAIL;
       case 3:
+        return ChangeMemberInfo.PHONE;
+      case 4:
         return ChangeMemberInfo.BACK;
       default:
         return null;
