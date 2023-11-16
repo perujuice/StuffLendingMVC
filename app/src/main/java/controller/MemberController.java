@@ -1,5 +1,6 @@
 package controller;
 
+import model.MemberRegistry;
 import view.MemberView;
 
 /**
@@ -7,6 +8,7 @@ import view.MemberView;
  */
 public class MemberController {
   MemberView view;
+  MemberRegistry memberRegistry;
 
   private enum MemberOptions {
     CREATE_MEMBER,
@@ -32,22 +34,23 @@ public class MemberController {
 
     switch (selectedOption) {
       case CREATE_MEMBER:
-
+        view.memberCreateInput();
         break;
       case DELETE_MEMBER:
-
+        view.displayDelete();
         break;
       case VIEW_MEMBER_INFORMATION:
-                // Handle viewing member information
+        String email = view.toDisplayMemberInfo();
+        view.printMemberInfo(email);
         break;
       case CHANGE_MEMBER_INFORMATION:
         changeMemberInfo();
         break;
       case LIST_MEMBERS_SIMPLE:
-                // Handle listing members in a simple way
+        view.displaySimpleList();
         break;
       case LIST_MEMBERS_VERBOSE:
-                // Handle listing members in a verbose way
+        view.displaySimpleList();
         break;
       case BACK:
                 // Do nothing or handle going back to the main menu
@@ -59,7 +62,6 @@ public class MemberController {
     }
 
   private MemberOptions displayMemberManagementMenu() {
-    // Implement logic to display the member management menu and get user input for the selected option
     int selectedOption = view.getIntInput();
 
     switch (selectedOption) {
@@ -84,13 +86,16 @@ public class MemberController {
 
   private void changeMemberInfo() {
     ChangeMemberInfo option = displayChange();
-
+    String changeEmail = view.promtMemberEmail();
     switch (option) {
       case NAME:
+        view.promptChangeName(changeEmail);
         break;
       case EMAIL:
+        view.promtChangeEmail(changeEmail);
         break;
       case PHONE:
+        view.promtChangePhone(changeEmail);
         break;
       case BACK:
         break;

@@ -37,7 +37,7 @@ public class Member {
     return name;
   }
 
-  public void setName(String name) {
+  public void updateName(String name) {
     this.name = name;
   }
 
@@ -45,15 +45,15 @@ public class Member {
     return email;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void updateEmail(String newEmail) {
+    this.email = newEmail;
   }
 
   public int getPhoneNr() {
     return phoneNr;
   }
 
-  public void setPhoneNr(int phoneNr) {
+  public void updatePhoneNr(int phoneNr) {
     this.phoneNr = phoneNr;
   }
 

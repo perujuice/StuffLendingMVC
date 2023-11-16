@@ -34,10 +34,12 @@ public class ItemController {
       case CREATE_ITEM:
         break;
       case LIST_ITEMS:
+        view.displayItemList();
         break;
       case DELETE:
         break;
       case CHANGE:
+        changeItemInfo();
         break;
       case VIEW:
         break;

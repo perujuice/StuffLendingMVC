@@ -5,23 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import controller.MemberController;
-
 /**
  * Class to create Items and handle retrieval of Item information.
  */
 public class ItemRegistry {
-  final private Map<String, Item> items = new HashMap<>();
-  final private MemberController memberController;
-  final private TimeManager time;
+  private Map<String, Item> items = new HashMap<>();
+  private MemberRegistry memberRegistry;
+  private TimeManager time;
 
-  /**
-   * Constructor for item methods.
-   *
-   * @param originalController Instance of controller for member passed in.
-   */
-  public ItemRegistry(MemberController originalController, TimeManager time) {
-    this.memberController = originalController;
+
+  public ItemRegistry(MemberRegistry memberRegistry, TimeManager time) {
+    this.memberRegistry = memberRegistry;
     this.time = time;
   }
 
@@ -36,17 +30,17 @@ public class ItemRegistry {
    * @return New Item.
    */
   public Item createItem(ItemCategory category, String name, String shortDesc, int costPerDay, String email) {
-    Member owner = memberController.searchMember(email);
+    Member owner = memberRegistry.searchMember(email);
 
     if (owner != null) {
       // Create a new item
       Item newItem = new Item(category, name, shortDesc, costPerDay, owner);
 
       // Add the item to the owner and get the updated owner
-      owner = owner.addItem(newItem);
+      owner.addItem(newItem);
 
       // Replace the existing member in the HashMap with the updated member
-      memberController.updateMember(owner);
+      memberRegistry.updateMember(owner);
 
       // Add the item to the items list
       items.put(newItem.getItemId(), newItem);
@@ -68,7 +62,7 @@ public class ItemRegistry {
    * @return True if the item is deleted successfully, false otherwise.
    */
   public boolean deleteItem(String itemId, String memberId) {
-    Member owner = memberController.searchMember(memberId);
+    Member owner = memberRegistry.searchMember(memberId);
     System.out.println(owner.getName());
 
     Item itemToRemove = items.get(itemId);
@@ -90,24 +84,6 @@ public class ItemRegistry {
    */
   public Item searchItem(String itemId) {
     return items.get(itemId);
-  }
-
-  /**
-   * Method to print information about an item.
-   *
-   * @param itemId The ID of the item to retrieve information for.
-   */
-  public void printItemInfo(String itemId) {
-    Item item = searchItem(itemId);
-    if (item != null) {
-      System.out.println("\nItem Information:");
-      System.out.println("Name: " + item.getName());
-      System.out.println("Short Description: " + item.getShortDescription());
-      System.out.println("Category: " + item.getCategory());
-      System.out.println("Cost per day: " + item.getCostPerDay());
-    } else {
-      System.out.println("Item with ID " + itemId + " not found.");
-    }
   }
 
   /**
@@ -137,10 +113,10 @@ public boolean updateItemName(String itemId, String newName) {
   Item itemToUpdate = searchItem(itemId);
   if (itemToUpdate != null) {
     // Update the name of the item and get the updated item
-    Item updatedItem = itemToUpdate.updateName(newName);
+    itemToUpdate.updateName(newName);
     
     // Replace the existing item in the HashMap with the updated item
-    items.put(updatedItem.getItemId(), updatedItem);
+    items.put(itemToUpdate.getItemId(), itemToUpdate);
     return true;
     }
   return false;
@@ -158,10 +134,10 @@ public boolean updateItemName(String itemId, String newName) {
     Item itemToUpdate = searchItem(itemId);
     if (itemToUpdate != null) {
       // Update the name of the item and get the updated item
-    Item updatedItem = itemToUpdate.updateDesc(newDesc);
+    itemToUpdate.updateDesc(newDesc);
     
     // Replace the existing item in the HashMap with the updated item
-    items.put(updatedItem.getItemId(), updatedItem);
+    items.put(itemToUpdate.getItemId(), itemToUpdate);
       return true;
     }
     return false;
@@ -178,9 +154,9 @@ public boolean updateItemName(String itemId, String newName) {
     Item itemToUpdate = searchItem(itemId);
     if (itemToUpdate != null) {
       // Update the name of the item and get the updated item
-      Item updatedItem = itemToUpdate.updateCategory(newCategory);
+      itemToUpdate.updateCategory(newCategory);
       // Replace the existing item in the HashMap with the updated item
-      items.put(updatedItem.getItemId(), updatedItem);
+      items.put(itemToUpdate.getItemId(), itemToUpdate);
       return true;
     }
     return false;
@@ -197,10 +173,10 @@ public boolean updateItemName(String itemId, String newName) {
     Item itemToUpdate = searchItem(itemId);
     if (itemToUpdate != null) {
       // Update the name of the item and get the updated item
-      Item updatedItem = itemToUpdate.updateCost(costPerDay);
+      itemToUpdate.updateCost(costPerDay);
     
       // Replace the existing item in the HashMap with the updated item
-      items.put(updatedItem.getItemId(), updatedItem);
+      items.put(itemToUpdate.getItemId(), itemToUpdate);
       return true;
     }
     return false;

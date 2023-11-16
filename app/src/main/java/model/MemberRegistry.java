@@ -1,7 +1,6 @@
 package model;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -65,54 +64,8 @@ public class MemberRegistry {
     return true;
   }
 
-  /**
-   * Prints all member info.
-   */
-  public void printAllMemberInfo() {
-    for (Member member : members.values()) {
-      String memberEmail = member.getEmail();
-      System.out.println("\nMember Information for Member email " + memberEmail + ":");
-      printMemberInfo(memberEmail);
-    }
-  }
-
-  /**
-   * Lists all members.
-   */
-  public void listAllMembersVerbose() {
-    for (Member member : members.values()) {
-      System.out.println("\nMember Information:");
-      System.out.println("Name: " + member.getName());
-
-      // List owned items for this member
-      List<Item> ownedItems = member.getOwnedItems();
-      if (!ownedItems.isEmpty()) {
-        System.out.println("Owned Items:");
-        for (Item item : ownedItems) {
-          System.out.println("  \nItem Name: " + item.getName());
-          System.out.println("  Item Category: " + item.getCategory());
-          System.out.println("  Item Description: " + item.getShortDescription());
-          System.out.println("  Item Cost Per Day: " + item.getCostPerDay());
-          // Add more item details as needed
-          // Check if the item has active contracts
-          List<Contract> activeContracts = item.getContracts();
-          if (!activeContracts.isEmpty()) {
-            System.out.println("  Item is currently lent out to:");
-
-            // Display information about the borrowers and time periods
-            for (Contract contract : activeContracts) {
-              System.out.println("    Borrower: " + contract.getBorrower().getName());
-              System.out.println("    Start Date: " + contract.getStartDate());
-              System.out.println("    End Date: " + contract.getEndDate());
-            }
-          } else {
-            System.out.println("  This item is not currently lent out.");
-          }
-        }
-      } else {
-        System.out.println("This member does not own any items.");
-      }
-    }
+  public Map<String, Member> getMembers() {
+    return members;
   }
 
   /**
@@ -141,25 +94,6 @@ public class MemberRegistry {
     return members.get(email);
   }
 
-  /**8PTE0X
-   * Prints all member info.
-
-   * @param email Email passed in.
-   */
-  public void printMemberInfo(String email) {
-    Member member = searchMember(email);
-    if (member != null) {
-      System.out.println("\nMember Information:");
-      System.out.println("Name: " + member.getName());
-      System.out.println("Email: " + member.getEmail());
-      System.out.println("Phone Number: " + member.getPhoneNr());
-      System.out.println("Number of owned Items: " + member.getOwnedItemCount());
-      System.out.println("Credits: " + member.getCredits());
-    } else {
-      System.out.println("Member with email " + email + " not found.");
-    }
-  }
-
 
   /**
    * Method to update member name.
@@ -171,8 +105,8 @@ public class MemberRegistry {
   public boolean updateMemberName(String email, String newName) {
     Member memberToUpdate = searchMember(email);
     if (memberToUpdate != null) {
-      Member updateMember = memberToUpdate.updateName(newName); // Use the existing setter
-      updateMember(updateMember);
+      memberToUpdate.updateName(newName); // Use the existing setter
+      updateMember(memberToUpdate);
       return true;
     }
     return false;
@@ -188,8 +122,8 @@ public class MemberRegistry {
   public boolean updateMemberEmail(String email, String newEmail) {
     Member memberToUpdate = searchMember(email);
     if (memberToUpdate != null) {
-      Member updatedMember = memberToUpdate.updateEmail(newEmail); // Use the existing setter
-      updateMember(updatedMember);
+      memberToUpdate.updateEmail(newEmail); // Use the existing setter
+      updateMember(memberToUpdate);
       return true;
     }
     return false;
@@ -205,8 +139,8 @@ public class MemberRegistry {
   public boolean updateMemberPhoneNr(String email, int newPhoneNr) {
     Member memberToUpdate = searchMember(email);
     if (memberToUpdate != null) {
-      Member updatedMember = memberToUpdate.updatePhoneNr(newPhoneNr); // Use the existing setter
-      updateMember(updatedMember);
+      memberToUpdate.updatePhoneNr(newPhoneNr); // Use the existing setter
+      updateMember(memberToUpdate);
       return true;
     }
     return false;

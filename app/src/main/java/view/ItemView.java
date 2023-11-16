@@ -47,7 +47,6 @@ public class ItemView {
   public String promtMemberEmail() {
     System.out.print("Enter the member's Email to change information: ");
     String ownerEmail = scanner.nextLine();
-    memberRegistry.printMemberInfo(ownerEmail);
     return ownerEmail;
   }
 
@@ -108,7 +107,7 @@ public class ItemView {
   public String promtItemId() {
     System.out.print("Enter the Item's ID to change information: ");
     String changeId = scanner.nextLine();
-    itemRegistry.printItemInfo(changeId);
+    printItemInfo(changeId);
     return changeId;
   }
 
@@ -188,7 +187,7 @@ public class ItemView {
 
     if (item != null) {
       // Display item information
-      itemRegistry.printItemInfo(itemId);
+      printItemInfo(itemId);
 
       // Display item's contracts
       List<Contract> contracts = item.getContracts();
@@ -207,6 +206,25 @@ public class ItemView {
       } else {
         System.out.println("No contracts found for this item.");
       }
+    } else {
+      System.out.println("Item with ID " + itemId + " not found.");
+    }
+  }
+
+  /**
+   * Method to print information about an item.
+   *
+   * @param itemId The ID of the item to retrieve information for.
+   */
+  public void printItemInfo(String itemId) {
+    Item item = itemRegistry.searchItem(itemId);
+
+    if (item != null) {
+      System.out.println("\nItem Information:");
+      System.out.println("Name: " + item.getName());
+      System.out.println("Short Description: " + item.getShortDescription());
+      System.out.println("Category: " + item.getCategory());
+      System.out.println("Cost per day: " + item.getCostPerDay());
     } else {
       System.out.println("Item with ID " + itemId + " not found.");
     }

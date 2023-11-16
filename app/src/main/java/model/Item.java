@@ -28,19 +28,17 @@ public class Item {
    * @param newShordDesc  Short description.
    * @param newCostPerDay Cost per day.
    */
-  public Item(ItemCategory newCategory, String newName, String newShordDesc, int newCostPerDay) {
+  public Item(ItemCategory newCategory, String newName, String newShordDesc, int newCostPerDay, Member owner) {
     this.name = newName;
     this.shortDesc = newShordDesc;
     this.category = newCategory;
     this.itemId = generateItemId();
     this.costPerDay = newCostPerDay;
+    this.owner = owner;
     contracts = new ArrayList<>();
   }
 
-  public Item(Item item) {
-  }
-
-  public void setName(String name) {
+  public void updateName(String name) {
     this.name = name;
   }
 
@@ -48,7 +46,7 @@ public class Item {
     return name;
   }
 
-  public void setShortDescription(String shortDesc) {
+  public void updateDesc(String shortDesc) {
     this.shortDesc = shortDesc;
   }
 
@@ -56,7 +54,7 @@ public class Item {
     return shortDesc;
   }
 
-  public void setCategory(ItemCategory category) {
+  public void updateCategory(ItemCategory category) {
     this.category = category;
   }
 
@@ -64,7 +62,7 @@ public class Item {
     return category;
   }
 
-  public void setCostPerDay(int costPerDay) {
+  public void updateCost(int costPerDay) {
     this.costPerDay = costPerDay;
   }
 
