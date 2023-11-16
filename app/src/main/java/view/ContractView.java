@@ -13,7 +13,11 @@ public class ContractView {
   private ContractRegistry contractRegistry;
 
 
-  public void displayContractMenu() {
+  public ContractView(Scanner scanner) {
+    this.scanner = scanner;
+ }
+
+public void displayContractMenu() {
     System.out.println("\nContract Management Menu:");
     System.out.println("1. Create a new lending contract");
     System.out.println("2. List all contracts");

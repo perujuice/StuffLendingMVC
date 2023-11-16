@@ -1,6 +1,5 @@
 package controller;
 
-import model.MemberRegistry;
 import view.MemberView;
 
 /**
@@ -8,7 +7,10 @@ import view.MemberView;
  */
 public class MemberController {
   MemberView view;
-  MemberRegistry memberRegistry;
+
+  public MemberController(MemberView v) {
+    this.view = v;
+  }
 
   private enum MemberOptions {
     CREATE_MEMBER,

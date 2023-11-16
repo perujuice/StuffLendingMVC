@@ -10,11 +10,15 @@ public class MainView {
   private Scanner scanner;
   private TimeManager time;
 
+  public MainView(Scanner scanner) {
+    this.scanner = scanner;
+  }
 
   /**
    * Main display menu.
    */
   public void displayMainMenu() {
+    TimeManager time = new TimeManager();
     System.out.println("Welcome to the Stuff Lending System!");
     System.out.println("Current day: " + time.getCurrentDay());
 

@@ -17,7 +17,11 @@ public class ItemView {
   private MemberRegistry memberRegistry;
   private ItemRegistry itemRegistry;
 
-  /**
+  public ItemView(Scanner scanner) {
+    this.scanner = scanner;
+  }
+
+/**
    * Method that handles user inpur.
    */
   public void displayItemMenu() {

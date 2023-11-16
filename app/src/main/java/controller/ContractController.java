@@ -15,6 +15,10 @@ public class ContractController {
   ItemRegistry itemRegistry;
   ContractRegistry contract;
 
+  public ContractController(ContractView c) {
+    this.view = c;
+  }
+
   private enum ContractOptions {
     CREATE,
     LIST,

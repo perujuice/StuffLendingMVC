@@ -1,14 +1,23 @@
 package controller;
 
-import model.TimeManager;
+import java.util.Scanner;
+
+import view.ContractView;
+import view.ItemView;
+import view.MainView;
+import view.MemberView;
 
 
 /**
  * Responsible for staring the application.
  */
 public class App {
-  TimeManager timeManager = new TimeManager();
-  UserInterface ui = new UserInterface();
+  Scanner scanner = new Scanner(System.in);
+  MainView v = new MainView(scanner);
+  MemberView m = new MemberView(scanner);
+  ItemView i = new ItemView(scanner);
+  ContractView c = new ContractView(scanner); 
+  UserInterface ui = new UserInterface(v, m, i, c);
 
   /**
    * This is just some data for persistance.

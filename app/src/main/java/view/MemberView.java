@@ -15,6 +15,10 @@ public class MemberView {
   private Scanner scanner;
   private MemberRegistry memberRegistry;
 
+  public MemberView(Scanner scanner) {
+    this.scanner = scanner;
+  }
+
   /**
    * Method for user input.
    */

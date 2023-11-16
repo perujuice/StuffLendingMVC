@@ -1,7 +1,10 @@
 package controller;
 
 import model.TimeManager;
+import view.ContractView;
+import view.ItemView;
 import view.MainView;
+import view.MemberView;
 
 /**
  * Main scenario controller for the app.
@@ -21,11 +24,12 @@ public class UserInterface {
     EXIT;
   }
 
-  public UserInterface() {
-    member = new MemberController();
-    contract = new ContractController();
-    item = new ItemController();
+  public UserInterface(MainView v, MemberView m, ItemView i, ContractView c) {
+    member = new MemberController(m);
+    contract = new ContractController(c);
+    item = new ItemController(i);
     time = new TimeManager();
+    view = v;
   }
 
   public boolean mainMenu() {

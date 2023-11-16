@@ -8,6 +8,10 @@ import view.ItemView;
 public class ItemController {
   ItemView view;
 
+  public ItemController(ItemView v) {
+    this.view = v;
+  }
+
   private enum ItemOptions {
     CREATE_ITEM,
     LIST_ITEMS,
