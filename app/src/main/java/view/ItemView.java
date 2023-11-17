@@ -3,22 +3,21 @@ package view;
 import java.util.List;
 import java.util.Scanner;
 import model.Contract;
+import model.DataManager;
 import model.Item;
 import model.ItemCategory;
-import model.ItemRegistry;
 import model.Member;
-import model.MemberRegistry;
 
 /**
  * Class for Item UI.
  */
 public class ItemView {
   private Scanner scanner;
-  private MemberRegistry memberRegistry;
-  private ItemRegistry itemRegistry;
+  private DataManager data;
 
-  public ItemView(Scanner scanner) {
+  public ItemView(Scanner scanner, DataManager d) {
     this.scanner = scanner;
+    this.data = d;
   }
 
 /**
@@ -56,7 +55,7 @@ public class ItemView {
 
   public void itemCreateInput() {
     String email = promtMemberEmail();
-    Member owner = memberRegistry.searchMember(email);
+    Member owner = data.getMemberRegistry().searchMember(email);
     if (owner != null) {
       final ItemCategory category = getCategoryFromUserInput();
 
@@ -73,7 +72,7 @@ public class ItemView {
 
       scanner.nextLine();
 
-      Item newItem = itemRegistry.createItem(category, name, description, costPerDay, email);
+      Item newItem = data.getItemRegistry().createItem(category, name, description, costPerDay, email);
       System.out.println("Item ID: " + newItem.getItemId());
       System.out.println("Item created successfully.");
     } else {
@@ -82,7 +81,7 @@ public class ItemView {
   }
 
   public void displayItemList() {
-    List<String> allItems = itemRegistry.getAllItems();
+    List<String> allItems = data.getItemRegistry().getAllItems();
     for (String items : allItems) {
       // Display the member name as needed
       System.out.println("Item: " + items);
@@ -92,9 +91,9 @@ public class ItemView {
   public void promtItemDelete() {
     System.out.print("Enter the items's ID to be deleted: ");
     String deleteId = scanner.nextLine();
-    Item itemDelete = itemRegistry.searchItem(deleteId);
+    Item itemDelete = data.getItemRegistry().searchItem(deleteId);
     Member itemowner = itemDelete.getOwner();
-    itemRegistry.deleteItem(deleteId, itemowner.getMemberId());
+    data.getItemRegistry().deleteItem(deleteId, itemowner.getMemberId());
     System.out.println(itemDelete.getName() + "successfully deleted! ");
   }
 
@@ -119,19 +118,19 @@ public class ItemView {
   public void promptChangeName(String changeId) {
     System.out.print("Enter new name: ");
     String newName = scanner.nextLine();
-    itemRegistry.updateItemName(changeId, newName);
+    data.getItemRegistry().updateItemName(changeId, newName);
   }
 
   public void promptChangeDesc(String changeId) {
     System.out.print("Enter new name: ");
     String newName = scanner.nextLine();
-    itemRegistry.updateItemName(changeId, newName);
+    data.getItemRegistry().updateItemName(changeId, newName);
   }
   
   public void promptChangeCategory(String changeId) {
     ItemCategory newCategory = getCategoryFromUserInput();
     System.out.println("New Category: " + newCategory);
-    itemRegistry.updateItemCategory(changeId, newCategory);
+    data.getItemRegistry().updateItemCategory(changeId, newCategory);
     scanner.nextLine();
   }
 
@@ -139,7 +138,7 @@ public class ItemView {
     System.out.print("Enter new cost per day: ");
     int newCost = scanner.nextInt();
     scanner.nextLine();
-    itemRegistry.updateCostPerDay(changeId, newCost);
+    data.getItemRegistry().updateCostPerDay(changeId, newCost);
   }
 
   /**
@@ -187,7 +186,7 @@ public class ItemView {
   public void viewItemInformation() {
     System.out.print("Enter the Item's ID to view information: ");
     String itemId = scanner.nextLine();
-    Item item = itemRegistry.searchItem(itemId);
+    Item item = data.getItemRegistry().searchItem(itemId);
 
     if (item != null) {
       // Display item information
@@ -221,7 +220,7 @@ public class ItemView {
    * @param itemId The ID of the item to retrieve information for.
    */
   public void printItemInfo(String itemId) {
-    Item item = itemRegistry.searchItem(itemId);
+    Item item = data.getItemRegistry().searchItem(itemId);
 
     if (item != null) {
       System.out.println("\nItem Information:");

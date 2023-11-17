@@ -4,19 +4,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import model.Contract;
+import model.DataManager;
 import model.Item;
 import model.Member;
-import model.MemberRegistry;
 
 /**
  * Class for member UI.
  */
 public class MemberView {
   private Scanner scanner;
-  private MemberRegistry memberRegistry;
+  private DataManager data;
 
-  public MemberView(Scanner scanner) {
+  public MemberView(Scanner scanner, DataManager d) {
     this.scanner = scanner;
+    this.data = d;
   }
 
   /**
@@ -35,7 +36,7 @@ public class MemberView {
     System.out.print("\nEnter your choice: ");
   }
 
-  public void memberCreateInput() {
+  public Boolean memberCreateInput() {
     System.out.println("Creating a new member...\n");
     System.out.print("Enter the member's name: ");
     final String name = scanner.nextLine();
@@ -49,14 +50,16 @@ public class MemberView {
     scanner.nextLine();
     // creat instance create a new member
     // MemberController memberController = new MemberController();
-    Member newMember = memberRegistry.createMember(name, email, phoneNr);
+    Member newMember = data.getMemberRegistry().createMember(name, email, phoneNr);
     System.out.println("New member created with Member ID: " + newMember.getMemberId());
+    
+    return true;
   }
 
   public void displayDelete() {
     System.out.print("\nEnter the member's email to be deleted: ");
     String deleteEmail = scanner.nextLine();
-    memberRegistry.deleteMember(deleteEmail);
+    data.getMemberRegistry().deleteMember(deleteEmail);
     System.out.println("\nMember successfully deleted! ");
   }
 
@@ -67,7 +70,7 @@ public class MemberView {
   }
 
   public void displaySimpleList() {
-    Map<String, Member> members = memberRegistry.getMembers();
+    Map<String, Member> members = data.getMemberRegistry().getMembers();
     for (Member member : members.values()) {
       String memberEmail = member.getEmail();
       System.out.println("\nMember Information for Member email " + memberEmail + ":");
@@ -79,7 +82,7 @@ public class MemberView {
    * Lists all members in a verbose way.
    */
   public void displayVerboseList() {
-    Map<String, Member> members = memberRegistry.getMembers();
+    Map<String, Member> members = data.getMemberRegistry().getMembers();
     for (Member member : members.values()) {
       System.out.println("\nMember Information:");
       System.out.println("Name: " + member.getName());
@@ -142,19 +145,19 @@ public class MemberView {
   public void promptChangeName(String changeEmail) {
     System.out.print("Enter new name: ");
     String newName = scanner.nextLine();
-    memberRegistry.updateMemberName(changeEmail, newName);
+    data.getMemberRegistry().updateMemberName(changeEmail, newName);
   }
 
   public void promtChangeEmail(String changeEmail) {
     System.out.print("Enter new email: ");
     String newEmail = scanner.nextLine();
-    memberRegistry.updateMemberEmail(changeEmail, newEmail);
+    data.getMemberRegistry().updateMemberEmail(changeEmail, newEmail);
   }
 
   public void promtChangePhone(String changeEmail) {
     System.out.print("Enter new phone number: ");
     int newPhoneNr = scanner.nextInt();
-    memberRegistry.updateMemberPhoneNr(changeEmail, newPhoneNr);
+    data.getMemberRegistry().updateMemberPhoneNr(changeEmail, newPhoneNr);
     scanner.nextLine(); // Just to consumer the next line.
   } 
 
@@ -164,7 +167,7 @@ public class MemberView {
    * @param email Email passed in.
    */
   public void printMemberInfo(String email) {
-    Member member = memberRegistry.searchMember(email);
+    Member member = data.getMemberRegistry().searchMember(email);
 
     System.out.println("\nMember Information:");
     System.out.println("Name: " + member.getName());

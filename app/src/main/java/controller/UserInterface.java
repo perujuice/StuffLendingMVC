@@ -1,5 +1,6 @@
 package controller;
 
+import model.DataManager;
 import model.TimeManager;
 import view.ContractView;
 import view.ItemView;
@@ -24,11 +25,11 @@ public class UserInterface {
     EXIT;
   }
 
-  public UserInterface(MainView v, MemberView m, ItemView i, ContractView c) {
-    member = new MemberController(m);
-    contract = new ContractController(c);
+  public UserInterface(MainView v, MemberView m, ItemView i, ContractView c, TimeManager t, DataManager d) {
+    member = new MemberController(m, this);
+    contract = new ContractController(c, d);
     item = new ItemController(i);
-    time = new TimeManager();
+    time = t;
     view = v;
   }
 

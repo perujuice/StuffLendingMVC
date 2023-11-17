@@ -1,22 +1,19 @@
 package controller;
 
 import model.Contract;
-import model.ContractRegistry;
+import model.DataManager;
 import model.Item;
-import model.ItemRegistry;
 import model.Member;
-import model.MemberRegistry;
 import view.ContractView;
 
 
 public class ContractController {
   ContractView view;
-  MemberRegistry memberRegistry;
-  ItemRegistry itemRegistry;
-  ContractRegistry contract;
+  DataManager data;
 
-  public ContractController(ContractView c) {
+  public ContractController(ContractView c, DataManager d) {
     this.view = c;
+    this.data = d;
   }
 
   private enum ContractOptions {
@@ -60,15 +57,15 @@ public class ContractController {
 
   private void createNewContract() {
     String borrowerId = view.promptBorrowerId();
-    Member borrower = memberRegistry.searchMember(borrowerId);
+    Member borrower = data.getMemberRegistry().searchMember(borrowerId);
 
     if (borrower != null) {
       String itemId = view.promptItemId();
       int returnDay = view.promptReturnDay();
-      Item item = itemRegistry.searchItem(itemId);
+      Item item = data.getItemRegistry().searchItem(itemId);
       if (item != null) {
         Member lender = item.getOwner();
-        Contract newContract = contract.createContract(borrower, lender, item, returnDay);
+        Contract newContract = data.getContractRegistry().createContract(borrower, lender, item, returnDay);
         if (newContract != null) {
           System.out.println("Contract created successfully. Contract ID: " + newContract.getContractId());
         }

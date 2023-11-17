@@ -8,7 +8,7 @@ public class TimeManager {
 
   public TimeManager() {
     // Initialize the current day to 1 when the system starts
-    this.currentDay = 1;
+    this.currentDay = 0;
   }
 
   public int getCurrentDay() {

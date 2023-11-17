@@ -7,9 +7,11 @@ import view.MemberView;
  */
 public class MemberController {
   MemberView view;
+  UserInterface ui;
 
-  public MemberController(MemberView v) {
+  public MemberController(MemberView v, UserInterface ui) {
     this.view = v;
+    this.ui = ui;
   }
 
   private enum MemberOptions {
@@ -30,38 +32,43 @@ public class MemberController {
   }
 
   public void handleMemberManagement() {
-    view.displayMemberOptions();
+    boolean continueManagingMembers = true;
 
-    MemberOptions selectedOption = displayMemberManagementMenu();
+    while (continueManagingMembers) {
+      view.displayMemberOptions();
 
-    switch (selectedOption) {
-      case CREATE_MEMBER:
-        view.memberCreateInput();
-        break;
-      case DELETE_MEMBER:
-        view.displayDelete();
-        break;
-      case VIEW_MEMBER_INFORMATION:
-        String email = view.toDisplayMemberInfo();
-        view.printMemberInfo(email);
-        break;
-      case CHANGE_MEMBER_INFORMATION:
-        changeMemberInfo();
-        break;
-      case LIST_MEMBERS_SIMPLE:
-        view.displaySimpleList();
-        break;
-      case LIST_MEMBERS_VERBOSE:
-        view.displaySimpleList();
-        break;
-      case BACK:
-                // Do nothing or handle going back to the main menu
-        break;
-      default:
-        System.out.println("Invalid option. Please try again.");
-        break;
+      MemberOptions selectedOption = displayMemberManagementMenu();
+
+      switch (selectedOption) {
+        case CREATE_MEMBER:
+          continueManagingMembers = view.memberCreateInput();
+          break;
+        case DELETE_MEMBER:
+          view.displayDelete();
+          break;
+        case VIEW_MEMBER_INFORMATION:
+          String email = view.toDisplayMemberInfo();
+          view.printMemberInfo(email);
+          break;
+        case CHANGE_MEMBER_INFORMATION:
+          changeMemberInfo();
+          break;
+        case LIST_MEMBERS_SIMPLE:
+          view.displaySimpleList();
+          break;
+        case LIST_MEMBERS_VERBOSE:
+          view.displaySimpleList();
+          break;
+        case BACK:
+          continueManagingMembers = false;
+          ui.mainMenu();
+          break;
+        default:
+          System.out.println("Invalid option. Please try again.");
+          break;
       }
     }
+  }
 
   private MemberOptions displayMemberManagementMenu() {
     int selectedOption = view.getIntInput();

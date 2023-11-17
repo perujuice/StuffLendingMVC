@@ -3,18 +3,19 @@ package view;
 import java.util.List;
 import java.util.Scanner;
 import model.Contract;
-import model.ContractRegistry;
+import model.DataManager;
 
 /**
  * Class for contract UI stuff.
  */
 public class ContractView {
   private Scanner scanner;
-  private ContractRegistry contractRegistry;
+  private DataManager data;
 
 
-  public ContractView(Scanner scanner) {
+  public ContractView(Scanner scanner, DataManager d) {
     this.scanner = scanner;
+    this.data = d;
  }
 
 public void displayContractMenu() {
@@ -49,7 +50,7 @@ public void displayContractMenu() {
    * Method to list all contracts.
    */
   public void listAllContracts() {
-    List<Contract> contracts = contractRegistry.getAllContracts();
+    List<Contract> contracts = data.getContractRegistry().getAllContracts();
 
     if (contracts.isEmpty()) {
       System.out.println("No contracts found.");
