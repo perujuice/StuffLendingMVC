@@ -38,6 +38,16 @@ public class Item {
     contracts = new ArrayList<>();
   }
 
+  public Item(Item other) {
+    this.name = other.name;
+    this.shortDesc = other.shortDesc;
+    this.category = other.category;
+    this.itemId = other.itemId;
+    this.costPerDay = other.costPerDay;
+    this.owner = other.owner;
+    this.contracts = new ArrayList<>(other.contracts);
+  }
+
   public void updateName(String name) {
     this.name = name;
   }

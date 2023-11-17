@@ -33,6 +33,20 @@ public class Member {
     // this.creationDate = getCurrentDateTime();
   }
 
+  /**
+   * Copy constuctor
+
+   * @param other The member copy
+   */
+  public Member(Member other) {
+    this.name = other.name;
+    this.email = other.email;
+    this.phoneNr = other.phoneNr;
+    this.memberId = other.memberId;
+    this.ownedItems = new ArrayList<>(other.ownedItems);
+    this.credits = other.credits;
+  }
+
   public String getName() {
     return name;
   }
@@ -100,7 +114,7 @@ public class Member {
   }
 
   public List<Item> getOwnedItems() {
-    return this.ownedItems;
+    return new ArrayList<>(ownedItems);
   }
 
   public int getOwnedItemCount() {

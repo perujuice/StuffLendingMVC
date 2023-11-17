@@ -2,7 +2,6 @@ package view;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import model.Contract;
 import model.DataManager;
@@ -86,8 +85,8 @@ public class MemberView {
    * Displays all members in a simple way.
    */
   public void displaySimpleList() {
-    Map<String, Member> members = data.getMemberRegistry().getMembers();
-    for (Member member : members.values()) {
+    List<Member> members = data.getMemberRegistry().getMembers();
+    for (Member member : members) {
       String memberEmail = member.getEmail();
       System.out.println("\nMember Information for Member email " + memberEmail + ":");
       printMemberInfo(memberEmail);
@@ -98,8 +97,8 @@ public class MemberView {
    * Lists all members in a verbose way.
    */
   public void displayVerboseList() {
-    Map<String, Member> members = data.getMemberRegistry().getMembers();
-    for (Member member : members.values()) {
+    List<Member> members = data.getMemberRegistry().getMembers();
+    for (Member member : members) {
       System.out.println("\nMember Information:");
       System.out.println("Name: " + member.getName());
 

@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,8 +66,8 @@ public class MemberRegistry {
     return true;
   }
 
-  public Map<String, Member> getMembers() {
-    return members;
+  public List<Member> getMembers() {
+    return new ArrayList<>(members.values());
   }
 
   /**

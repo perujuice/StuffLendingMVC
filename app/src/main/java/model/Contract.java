@@ -28,9 +28,9 @@ public class Contract {
    * @param newEndDate   The end date of the contract.
    */
   public Contract(Member newLender, Member newBorrower, Item newItem, int newStartDate, int newEndDate) {
-    this.lender = newLender;
-    this.borrower = newBorrower;
-    this.item = newItem;
+    this.lender = new Member(newLender);
+    this.borrower = new Member(newBorrower);
+    this.item = new Item(newItem);
     this.startDate = newStartDate;
     this.endDate = newEndDate;
     this.totalCost = calculateTotalCost();
@@ -73,7 +73,7 @@ public class Contract {
    * @return The lender.
    */
   public Member getLender() {
-    return this.lender;
+    return new Member(this.lender);
   }
 
   /**
@@ -82,11 +82,11 @@ public class Contract {
    * @return Borrower.
    */
   public Member getBorrower() {
-    return this.borrower;
+    return new Member(this.borrower);
   }
 
   public Item getItem() {
-    return this.item;
+    return new Item(this.item);
   }
 
   public void setStartDate(int currentDay) {
