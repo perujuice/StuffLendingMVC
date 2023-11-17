@@ -6,7 +6,9 @@ import model.Item;
 import model.Member;
 import view.ContractView;
 
-
+/**
+ * Class handling state of the contract menu.
+ */
 public class ContractController {
   ContractView view;
   DataManager data;
@@ -22,6 +24,9 @@ public class ContractController {
     BACK;
   }
 
+  /**
+   * Method to handle user options.
+   */
   public void handleContractManagement() {
     view.displayContractMenu();
     ContractOptions option = displayContractManagementMenu();

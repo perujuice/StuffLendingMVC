@@ -103,23 +103,23 @@ public class ItemRegistry {
   }
 
   /**
- * Method to update the name of an item.
- *
- * @param itemId  The ID of the item to update.
- * @param newName The new name for the item.
- * @return True if the item name is updated successfully, false otherwise.
- */
-public boolean updateItemName(String itemId, String newName) {
-  Item itemToUpdate = searchItem(itemId);
-  if (itemToUpdate != null) {
-    // Update the name of the item and get the updated item
-    itemToUpdate.updateName(newName);
-    
-    // Replace the existing item in the HashMap with the updated item
-    items.put(itemToUpdate.getItemId(), itemToUpdate);
-    return true;
+  * Method to update the name of an item.
+
+  * @param itemId  The ID of the item to update.
+  * @param newName The new name for the item.
+  * @return True if the item name is updated successfully, false otherwise.
+  */
+  public boolean updateItemName(String itemId, String newName) {
+    Item itemToUpdate = searchItem(itemId);
+    if (itemToUpdate != null) {
+      // Update the name of the item and get the updated item
+      itemToUpdate.updateName(newName);
+      
+      // Replace the existing item in the HashMap with the updated item
+      items.put(itemToUpdate.getItemId(), itemToUpdate);
+      return true;
     }
-  return false;
+    return false;
   }
 
   /**
@@ -133,11 +133,8 @@ public boolean updateItemName(String itemId, String newName) {
   public boolean updateItemDesc(String itemId, String newDesc) {
     Item itemToUpdate = searchItem(itemId);
     if (itemToUpdate != null) {
-      // Update the name of the item and get the updated item
-    itemToUpdate.updateDesc(newDesc);
-    
-    // Replace the existing item in the HashMap with the updated item
-    items.put(itemToUpdate.getItemId(), itemToUpdate);
+      itemToUpdate.updateDesc(newDesc);
+      items.put(itemToUpdate.getItemId(), itemToUpdate);
       return true;
     }
     return false;

@@ -29,6 +29,9 @@ public class ItemController {
     BACK;
   }
 
+  /**
+   * Method to handle user options.
+   */
   public void handleItemManagement() {
     view.displayItemMenu();
 

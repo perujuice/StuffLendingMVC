@@ -62,6 +62,7 @@ public class Contract {
 
     return new String(contractId);
   }
+  
   public String getContractId() {
     return contractId;
   }

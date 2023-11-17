@@ -25,6 +25,16 @@ public class UserInterface {
     EXIT;
   }
 
+  /**
+   * Constructor for the UserInterface.
+
+   * @param v The main view.
+   * @param m Member view.
+   * @param i Item view.
+   * @param c Contract view.
+   * @param t Time.
+   * @param d Data manager.
+   */
   public UserInterface(MainView v, MemberView m, ItemView i, ContractView c, TimeManager t, DataManager d) {
     member = new MemberController(m, this);
     contract = new ContractController(c, d);
@@ -33,6 +43,11 @@ public class UserInterface {
     view = v;
   }
 
+  /**
+   * Main menu options for the user, state of the app.
+
+   * @return True if the app is running.
+   */
   public boolean mainMenu() {
     view.displayMainMenu();
 
@@ -62,6 +77,11 @@ public class UserInterface {
   }
 
 
+  /**
+   * Handling displayal of user options.
+
+   * @return The chosen option.
+   */
   public MainMenuOptions displayMainMenuOptions() {
     int selectedOption = view.getIntInput();
 
@@ -80,5 +100,4 @@ public class UserInterface {
         return null;
     }
   }
-
 }

@@ -37,13 +37,20 @@ public class MainView {
     System.out.println("Current day: " + time.getCurrentDay());
   }
 
-
+  /**
+   * Display exit message.
+   */
   public void displayExit() {
     System.out.println("Exiting the application...");
     scanner.close();
     throw new RuntimeException("Application has been terminated.");
   }
 
+  /**
+   * Method for user input.
+
+   * @return Input integer.
+   */
   public int getIntInput() {
     int input = -1;
     try {

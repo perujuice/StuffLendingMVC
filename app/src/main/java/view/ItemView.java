@@ -20,7 +20,7 @@ public class ItemView {
     this.data = d;
   }
 
-/**
+  /**
    * Method that handles user inpur.
    */
   public void displayItemMenu() {
@@ -36,6 +36,9 @@ public class ItemView {
     System.out.print("\nEnter your choice: ");
   }
 
+  /**
+   * Method to display change options.
+   */
   public void displayChange() {
     System.out.println("\nWhat information would you like to change? ");
     System.out.println("1. Change name");
@@ -47,12 +50,20 @@ public class ItemView {
     System.out.print("\nEnter your choice: ");
   }
 
+  /**
+   * Prompts for email.
+
+   * @return The email.
+   */
   public String promtMemberEmail() {
     System.out.print("Enter the member's Email to change information: ");
     String ownerEmail = scanner.nextLine();
     return ownerEmail;
   }
 
+  /**
+   * Method creating the item from user input.
+   */
   public void itemCreateInput() {
     String email = promtMemberEmail();
     Member owner = data.getMemberRegistry().searchMember(email);
@@ -80,6 +91,9 @@ public class ItemView {
     }
   }
 
+  /**
+   * Display the items.
+   */
   public void displayItemList() {
     List<String> allItems = data.getItemRegistry().getAllItems();
     for (String items : allItems) {
@@ -88,6 +102,9 @@ public class ItemView {
     }
   }
 
+  /**
+   * Delete a specific item from user input.
+   */
   public void promtItemDelete() {
     System.out.print("Enter the items's ID to be deleted: ");
     String deleteId = scanner.nextLine();
@@ -97,6 +114,11 @@ public class ItemView {
     System.out.println(itemDelete.getName() + "successfully deleted! ");
   }
 
+  /**
+   * Get the input from the user.
+
+   * @return The input.
+   */
   public int getIntInput() {
     int input = -1;
     try {
@@ -107,6 +129,11 @@ public class ItemView {
     return input;
   }
 
+  /**
+   * Getting the itemId from user input.
+
+   * @return Item Id.
+   */
   public String promtItemId() {
     System.out.print("Enter the Item's ID to change information: ");
     String changeId = scanner.nextLine();
@@ -115,18 +142,33 @@ public class ItemView {
   }
 
 
+  /**
+   * Get the name to change from the user.
+
+   * @param changeId the Id of the item.
+   */
   public void promptChangeName(String changeId) {
     System.out.print("Enter new name: ");
     String newName = scanner.nextLine();
     data.getItemRegistry().updateItemName(changeId, newName);
   }
 
+  /**
+   * Method to get the new description from user.
+
+   * @param changeId Item Id.
+   */
   public void promptChangeDesc(String changeId) {
-    System.out.print("Enter new name: ");
+    System.out.print("Enter new Description: ");
     String newName = scanner.nextLine();
-    data.getItemRegistry().updateItemName(changeId, newName);
+    data.getItemRegistry().updateItemDesc(changeId, newName);
   }
   
+  /**
+   * Method to get the new category from user.
+
+   * @param changeId Item Id.
+   */
   public void promptChangeCategory(String changeId) {
     ItemCategory newCategory = getCategoryFromUserInput();
     System.out.println("New Category: " + newCategory);
@@ -134,6 +176,11 @@ public class ItemView {
     scanner.nextLine();
   }
 
+  /**
+   * Method to get the new cost from user.
+
+   * @param changeId Item Id.
+   */
   public void promptChangeCost(String changeId) {
     System.out.print("Enter new cost per day: ");
     int newCost = scanner.nextInt();

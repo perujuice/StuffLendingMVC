@@ -7,8 +7,8 @@ import java.util.Map;
  * Member wrapper class for member methods, retrieval and creaton of members.
  */
 public class MemberRegistry {
-  final private Map<String, Member> members = new HashMap<>();
-  final TimeManager time;
+  private Map<String, Member> members = new HashMap<>();
+  TimeManager time;
 
   /**
    * Constructor for member controller.

@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Scanner;
-
 import model.DataManager;
 import model.TimeManager;
 import view.ContractView;
@@ -15,17 +14,15 @@ import view.MemberView;
  */
 public class App {
   Scanner scanner = new Scanner(System.in);
-  TimeManager t = new TimeManager();
-  DataManager data = new DataManager(t);
-  MainView v = new MainView(scanner);
-  MemberView m = new MemberView(scanner, data);
-  ItemView i = new ItemView(scanner, data);
-  ContractView c = new ContractView(scanner, data); 
-  UserInterface ui = new UserInterface(v, m, i, c, t, data);
+  TimeManager time = new TimeManager();
+  DataManager data = new DataManager(time);
+  MainView view = new MainView(scanner);
+  MemberView memberView = new MemberView(data);
+  ItemView itemView = new ItemView(scanner, data);
+  ContractView contractView = new ContractView(scanner, data); 
+  UserInterface ui = new UserInterface(view, memberView, itemView, contractView, time, data);
 
-  /**
-   * This is just some data for persistance.
-   */
+  
   /*public void data() {
     Member member1 = memberController.createMember("John", "john@example.com", 1234567890);
     Member member2 = memberController.createMember("Alice", "alice@example.com", 986543210);

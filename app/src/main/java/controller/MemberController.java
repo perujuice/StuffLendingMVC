@@ -31,6 +31,9 @@ public class MemberController {
     BACK;
   }
 
+  /**
+   * Method to handle user options.
+   */
   public void handleMemberManagement() {
     boolean continueManagingMembers = true;
 

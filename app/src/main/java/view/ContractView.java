@@ -16,9 +16,12 @@ public class ContractView {
   public ContractView(Scanner scanner, DataManager d) {
     this.scanner = scanner;
     this.data = d;
- }
+  }
 
-public void displayContractMenu() {
+  /**
+   * Displays the contract menu.
+   */
+  public void displayContractMenu() {
     System.out.println("\nContract Management Menu:");
     System.out.println("1. Create a new lending contract");
     System.out.println("2. List all contracts");
@@ -27,6 +30,11 @@ public void displayContractMenu() {
     System.out.print("\nEnter your choice: ");
   }
 
+  /**
+   * Prompts user to ender the Id of the borrower.
+
+   * @return  the ID.
+   */
   public String promptBorrowerId() {
     System.out.println("Creating a new contract...\n");
     System.out.print("Enter member ID of the Borrower: ");
@@ -34,12 +42,22 @@ public void displayContractMenu() {
     return borrowerId;
   }
 
+  /**
+   * Prompts user to input ItemID.
+
+   * @return ItemId.
+   */
   public String promptItemId() {
     System.out.print("Enter Item ID of the item to borrow: ");
     String itemId = scanner.nextLine();
     return itemId;
   }
 
+  /**
+   * Prompts for the day of return.
+
+   * @return The date of return.
+   */
   public int promptReturnDay() {
     System.out.print("Enter the day of return: ");
     int endDate = getIntInput();

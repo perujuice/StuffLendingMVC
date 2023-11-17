@@ -15,8 +15,8 @@ public class MemberView {
   private Scanner scanner;
   private DataManager data;
 
-  public MemberView(Scanner scanner, DataManager d) {
-    this.scanner = scanner;
+  public MemberView(DataManager d) {
+    this.scanner = new Scanner(System.in);
     this.data = d;
   }
 
@@ -36,6 +36,11 @@ public class MemberView {
     System.out.print("\nEnter your choice: ");
   }
 
+  /**
+   * Creating member with user input.
+
+   * @return True if created sucessfully.
+   */
   public Boolean memberCreateInput() {
     System.out.println("Creating a new member...\n");
     System.out.print("Enter the member's name: ");
@@ -48,14 +53,16 @@ public class MemberView {
     final int phoneNr = scanner.nextInt();
 
     scanner.nextLine();
-    // creat instance create a new member
-    // MemberController memberController = new MemberController();
+    
     Member newMember = data.getMemberRegistry().createMember(name, email, phoneNr);
     System.out.println("New member created with Member ID: " + newMember.getMemberId());
     
     return true;
   }
 
+  /**
+   * Method to delete member based on user input.
+   */
   public void displayDelete() {
     System.out.print("\nEnter the member's email to be deleted: ");
     String deleteEmail = scanner.nextLine();
@@ -63,12 +70,20 @@ public class MemberView {
     System.out.println("\nMember successfully deleted! ");
   }
 
+  /**
+   * Display all member detail.
+
+   * @return The email.
+   */
   public String toDisplayMemberInfo() {
     System.out.print("Enter the member's email to view information: ");
     String viewEmail = scanner.nextLine();
     return viewEmail;
   }
 
+  /**
+   * Displays all members in a simple way.
+   */
   public void displaySimpleList() {
     Map<String, Member> members = data.getMemberRegistry().getMembers();
     for (Member member : members.values()) {
@@ -118,6 +133,11 @@ public class MemberView {
     }
   }
 
+  /**
+   * Getting the user input.
+
+   * @return The user input.
+   */
   public int getIntInput() {
     int input = -1;
     try {
@@ -128,6 +148,9 @@ public class MemberView {
     return input;
   }
 
+  /**
+   * Display all change options.
+   */
   public void displayChangeOptions() {
     System.out.println("\nWhat information would you like to change? ");
     System.out.println("1. Change name");
@@ -136,24 +159,44 @@ public class MemberView {
     System.out.println("4. Back");
   }
 
+  /**
+   * Prompt for member email.
+
+   * @return The email.
+   */
   public String promtMemberEmail() {
     System.out.print("Enter the member's Email to change information: ");
     String changeEmail = scanner.nextLine();
     return changeEmail;
   }
 
+  /**
+   * Prompt for the name to change.
+
+   * @param changeEmail Email to change.
+   */
   public void promptChangeName(String changeEmail) {
     System.out.print("Enter new name: ");
     String newName = scanner.nextLine();
     data.getMemberRegistry().updateMemberName(changeEmail, newName);
   }
 
+  /**
+   * Prompt user to change email.
+
+   * @param changeEmail Email to change.
+   */
   public void promtChangeEmail(String changeEmail) {
     System.out.print("Enter new email: ");
     String newEmail = scanner.nextLine();
     data.getMemberRegistry().updateMemberEmail(changeEmail, newEmail);
   }
 
+  /**
+   * Prompt phone number to change.
+
+   * @param changeEmail Email to change.
+   */
   public void promtChangePhone(String changeEmail) {
     System.out.print("Enter new phone number: ");
     int newPhoneNr = scanner.nextInt();

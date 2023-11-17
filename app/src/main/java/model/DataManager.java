@@ -1,25 +1,33 @@
 package model;
 
+/**
+ * Class to store the state of the data.
+ */
 public class DataManager {
-  private MemberRegistry m;
-  private ItemRegistry i;
-  private ContractRegistry c;
+  private MemberRegistry members;
+  private ItemRegistry items;
+  private ContractRegistry contracts;
 
+  /**
+   * Constructor for data.
+
+   * @param t Time.
+   */
   public DataManager(TimeManager t) {
-    m = new MemberRegistry(t);
-    i = new ItemRegistry(m, t);
-    c = new ContractRegistry(t);
+    members = new MemberRegistry(t);
+    items = new ItemRegistry(members, t);
+    contracts = new ContractRegistry(t);
   }
 
   public MemberRegistry getMemberRegistry() {
-    return m;
+    return members;
   }
 
   public ItemRegistry getItemRegistry() {
-    return i;
+    return items;
   }
 
   public ContractRegistry getContractRegistry() {
-    return c;
+    return contracts;
   }
 }
