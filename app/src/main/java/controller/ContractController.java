@@ -14,6 +14,13 @@ public class ContractController {
   DataManager data;
   UserInterface ui;
 
+  /**
+   * Constructor for the contract controller.
+
+   * @param c Contract view.
+   * @param d Data.
+   * @param ui User interface.
+   */
   public ContractController(ContractView c, DataManager d, UserInterface ui) {
     this.view = c;
     this.data = d;

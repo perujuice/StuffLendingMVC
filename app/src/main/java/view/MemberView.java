@@ -1,5 +1,6 @@
 package view;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class MemberView {
   private DataManager data;
 
   public MemberView(DataManager d) {
-    this.scanner = new Scanner(System.in);
+    this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
     this.data = d;
   }
 

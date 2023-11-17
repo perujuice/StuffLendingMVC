@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Scanner;
 import model.DataManager;
 import model.TimeManager;
 import view.ContractView;
@@ -13,13 +12,12 @@ import view.MemberView;
  * Responsible for staring the application.
  */
 public class App {
-  Scanner scanner = new Scanner(System.in);
   TimeManager time = new TimeManager();
   DataManager data = new DataManager(time);
-  MainView view = new MainView(scanner, time);
+  MainView view = new MainView(time);
   MemberView memberView = new MemberView(data);
-  ItemView itemView = new ItemView(scanner, data);
-  ContractView contractView = new ContractView(scanner, data); 
+  ItemView itemView = new ItemView(data);
+  ContractView contractView = new ContractView(data); 
   UserInterface ui = new UserInterface(view, memberView, itemView, contractView, time, data);
 
   public void initiateApp() {

@@ -31,6 +31,9 @@ public class DataManager {
     return contracts;
   }
 
+  /**
+   * Some persistent data.
+   */
   public void persistentData() {
     Member member1 = members.createMember("John", "john@example.com", 1234567890);
     Member member2 = members.createMember("Alice", "alice@example.com", 986543210);
@@ -39,17 +42,17 @@ public class DataManager {
     Member member5 = members.createMember("Charlie", "charlie@example.com", 777777777);
     Member member6 = members.createMember("Mallory", "mallory@example.com", 888888888);
 
-    Item item1 = items.createItem(ItemCategory.TOOL,
+    final Item item1 = items.createItem(ItemCategory.TOOL,
         "Hammer", "Works fine! ", 10, member1.getEmail());
-    Item item2 = items.createItem(ItemCategory.TOOL,
+    final Item item2 = items.createItem(ItemCategory.TOOL,
         "Hammer", "Works fine! ", 10, member2.getEmail());
-    Item item3 = items.createItem(ItemCategory.VEHICLE,
+    final Item item3 = items.createItem(ItemCategory.VEHICLE,
         "Car", "Runs smoothly", 500, member1.getEmail());
     items.createItem(ItemCategory.GAME,
         "Board Game", "Fun for the family", 2, member4.getEmail());
-    Item item5 = items.createItem(ItemCategory.TOY,
+    final Item item5 = items.createItem(ItemCategory.TOY,
         "Action Figure", "Collectible toy", 12, member3.getEmail());
-    Item item6 = items.createItem(ItemCategory.SPORT,
+    final Item item6 = items.createItem(ItemCategory.SPORT,
         "Basketball", "High-quality ball", 30, member2.getEmail());
     items.createItem(ItemCategory.OTHER,
         "Book", "Bestseller novel", 10, member5.getEmail());
@@ -59,13 +62,13 @@ public class DataManager {
         "Bicycle", "Great for commuting", 2, member4.getEmail());
     items.createItem(ItemCategory.GAME,
         "Video Game", "Exciting gameplay", 40, member2.getEmail());
-    Item item11 = items.createItem(ItemCategory.TOY,
+    final Item item11 = items.createItem(ItemCategory.TOY,
         "Puzzle", "Challenging puzzle", 2, member6.getEmail());
     items.createItem(ItemCategory.SPORT,
         "Soccer Ball", "Official size", 2, member3.getEmail());
     items.createItem(ItemCategory.OTHER,
         "Cookware Set", "High-quality pots", 7, member4.getEmail());
-    Item item14 = items.createItem(ItemCategory.TOOL,
+    final Item item14 = items.createItem(ItemCategory.TOOL,
         "Screwdriver Set", "Versatile tools", 3, member3.getEmail());
     items.createItem(ItemCategory.VEHICLE,
         "Scooter", "Fuel-efficient", 3, member6.getEmail());

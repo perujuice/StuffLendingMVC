@@ -1,5 +1,6 @@
 package view;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 import model.Contract;
@@ -13,8 +14,8 @@ public class ContractView {
   private DataManager data;
 
 
-  public ContractView(Scanner scanner, DataManager d) {
-    this.scanner = scanner;
+  public ContractView(DataManager d) {
+    this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
     this.data = d;
   }
 

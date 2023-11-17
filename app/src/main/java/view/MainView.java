@@ -1,5 +1,6 @@
 package view;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import model.TimeManager;
 
@@ -10,8 +11,8 @@ public class MainView {
   private Scanner scanner;
   private TimeManager time;
 
-  public MainView(Scanner scanner, TimeManager t) {
-    this.scanner = scanner;
+  public MainView(TimeManager t) {
+    this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
     this.time = t;
   }
 
