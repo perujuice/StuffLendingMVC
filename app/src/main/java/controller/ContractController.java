@@ -12,10 +12,12 @@ import view.ContractView;
 public class ContractController {
   ContractView view;
   DataManager data;
+  UserInterface ui;
 
-  public ContractController(ContractView c, DataManager d) {
+  public ContractController(ContractView c, DataManager d, UserInterface ui) {
     this.view = c;
     this.data = d;
+    this.ui = ui;
   }
 
   private enum ContractOptions {
@@ -28,20 +30,26 @@ public class ContractController {
    * Method to handle user options.
    */
   public void handleContractManagement() {
-    view.displayContractMenu();
-    ContractOptions option = displayContractManagementMenu();
+    boolean continueManagingContracts = true;
 
-    switch (option) {
-      case CREATE:
-        createNewContract();
-        break;
-      case LIST:
-        view.listAllContracts();
-        break;
-      case BACK:
-        break;
-      default:
-        throw new IllegalArgumentException("Invalid input! ");
+    while (continueManagingContracts) {
+      view.displayContractMenu();
+      ContractOptions option = displayContractManagementMenu();
+
+      switch (option) {
+        case CREATE:
+          continueManagingContracts = createNewContract();
+          break;
+        case LIST:
+          view.listAllContracts();
+          break;
+        case BACK:
+          continueManagingContracts = false;
+          ui.mainMenu();
+          break;
+        default:
+          throw new IllegalArgumentException("Invalid input! ");
+      }
     }
   }
 
@@ -60,8 +68,8 @@ public class ContractController {
     }
   }
 
-  private void createNewContract() {
-    String borrowerId = view.promptBorrowerId();
+  private boolean createNewContract() {
+    String borrowerId = view.promptBorrowerEmail();
     Member borrower = data.getMemberRegistry().searchMember(borrowerId);
 
     if (borrower != null) {
@@ -80,6 +88,7 @@ public class ContractController {
     } else {
       System.out.println("Borrower not found with the specified member ID.");
     }
+    return true;
   }
 }
 

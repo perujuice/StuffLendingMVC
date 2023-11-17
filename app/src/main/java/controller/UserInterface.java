@@ -37,8 +37,8 @@ public class UserInterface {
    */
   public UserInterface(MainView v, MemberView m, ItemView i, ContractView c, TimeManager t, DataManager d) {
     member = new MemberController(m, this);
-    contract = new ContractController(c, d);
-    item = new ItemController(i);
+    contract = new ContractController(c, d, this);
+    item = new ItemController(i, this);
     time = t;
     view = v;
   }

@@ -58,11 +58,11 @@ public class ItemRegistry {
    * Method to delete an Item.
    *
    * @param itemId   The ID of the item to delete.
-   * @param memberId Member who owns the item.
+   * @param memberEmail Member who owns the item.
    * @return True if the item is deleted successfully, false otherwise.
    */
-  public boolean deleteItem(String itemId, String memberId) {
-    Member owner = memberRegistry.searchMember(memberId);
+  public boolean deleteItem(String itemId, String memberEmail) {
+    Member owner = memberRegistry.searchMember(memberEmail);
     System.out.println(owner.getName());
 
     Item itemToRemove = items.get(itemId);

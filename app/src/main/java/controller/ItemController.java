@@ -7,9 +7,11 @@ import view.ItemView;
  */
 public class ItemController {
   ItemView view;
+  UserInterface ui;
 
-  public ItemController(ItemView v) {
+  public ItemController(ItemView v, UserInterface ui) {
     this.view = v;
+    this.ui = ui;
   }
 
   private enum ItemOptions {
@@ -33,30 +35,35 @@ public class ItemController {
    * Method to handle user options.
    */
   public void handleItemManagement() {
-    view.displayItemMenu();
+    boolean continueManagingItems = true;
 
-    ItemOptions option = displayItemManagementMenu();
+    while (continueManagingItems) {
+      view.displayItemMenu();
+      ItemOptions option = displayItemManagementMenu();
 
-    switch (option) {
-      case CREATE_ITEM:
-        view.itemCreateInput();
-        break;
-      case LIST_ITEMS:
-        view.displayItemList();
-        break;
-      case DELETE:
-        view.promtItemDelete();
-        break;
-      case CHANGE:
-        changeItemInfo();
-        break;
-      case VIEW:
-        view.viewItemInformation();
-        break;
-      case BACK:
-        break;
-      default:
-        throw new IllegalArgumentException("Wrong user input! ");
+      switch (option) {
+        case CREATE_ITEM:
+          continueManagingItems = view.itemCreateInput();
+          break;
+        case LIST_ITEMS:
+          view.displayItemList();
+          break;
+        case DELETE:
+          view.promtItemDelete();
+          break;
+        case CHANGE:
+          changeItemInfo();
+          break;
+        case VIEW:
+          view.viewItemInformation();
+          break;
+        case BACK:
+          continueManagingItems = false;
+          ui.mainMenu();
+          break;
+        default:
+          throw new IllegalArgumentException("Wrong user input! ");
+      }
     }
   }
 

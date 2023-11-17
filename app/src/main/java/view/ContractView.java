@@ -31,13 +31,13 @@ public class ContractView {
   }
 
   /**
-   * Prompts user to ender the Id of the borrower.
+   * Prompts user to ender the Email of the borrower.
 
    * @return  the ID.
    */
-  public String promptBorrowerId() {
+  public String promptBorrowerEmail() {
     System.out.println("Creating a new contract...\n");
-    System.out.print("Enter member ID of the Borrower: ");
+    System.out.print("Enter member Email of the Borrower: ");
     String borrowerId = scanner.nextLine();
     return borrowerId;
   }

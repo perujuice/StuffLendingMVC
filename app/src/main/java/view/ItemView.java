@@ -56,7 +56,7 @@ public class ItemView {
    * @return The email.
    */
   public String promtMemberEmail() {
-    System.out.print("Enter the member's Email to change information: ");
+    System.out.print("Enter the owners email: ");
     String ownerEmail = scanner.nextLine();
     return ownerEmail;
   }
@@ -64,7 +64,7 @@ public class ItemView {
   /**
    * Method creating the item from user input.
    */
-  public void itemCreateInput() {
+  public boolean itemCreateInput() {
     String email = promtMemberEmail();
     Member owner = data.getMemberRegistry().searchMember(email);
     if (owner != null) {
@@ -89,6 +89,7 @@ public class ItemView {
     } else {
       System.out.println("Member not found with the specified memberId.");
     }
+    return true;
   }
 
   /**
@@ -110,7 +111,7 @@ public class ItemView {
     String deleteId = scanner.nextLine();
     Item itemDelete = data.getItemRegistry().searchItem(deleteId);
     Member itemowner = itemDelete.getOwner();
-    data.getItemRegistry().deleteItem(deleteId, itemowner.getMemberId());
+    data.getItemRegistry().deleteItem(deleteId, itemowner.getEmail());
     System.out.println(itemDelete.getName() + "successfully deleted! ");
   }
 
