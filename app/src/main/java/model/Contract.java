@@ -37,6 +37,21 @@ public class Contract {
     this.contractId = generateItemId();
   }
 
+  /**
+   * Copy constructor for the contract.
+
+   * @param other THe copy
+   */
+  public Contract(Contract other) {
+    this.lender = other.lender;
+    this.borrower = other.borrower;
+    this.item = other.item;
+    this.startDate = other.startDate;
+    this.endDate = other.endDate;
+    this.totalCost = other.totalCost;
+    this.contractId = other.contractId;
+  }
+
   private double calculateTotalCost() {
     int diffInDays = (endDate - startDate);
     double pricePerDay = item.getCostPerDay();

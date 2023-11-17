@@ -34,10 +34,15 @@ public class Item {
     this.category = newCategory;
     this.itemId = generateItemId();
     this.costPerDay = newCostPerDay;
-    this.owner = owner;
+    this.owner = new Member(owner);
     contracts = new ArrayList<>();
   }
 
+  /**
+   * Copy constructor for item.
+
+   * @param other The copy.
+   */
   public Item(Item other) {
     this.name = other.name;
     this.shortDesc = other.shortDesc;
@@ -123,14 +128,13 @@ public class Item {
    * @param owner The specific member.
    */
   public void setOwner(Member owner) {
-    // Create a copy of the owner object before assigning it
     this.owner = owner;
     owner.addItem(this);
   }
 
   public Member getOwner() {
     // Return a new copy of the owner object
-    return this.owner;
+    return new Member(this.owner);
   }
 
   public void deleteFromOwner(Member owner) {
@@ -138,7 +142,7 @@ public class Item {
   }
 
   public List<Contract> getContracts() {
-    return contracts;
+    return new ArrayList<>(this.contracts);
   }
 
 }

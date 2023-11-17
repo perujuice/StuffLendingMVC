@@ -34,7 +34,7 @@ public class Member {
   }
 
   /**
-   * Copy constuctor
+   * Copy constuctor.
 
    * @param other The member copy
    */
