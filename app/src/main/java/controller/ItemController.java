@@ -39,16 +39,19 @@ public class ItemController {
 
     switch (option) {
       case CREATE_ITEM:
+        view.itemCreateInput();
         break;
       case LIST_ITEMS:
         view.displayItemList();
         break;
       case DELETE:
+        view.promtItemDelete();
         break;
       case CHANGE:
         changeItemInfo();
         break;
       case VIEW:
+        view.viewItemInformation();
         break;
       case BACK:
         break;
@@ -81,17 +84,23 @@ public class ItemController {
   private void changeItemInfo() {
     view.displayChange();
     ChangeItemInfo option = displayItemChange();
+    String changeId = view.promtItemId();
     
     switch (option) {
       case NAME:
+        view.promptChangeName(changeId);
         break;
       case DESC:
+        view.promptChangeDesc(changeId);
         break;
       case CATEGORY:
+        view.promptChangeCategory(changeId);
         break;
       case COST:
+        view.promptChangeCost(changeId);
         break;
       case BACK:
+        handleItemManagement();
         break;
       default:
         throw new IllegalArgumentException("Invalid intput! ");

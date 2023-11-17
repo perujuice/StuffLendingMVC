@@ -10,8 +10,9 @@ public class MainView {
   private Scanner scanner;
   private TimeManager time;
 
-  public MainView(Scanner scanner) {
+  public MainView(Scanner scanner, TimeManager t) {
     this.scanner = scanner;
+    this.time = t;
   }
 
   /**
