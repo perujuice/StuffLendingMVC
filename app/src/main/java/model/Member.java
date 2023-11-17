@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 /**
  * This class will handle member information.
@@ -14,6 +14,7 @@ public class Member {
   private String memberId;
   private int credits;
   private List<Item> ownedItems;
+  private Random random = new Random();
 
   /**
    * Constructor for member.
@@ -21,6 +22,7 @@ public class Member {
    * New email.
    * New phone number.
    */
+
   public Member(String newName, String newEmail, int newPhoneNr) {
     this.name = newName;
     this.email = newEmail;
@@ -34,6 +36,7 @@ public class Member {
    * Copy constuctor.
    * The member copy
    */
+
   public Member(Member other) {
     this.name = other.name;
     this.email = other.email;
@@ -68,9 +71,15 @@ public class Member {
   }
 
   private String generateMemberId() {
-    UUID uuid = UUID.randomUUID();
-    String uuidString = uuid.toString().replace("-", "");
-    return uuidString.substring(0, 6);
+    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    char[] memberId = new char[6];
+
+    for (int i = 0; i < 6; i++) {
+      int randomIndex = random.nextInt(characters.length());
+      memberId[i] = characters.charAt(randomIndex);
+    }
+
+    return new String(memberId);
   }
 
   public String getMemberId() {
@@ -96,7 +105,9 @@ public class Member {
   /**
    * Links items to its owner.
    * The item owned by the member.
+   * 
    */
+
   public void addItem(Item item) {
     ownedItems.add(item);
     this.credits += 100;
