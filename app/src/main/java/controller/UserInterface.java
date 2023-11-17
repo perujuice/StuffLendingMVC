@@ -66,6 +66,7 @@ public class UserInterface {
       case ADVANCE_TIME:
         time.advanceDay();
         view.displayTime();
+        mainMenu();
         break;
       case EXIT:
         break;

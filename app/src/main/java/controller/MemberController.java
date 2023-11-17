@@ -60,7 +60,7 @@ public class MemberController {
           view.displaySimpleList();
           break;
         case LIST_MEMBERS_VERBOSE:
-          view.displaySimpleList();
+          view.displayVerboseList();
           break;
         case BACK:
           continueManagingMembers = false;

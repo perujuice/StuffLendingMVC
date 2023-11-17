@@ -22,8 +22,9 @@ public class App {
   ContractView contractView = new ContractView(scanner, data); 
   UserInterface ui = new UserInterface(view, memberView, itemView, contractView, time, data);
 
-  public void initiateData() {
+  public void initiateApp() {
     data.persistentData();
+    view.displayWelcome();
   }
 
   /**
@@ -33,7 +34,7 @@ public class App {
    */
   public static void main(String[] args) {
     App app = new App(); // Create an instance of the App class
-    app.initiateData();
+    app.initiateApp();
     UserInterface ui = app.ui;
     ui.mainMenu();
   }

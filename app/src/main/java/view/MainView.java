@@ -15,14 +15,15 @@ public class MainView {
     this.time = t;
   }
 
+  public void displayWelcome() {
+    System.out.println("\nWelcome to the Stuff Lending System!");
+    System.out.println("Current day: " + time.getCurrentDay());
+  }
+
   /**
    * Main display menu.
    */
   public void displayMainMenu() {
-    TimeManager time = new TimeManager();
-    System.out.println("Welcome to the Stuff Lending System!");
-    System.out.println("Current day: " + time.getCurrentDay());
-
     System.out.println("\nMain Menu:");
     System.out.println("1. Member Management");
     System.out.println("2. Item Management");
