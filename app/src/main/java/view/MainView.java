@@ -35,7 +35,6 @@ public class MainView {
     System.out.print("\nEnter your choice: ");
   }
 
-
   public void displayTime() {
     System.out.println("Current day: " + time.getCurrentDay());
   }
@@ -51,16 +50,22 @@ public class MainView {
 
   /**
    * Method for user input.
-
-   * @return Input integer.
+   * return Input integer.
    */
   public int getIntInput() {
-    int input = -1;
-    try {
-      input = Integer.parseInt(scanner.nextLine());
-    } catch (NumberFormatException e) {
-      // Invalid input; do nothing, the loop will prompt again.
+    while (true) {
+      try {
+        String inputLine = scanner.nextLine();
+        if (inputLine.trim().isEmpty()) {
+          System.out.println("No input detected. Please enter a number:");
+          continue;
+        }
+        return Integer.parseInt(inputLine);
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid input. Please enter a valid number:");
+        // The loop continues, prompting the user again.
+      }
     }
-    return input;
   }
+
 }
