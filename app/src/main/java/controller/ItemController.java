@@ -6,6 +6,7 @@ import model.DataManager;
 import model.Item;
 import model.ItemCategory;
 import model.Member;
+import model.TimeManager;
 import view.ItemView;
 
 /**
@@ -15,6 +16,7 @@ public class ItemController {
   ItemView view;
   UserInterface ui;
   DataManager data;
+  TimeManager time;
 
   /**
    * Constructor for item controller.
@@ -23,10 +25,11 @@ public class ItemController {
    * @param d Data.
    * @param ui  User interface.
    */
-  public ItemController(ItemView v, DataManager d, UserInterface ui) {
+  public ItemController(ItemView v, DataManager d, UserInterface ui, TimeManager time) {
     this.view = v;
     this.ui = ui;
     this.data = d;
+    this.time = time;
   }
 
   private enum ItemOptions {
@@ -89,7 +92,7 @@ public class ItemController {
           String itemId = view.promtItemId();
           Item item = data.getItemRegistry().searchItem(itemId);
           view.printItemInfo(item, itemId);
-          List<Contract> contracts = item.getContracts();
+          List<Contract> contracts = item.getContracts(time.getCurrentDay());
           view.viewItemInformation(item, itemId, contracts);
           break;
         case BACK:

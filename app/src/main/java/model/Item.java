@@ -141,8 +141,14 @@ public class Item {
     owner.removeOwnedItem(this);
   }
 
-  public List<Contract> getContracts() {
-    return new ArrayList<>(this.contracts);
+  public List<Contract> getContracts(int time) {
+    List<Contract> activeContracts = new ArrayList<>();
+    for (Contract contract : contracts) {
+      if (contract.isActive(time)) {
+        activeContracts.add(contract);
+      } 
+    }
+    return activeContracts;
   }
 
 }

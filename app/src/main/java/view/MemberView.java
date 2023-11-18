@@ -6,15 +6,18 @@ import java.util.Scanner;
 import model.Contract;
 import model.Item;
 import model.Member;
+import model.TimeManager;
 
 /**
  * Class for member UI.
  */
 public class MemberView {
   private Scanner scanner;
+  private TimeManager time;
 
-  public MemberView() {
+  public MemberView(TimeManager t) {
     this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+    this.time = t;
   }
 
   /**
@@ -126,7 +129,7 @@ public class MemberView {
           System.out.println("  Item Cost Per Day: " + item.getCostPerDay());
           // Add more item details as needed
           // Check if the item has active contracts
-          List<Contract> activeContracts = item.getContracts();
+          List<Contract> activeContracts = item.getContracts(time.getCurrentDay());
           if (!activeContracts.isEmpty()) {
             System.out.println("  Item is currently lent out to:");
 

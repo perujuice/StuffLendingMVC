@@ -15,7 +15,7 @@ public class App {
   TimeManager time = new TimeManager();
   DataManager data = new DataManager(time);
   MainView view = new MainView(time);
-  MemberView memberView = new MemberView();
+  MemberView memberView = new MemberView(time);
   ItemView itemView = new ItemView();
   ContractView contractView = new ContractView(); 
   UserInterface ui = new UserInterface(view, memberView, itemView, contractView, time, data);
