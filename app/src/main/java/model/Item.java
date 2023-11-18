@@ -106,11 +106,10 @@ public class Item {
   }
 
   /**
-   * Checks if item is available.
+   * Checking if item is available.
 
-   * @param startDate The start day.
-   * @param endDate The end day.
-   * @return Boolean.
+   * @param currentDate The current date.
+   * @return  True if available.
    */
   public boolean isAvailable(int currentDate) {
     for (Contract contract : contracts) {
@@ -141,6 +140,12 @@ public class Item {
     owner.removeOwnedItem(this);
   }
 
+  /**
+   * Gettinf only the active contracts.
+
+   * @param time Time.
+   * @return  Active contracts.
+   */
   public List<Contract> getContracts(int time) {
     List<Contract> activeContracts = new ArrayList<>();
     for (Contract contract : contracts) {

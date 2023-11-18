@@ -28,16 +28,16 @@ This test report covers the testing of the Stuff Lending System, including the M
 
 | Case  | Result  | Note               |
 |-------|---------|--------------------|
-| 1.1   | [Pass]  |                    |
-| 1.2   | [Pass]  |                    |
-| 1.3   | [Pass]  |                    |
-| 2.1   | [Pass]  |                    |
-| 2.2   | [Pass]  |                    |
-| 2.3   | [Pass]  |                    |
-| 3.1   | [Pass]  |                    |
-| 3.2   | [Pass]  |                    |
-| 3.3   | [Pass]  |                    |
-| 4.1   | [Pass]  |                    |
+| 1.1   | [ok]    |                    |
+| 1.2   | [ok]    |                    |
+| 1.3   | [ok]    |                    |
+| 2.1   | [ok]    |                    |
+| 2.2   | [ok]    |                    |
+| 2.3   | [ok]    |                    |
+| 3.1   | [ok]    |                    |
+| 3.2   | [ok]    |                    |
+| 3.3   | [ok]    |                    |
+| 4.1   | [ok]    |                    |
 ---------------------------------------
 
 ---
@@ -104,7 +104,7 @@ This test report covers the testing of the Stuff Lending System, including the M
   4. Create a contract between the borrower, lender, and item.
 - **Expected Result:** The contract was created successfully.
 
-### Test Case 3.2: List All Contracts
+### Test Case 3.2: List All no
 - **Description:** Tests listing all contracts in the system.
 - **Test Steps:**
   1. Create multiple contracts.

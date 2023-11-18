@@ -66,22 +66,26 @@ public class ContractRegistry {
     return contract;
   }
 
-  // list all contracts
+  /**
+   * Gets all active contracts.
+
+   * @return The active contracts.
+   */
   public List<Contract> getAllContracts() {
     List<Contract> activeContracts = new ArrayList<>();
     Iterator<Map.Entry<String, Contract>> iterator = contracts.entrySet().iterator();
 
     while (iterator.hasNext()) {
-        Map.Entry<String, Contract> entry = iterator.next();
-        Contract contract = entry.getValue();
-        if (contract.isActive(timeManager.getCurrentDay())) {
-            activeContracts.add(contract);
-        } else {
-            System.out.println("Contract not active anymore! ");
-            iterator.remove(); // Remove the inactive contract from the map
-        }
+      Map.Entry<String, Contract> entry = iterator.next();
+      Contract contract = entry.getValue();
+      if (contract.isActive(timeManager.getCurrentDay())) {
+        activeContracts.add(contract);
+      } else {
+        System.out.println("Contract not active anymore! ");
+        iterator.remove(); // Remove the inactive contract from the map
+      }
     }
 
     return activeContracts;
-}
+  }
 }

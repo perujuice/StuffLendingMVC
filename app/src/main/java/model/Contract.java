@@ -58,6 +58,12 @@ public class Contract {
     return diffInDays * pricePerDay;
   }
 
+  /**
+   * Method to check if contract is active.
+
+   * @param currentDate Day in the state of the app.
+   * @return  True if active.
+   */
   public boolean isActive(int currentDate) {
     if (startDate <= currentDate && endDate >= currentDate) {
       return true;
