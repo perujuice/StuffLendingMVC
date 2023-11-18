@@ -27,13 +27,12 @@ public class UserInterface {
 
   /**
    * Constructor for the UserInterface.
-
-   * @param v The main view.
-   * @param m Member view.
-   * @param i Item view.
-   * @param c Contract view.
-   * @param t Time.
-   * @param d Data manager.
+   * v The main view.
+   * m Member view.
+   * i Item view.
+   * c Contract view.
+   * t Time.
+   * d Data manager.
    */
   public UserInterface(MainView v, MemberView m, ItemView i, ContractView c, TimeManager t, DataManager d) {
     member = new MemberController(m, this, d);
@@ -45,8 +44,7 @@ public class UserInterface {
 
   /**
    * Main menu options for the user, state of the app.
-
-   * @return True if the app is running.
+   * return True if the app is running.
    */
   public boolean mainMenu() {
     view.displayMainMenu();
@@ -77,28 +75,29 @@ public class UserInterface {
     return option != MainMenuOptions.EXIT;
   }
 
-
   /**
    * Handling displayal of user options.
-
-   * @return The chosen option.
+   * return The chosen option.
    */
   public MainMenuOptions displayMainMenuOptions() {
-    int selectedOption = view.getIntInput();
-
-    switch (selectedOption) {
-      case 1:
-        return MainMenuOptions.MEMBER_MANAGEMENT;
-      case 2:
-        return MainMenuOptions.ITEM_MANAGEMENT;
-      case 3:
-        return MainMenuOptions.CONTRACT_MANAGEMENT;
-      case 4:
-        return MainMenuOptions.ADVANCE_TIME;
-      case 5:
-        return MainMenuOptions.EXIT;
-      default:
-        return null;
+    while (true) {
+      int selectedOption = view.getIntInput();
+      switch (selectedOption) {
+        case 1:
+          return MainMenuOptions.MEMBER_MANAGEMENT;
+        case 2:
+          return MainMenuOptions.ITEM_MANAGEMENT;
+        case 3:
+          return MainMenuOptions.CONTRACT_MANAGEMENT;
+        case 4:
+          return MainMenuOptions.ADVANCE_TIME;
+        case 5:
+          return MainMenuOptions.EXIT;
+        default:
+          System.out.println("Invalid option selected. Please try again.");
+          view.displayMainMenu(); // Re-display the menu to prompt again
+      }
     }
   }
+
 }

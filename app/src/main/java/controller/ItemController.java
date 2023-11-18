@@ -20,10 +20,9 @@ public class ItemController {
 
   /**
    * Constructor for item controller.
-
-   * @param v Item view.
-   * @param d Data.
-   * @param ui  User interface.
+   * v Item view.
+   * d Data.
+   * ui User interface.
    */
   public ItemController(ItemView v, DataManager d, UserInterface ui, TimeManager time) {
     this.view = v;
@@ -36,7 +35,7 @@ public class ItemController {
     CREATE_ITEM,
     LIST_ITEMS,
     DELETE,
-    CHANGE, 
+    CHANGE,
     VIEW,
     BACK;
   }
@@ -64,7 +63,7 @@ public class ItemController {
           String email = view.promtMemberEmail();
           Member owner = data.getMemberRegistry().searchMember(email);
           if (owner != null) {
-            ItemCategory category = view.getCategoryFromUserInput();      
+            ItemCategory category = view.getCategoryFromUserInput();
             String name = view.promptItemName();
             String description = view.promptItemDesc();
             int costPerDay = view.promptsItemCost();
@@ -106,31 +105,36 @@ public class ItemController {
   }
 
   private ItemOptions displayItemManagementMenu() {
-    int selectedOption = view.getIntInput();
+    while (true) {
+      int selectedOption = view.getIntInput();
 
-    switch (selectedOption) {
-      case 1:
-        return ItemOptions.CREATE_ITEM;
-      case 2:
-        return ItemOptions.LIST_ITEMS;
-      case 3:
-        return ItemOptions.DELETE;
-      case 4:
-        return ItemOptions.CHANGE;
-      case 5:
-        return ItemOptions.VIEW;
-      case 6:
-        return ItemOptions.BACK;
-      default:
-        return null;
+      switch (selectedOption) {
+        case 1:
+          return ItemOptions.CREATE_ITEM;
+        case 2:
+          return ItemOptions.LIST_ITEMS;
+        case 3:
+          return ItemOptions.DELETE;
+        case 4:
+          return ItemOptions.CHANGE;
+        case 5:
+          return ItemOptions.VIEW;
+        case 6:
+          return ItemOptions.BACK;
+        default:
+          System.out.println("Invalid option selected. Please enter 1, 2, 3, 4, 5 or 6.");
+          view.displayItemMenu(); // Re-display the contract menu
+      }
+
     }
+
   }
 
   private void changeItemInfo() {
     view.displayChange();
     ChangeItemInfo option = displayItemChange();
     String changeId = view.promtItemId();
-    
+
     switch (option) {
       case NAME:
         String newName = view.promptChangeName(changeId);

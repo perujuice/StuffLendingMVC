@@ -15,10 +15,9 @@ public class MemberController {
 
   /**
    * Constructor for member controller.
-
-   * @param v Member view.
-   * @param ui  User interface.
-   * @param d Data.
+   * v Member view.
+   * ui User interface.
+   * d Data.
    */
   public MemberController(MemberView v, UserInterface ui, DataManager d) {
     this.view = v;
@@ -39,7 +38,7 @@ public class MemberController {
   private enum ChangeMemberInfo {
     NAME,
     EMAIL,
-    PHONE, 
+    PHONE,
     BACK;
   }
 
@@ -100,26 +99,31 @@ public class MemberController {
   }
 
   private MemberOptions displayMemberManagementMenu() {
-    int selectedOption = view.getIntInput();
+    while (true) {
+      int selectedOption = view.getIntInput();
 
-    switch (selectedOption) {
-      case 1:
-        return MemberOptions.CREATE_MEMBER;
-      case 2:
-        return MemberOptions.DELETE_MEMBER;
-      case 3:
-        return MemberOptions.VIEW_MEMBER_INFORMATION;
-      case 4:
-        return MemberOptions.CHANGE_MEMBER_INFORMATION;
-      case 5:
-        return MemberOptions.LIST_MEMBERS_SIMPLE;
-      case 6:
-        return MemberOptions.LIST_MEMBERS_VERBOSE;
-      case 7:
-        return MemberOptions.BACK;
-      default:
-        return null;
+      switch (selectedOption) {
+        case 1:
+          return MemberOptions.CREATE_MEMBER;
+        case 2:
+          return MemberOptions.DELETE_MEMBER;
+        case 3:
+          return MemberOptions.VIEW_MEMBER_INFORMATION;
+        case 4:
+          return MemberOptions.CHANGE_MEMBER_INFORMATION;
+        case 5:
+          return MemberOptions.LIST_MEMBERS_SIMPLE;
+        case 6:
+          return MemberOptions.LIST_MEMBERS_VERBOSE;
+        case 7:
+          return MemberOptions.BACK;
+        default:
+          System.out.println("Invalid option selected. Please enter valid optoin!");
+          view.displayMemberOptions(); // Re-display the member menu
+      }
+
     }
+
   }
 
   private void changeMemberInfo() {

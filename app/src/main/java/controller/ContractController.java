@@ -17,10 +17,9 @@ public class ContractController {
 
   /**
    * Constructor for the contract controller.
-
-   * @param c Contract view.
-   * @param d Data.
-   * @param ui User interface.
+   * c Contract view.
+   * d Data.
+   * ui User interface.
    */
   public ContractController(ContractView c, DataManager d, UserInterface ui) {
     this.view = c;
@@ -63,17 +62,19 @@ public class ContractController {
   }
 
   private ContractOptions displayContractManagementMenu() {
-    int selectedOption = view.getIntInput();
-
-    switch (selectedOption) {
-      case 1:
-        return ContractOptions.CREATE;
-      case 2:
-        return ContractOptions.LIST;
-      case 3:
-        return ContractOptions.BACK;
-      default:
-        return null;
+    while (true) {
+      int selectedOption = view.getIntInput();
+      switch (selectedOption) {
+        case 1:
+          return ContractOptions.CREATE;
+        case 2:
+          return ContractOptions.LIST;
+        case 3:
+          return ContractOptions.BACK;
+        default:
+          System.out.println("Invalid option selected. Please enter 1, 2, or 3.");
+          view.displayContractMenu(); // Re-display the contract menu
+      }
     }
   }
 
@@ -100,4 +101,3 @@ public class ContractController {
     return true;
   }
 }
-

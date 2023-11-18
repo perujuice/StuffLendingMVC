@@ -29,8 +29,7 @@ public class ContractView {
 
   /**
    * Prompts user to ender the Email of the borrower.
-
-   * @return  the ID.
+   * return the ID.
    */
   public String promptBorrowerEmail() {
     System.out.println("Creating a new contract...\n");
@@ -41,8 +40,7 @@ public class ContractView {
 
   /**
    * Prompts user to input ItemID.
-
-   * @return ItemId.
+   * ItemId.
    */
   public String promptItemId() {
     System.out.print("Enter Item ID of the item to borrow: ");
@@ -52,8 +50,7 @@ public class ContractView {
 
   /**
    * Prompts for the day of return.
-
-   * @return The date of return.
+   * The date of return.
    */
   public int promptReturnDay() {
     System.out.print("Enter the day of return: ");
@@ -84,16 +81,22 @@ public class ContractView {
 
   /**
    * Reads an integer input from the user.
-   *
-   * @return The integer input from the user.
+   * return The integer input from the user.
    */
   public int getIntInput() {
-    int input = -1;
-    try {
-      input = Integer.parseInt(scanner.nextLine());
-    } catch (NumberFormatException e) {
-      // Invalid input; do nothing, the loop will prompt again.
+    while (true) {
+      try {
+        String inputLine = scanner.nextLine();
+        if (inputLine.trim().isEmpty()) {
+          System.out.println("No input detected. Please enter a number:");
+          continue; // If the input is empty, prompt again
+        }
+        return Integer.parseInt(inputLine);
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid input. Please enter a valid number:");
+        // The loop continues, prompting the user again
+      }
     }
-    return input;
   }
+
 }

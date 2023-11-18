@@ -49,8 +49,7 @@ public class ItemView {
 
   /**
    * Prompts for email.
-
-   * @return The email.
+   * return The email.
    */
   public String promtMemberEmail() {
     System.out.print("Enter the owners email: ");
@@ -60,8 +59,7 @@ public class ItemView {
 
   /**
    * Getting the itemId from user input.
-
-   * @return Item Id.
+   * return Item Id.
    */
   public String promtItemId() {
     System.out.print("Enter the Item's ID: ");
@@ -71,8 +69,7 @@ public class ItemView {
 
   /**
    * Getting item name from user input.
-
-   * @return Item name.
+   * return Item name.
    */
   public String promptItemName() {
     scanner.nextLine();
@@ -83,8 +80,7 @@ public class ItemView {
 
   /**
    * Getting item description from user input.
-
-   * @return  Item description.
+   * return Item description.
    */
   public String promptItemDesc() {
     System.out.print("Enter Item Description: ");
@@ -94,8 +90,7 @@ public class ItemView {
 
   /**
    * Getting item cost from user input.
-
-   * @return  Item cost.
+   * return Item cost.
    */
   public int promptsItemCost() {
     System.out.print("Enter Cost Per Day: ");
@@ -103,7 +98,7 @@ public class ItemView {
     scanner.nextLine();
     return costPerDay;
   }
-  
+
   /**
    * Method creating the item from user input.
    */
@@ -115,8 +110,7 @@ public class ItemView {
 
   /**
    * Mehtod to promt user for a category choice.
-
-   * @return Returns the category.
+   * return Returns the category.
    */
   public ItemCategory getCategoryFromUserInput() {
     System.out.println("Enter Item Category: ");
@@ -168,11 +162,9 @@ public class ItemView {
     System.out.println(itemDelete.getName() + "successfully deleted! ");
   }
 
-
   /**
    * Get the name to change from the user.
-
-   * @param changeId the Id of the item.
+   * changeId the Id of the item.
    */
   public String promptChangeName(String changeId) {
     System.out.print("Enter new name: ");
@@ -182,19 +174,17 @@ public class ItemView {
 
   /**
    * Method to get the new description from user.
-
-   * @param changeId Item Id.
+   * param changeId Item Id.
    */
   public String promptChangeDesc(String changeId) {
     System.out.print("Enter new Description: ");
     String newDesc = scanner.nextLine();
     return newDesc;
   }
-  
+
   /**
    * Method to get the new category from user.
-
-   * @param changeId Item Id.
+   * changeId Item Id.
    */
   public ItemCategory promptChangeCategory(String changeId) {
     ItemCategory newCategory = getCategoryFromUserInput();
@@ -205,8 +195,7 @@ public class ItemView {
 
   /**
    * Method to get the new cost from user.
-
-   * @param changeId Item Id.
+   * changeId Item Id.
    */
   public int promptChangeCost(String changeId) {
     System.out.print("Enter new cost per day: ");
@@ -264,8 +253,7 @@ public class ItemView {
 
   /**
    * Get the input from the user.
-
-   * @return The input.
+   * The input.
    */
   public int getIntInput() {
     int input = -1;
