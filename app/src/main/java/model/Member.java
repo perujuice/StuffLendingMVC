@@ -18,11 +18,11 @@ public class Member {
 
   /**
    * Constructor for member.
-
-   * @param newName    New name.
-   * @param newEmail   New email.
-   * @param newPhoneNr New phone number.
+   * New name.
+   * New email.
+   * New phone number.
    */
+
   public Member(String newName, String newEmail, int newPhoneNr) {
     this.name = newName;
     this.email = newEmail;
@@ -30,14 +30,13 @@ public class Member {
     this.memberId = generateMemberId();
     this.ownedItems = new ArrayList<>();
     this.credits = 0;
-    // this.creationDate = getCurrentDateTime();
   }
 
   /**
    * Copy constuctor.
-
-   * @param other The member copy
+   * The member copy
    */
+
   public Member(Member other) {
     this.name = other.name;
     this.email = other.email;
@@ -101,9 +100,10 @@ public class Member {
 
   /**
    * Links items to its owner.
-
-   * @param item The item owned by the member.
+   * The item owned by the member.
+   * 
    */
+
   public void addItem(Item item) {
     ownedItems.add(item);
     this.credits += 100;
