@@ -4,21 +4,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 import model.Contract;
-import model.DataManager;
 import model.Item;
 import model.ItemCategory;
-import model.Member;
 
 /**
  * Class for Item UI.
  */
 public class ItemView {
   private Scanner scanner;
-  private DataManager data;
 
-  public ItemView(DataManager d) {
+  public ItemView() {
     this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-    this.data = d;
   }
 
   /**
@@ -63,131 +59,57 @@ public class ItemView {
   }
 
   /**
-   * Method creating the item from user input.
-   */
-  public boolean itemCreateInput() {
-    String email = promtMemberEmail();
-    Member owner = data.getMemberRegistry().searchMember(email);
-    if (owner != null) {
-      final ItemCategory category = getCategoryFromUserInput();
-
-      scanner.nextLine();
-
-      System.out.print("Enter Item Name: ");
-      final String name = scanner.nextLine();
-
-      System.out.print("Enter Item Description: ");
-      final String description = scanner.nextLine();
-
-      System.out.print("Enter Cost Per Day: ");
-      final int costPerDay = scanner.nextInt();
-
-      scanner.nextLine();
-
-      Item newItem = data.getItemRegistry().createItem(category, name, description, costPerDay, email);
-      System.out.println("Item ID: " + newItem.getItemId());
-      System.out.println("Item created successfully.");
-    } else {
-      System.out.println("Member not found with the specified memberId.");
-    }
-    return true;
-  }
-
-  /**
-   * Display the items.
-   */
-  public void displayItemList() {
-    List<String> allItems = data.getItemRegistry().getAllItems();
-    for (String items : allItems) {
-      // Display the member name as needed
-      System.out.println("Item: " + items);
-    }
-  }
-
-  /**
-   * Delete a specific item from user input.
-   */
-  public void promtItemDelete() {
-    System.out.print("Enter the items's ID to be deleted: ");
-    String deleteId = scanner.nextLine();
-    Item itemDelete = data.getItemRegistry().searchItem(deleteId);
-    Member itemowner = itemDelete.getOwner();
-    data.getItemRegistry().deleteItem(deleteId, itemowner.getEmail());
-    System.out.println(itemDelete.getName() + "successfully deleted! ");
-  }
-
-  /**
-   * Get the input from the user.
-
-   * @return The input.
-   */
-  public int getIntInput() {
-    int input = -1;
-    try {
-      input = Integer.parseInt(scanner.nextLine());
-    } catch (NumberFormatException e) {
-      // Invalid input; do nothing, the loop will prompt again.
-    }
-    return input;
-  }
-
-  /**
    * Getting the itemId from user input.
 
    * @return Item Id.
    */
   public String promtItemId() {
-    System.out.print("Enter the Item's ID to change information: ");
-    String changeId = scanner.nextLine();
-    printItemInfo(changeId);
-    return changeId;
-  }
-
-
-  /**
-   * Get the name to change from the user.
-
-   * @param changeId the Id of the item.
-   */
-  public void promptChangeName(String changeId) {
-    System.out.print("Enter new name: ");
-    String newName = scanner.nextLine();
-    data.getItemRegistry().updateItemName(changeId, newName);
+    System.out.print("Enter the Item's ID: ");
+    String itemId = scanner.nextLine();
+    return itemId;
   }
 
   /**
-   * Method to get the new description from user.
+   * Getting item name from user input.
 
-   * @param changeId Item Id.
+   * @return Item name.
    */
-  public void promptChangeDesc(String changeId) {
-    System.out.print("Enter new Description: ");
-    String newName = scanner.nextLine();
-    data.getItemRegistry().updateItemDesc(changeId, newName);
+  public String promptItemName() {
+    System.out.print("Enter Item Name: ");
+    String name = scanner.nextLine();
+    return name;
+  }
+
+  /**
+   * Getting item description from user input.
+
+   * @return  Item description.
+   */
+  public String promptItemDesc() {
+    System.out.print("Enter Item Description: ");
+    String description = scanner.nextLine();
+    return description;
+  }
+
+  /**
+   * Getting item cost from user input.
+
+   * @return  Item cost.
+   */
+  public int promptsItemCost() {
+    System.out.print("Enter Cost Per Day: ");
+    int costPerDay = scanner.nextInt();
+    scanner.nextLine();
+    return costPerDay;
   }
   
   /**
-   * Method to get the new category from user.
-
-   * @param changeId Item Id.
+   * Method creating the item from user input.
    */
-  public void promptChangeCategory(String changeId) {
-    ItemCategory newCategory = getCategoryFromUserInput();
-    System.out.println("New Category: " + newCategory);
-    data.getItemRegistry().updateItemCategory(changeId, newCategory);
-    scanner.nextLine();
-  }
-
-  /**
-   * Method to get the new cost from user.
-
-   * @param changeId Item Id.
-   */
-  public void promptChangeCost(String changeId) {
-    System.out.print("Enter new cost per day: ");
-    int newCost = scanner.nextInt();
-    scanner.nextLine();
-    data.getItemRegistry().updateCostPerDay(changeId, newCost);
+  public boolean displayItemCreate(Item newItem) {
+    System.out.println("Item ID: " + newItem.getItemId());
+    System.out.println("Item created successfully.");
+    return true;
   }
 
   /**
@@ -229,20 +151,79 @@ public class ItemView {
   }
 
   /**
+   * Display the items.
+   */
+  public void displayItemList(List<String> allItems) {
+    for (String items : allItems) {
+      // Display the member name as needed
+      System.out.println("Item: " + items);
+    }
+  }
+
+  /**
+   * Delete a specific item from user input.
+   */
+  public void displayItemDelete(Item itemDelete) {
+    System.out.println(itemDelete.getName() + "successfully deleted! ");
+  }
+
+
+  /**
+   * Get the name to change from the user.
+
+   * @param changeId the Id of the item.
+   */
+  public String promptChangeName(String changeId) {
+    System.out.print("Enter new name: ");
+    String newName = scanner.nextLine();
+    return newName;
+  }
+
+  /**
+   * Method to get the new description from user.
+
+   * @param changeId Item Id.
+   */
+  public String promptChangeDesc(String changeId) {
+    System.out.print("Enter new Description: ");
+    String newDesc = scanner.nextLine();
+    return newDesc;
+  }
+  
+  /**
+   * Method to get the new category from user.
+
+   * @param changeId Item Id.
+   */
+  public ItemCategory promptChangeCategory(String changeId) {
+    ItemCategory newCategory = getCategoryFromUserInput();
+    System.out.println("New Category: " + newCategory);
+    scanner.nextLine();
+    return newCategory;
+  }
+
+  /**
+   * Method to get the new cost from user.
+
+   * @param changeId Item Id.
+   */
+  public int promptChangeCost(String changeId) {
+    System.out.print("Enter new cost per day: ");
+    int newCost = scanner.nextInt();
+    scanner.nextLine();
+    return newCost;
+  }
+
+  /**
    * Method to view an item's information including its contracts (historical and
    * future).
    */
-  public void viewItemInformation() {
-    System.out.print("Enter the Item's ID to view information: ");
-    String itemId = scanner.nextLine();
-    Item item = data.getItemRegistry().searchItem(itemId);
-
+  public void viewItemInformation(Item item, String itemId, List<Contract> contracts) {
     if (item != null) {
       // Display item information
-      printItemInfo(itemId);
+      printItemInfo(item, itemId);
 
       // Display item's contracts
-      List<Contract> contracts = item.getContracts();
       if (!contracts.isEmpty()) {
         System.out.println("\n Contracts for this Item:");
 
@@ -268,9 +249,7 @@ public class ItemView {
    *
    * @param itemId The ID of the item to retrieve information for.
    */
-  public void printItemInfo(String itemId) {
-    Item item = data.getItemRegistry().searchItem(itemId);
-
+  public void printItemInfo(Item item, String itemId) {
     if (item != null) {
       System.out.println("\nItem Information:");
       System.out.println("Name: " + item.getName());
@@ -280,5 +259,20 @@ public class ItemView {
     } else {
       System.out.println("Item with ID " + itemId + " not found.");
     }
+  }
+
+  /**
+   * Get the input from the user.
+
+   * @return The input.
+   */
+  public int getIntInput() {
+    int input = -1;
+    try {
+      input = Integer.parseInt(scanner.nextLine());
+    } catch (NumberFormatException e) {
+      // Invalid input; do nothing, the loop will prompt again.
+    }
+    return input;
   }
 }

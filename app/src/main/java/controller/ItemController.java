@@ -1,5 +1,11 @@
 package controller;
 
+import java.util.List;
+import model.Contract;
+import model.DataManager;
+import model.Item;
+import model.ItemCategory;
+import model.Member;
 import view.ItemView;
 
 /**
@@ -8,10 +14,19 @@ import view.ItemView;
 public class ItemController {
   ItemView view;
   UserInterface ui;
+  DataManager data;
 
-  public ItemController(ItemView v, UserInterface ui) {
+  /**
+   * Constructor for item controller.
+
+   * @param v Item view.
+   * @param d Data.
+   * @param ui  User interface.
+   */
+  public ItemController(ItemView v, DataManager d, UserInterface ui) {
     this.view = v;
     this.ui = ui;
+    this.data = d;
   }
 
   private enum ItemOptions {
@@ -43,19 +58,39 @@ public class ItemController {
 
       switch (option) {
         case CREATE_ITEM:
-          continueManagingItems = view.itemCreateInput();
+          String email = view.promtMemberEmail();
+          Member owner = data.getMemberRegistry().searchMember(email);
+          if (owner != null) {
+            ItemCategory category = view.getCategoryFromUserInput();      
+            String name = view.promptItemName();
+            String description = view.promptItemDesc();
+            int costPerDay = view.promptsItemCost();
+            Item newItem = data.getItemRegistry().createItem(category, name, description, costPerDay, email);
+            continueManagingItems = view.displayItemCreate(newItem);
+          } else {
+            System.out.println("Member not found with the specified memberId.");
+          }
           break;
         case LIST_ITEMS:
-          view.displayItemList();
+          List<String> allItems = data.getItemRegistry().getAllItems();
+          view.displayItemList(allItems);
           break;
         case DELETE:
-          view.promtItemDelete();
+          String deleteId = view.promtItemId();
+          Item deleteItem = data.getItemRegistry().searchItem(deleteId);
+          Member itemOwner = deleteItem.getOwner();
+          data.getItemRegistry().deleteItem(deleteId, itemOwner.getEmail());
+          view.displayItemDelete(deleteItem);
           break;
         case CHANGE:
           changeItemInfo();
           break;
         case VIEW:
-          view.viewItemInformation();
+          String itemId = view.promtItemId();
+          Item item = data.getItemRegistry().searchItem(itemId);
+          view.printItemInfo(item, itemId);
+          List<Contract> contracts = item.getContracts();
+          view.viewItemInformation(item, itemId, contracts);
           break;
         case BACK:
           continueManagingItems = false;
@@ -95,16 +130,20 @@ public class ItemController {
     
     switch (option) {
       case NAME:
-        view.promptChangeName(changeId);
+        String newName = view.promptChangeName(changeId);
+        data.getItemRegistry().updateItemName(changeId, newName);
         break;
       case DESC:
-        view.promptChangeDesc(changeId);
+        String newDesc = view.promptChangeDesc(changeId);
+        data.getItemRegistry().updateItemDesc(changeId, newDesc);
         break;
       case CATEGORY:
-        view.promptChangeCategory(changeId);
+        ItemCategory newCategory = view.promptChangeCategory(changeId);
+        data.getItemRegistry().updateItemCategory(changeId, newCategory);
         break;
       case COST:
-        view.promptChangeCost(changeId);
+        int newCost = view.promptChangeCost(changeId);
+        data.getItemRegistry().updateCostPerDay(changeId, newCost);
         break;
       case BACK:
         handleItemManagement();

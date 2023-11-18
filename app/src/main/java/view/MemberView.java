@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 import model.Contract;
-import model.DataManager;
 import model.Item;
 import model.Member;
 
@@ -13,11 +12,9 @@ import model.Member;
  */
 public class MemberView {
   private Scanner scanner;
-  private DataManager data;
 
-  public MemberView(DataManager d) {
+  public MemberView() {
     this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-    this.data = d;
   }
 
   /**
@@ -37,67 +34,83 @@ public class MemberView {
   }
 
   /**
-   * Creating member with user input.
-
-   * @return True if created sucessfully.
+   * Display all change options.
    */
-  public Boolean memberCreateInput() {
-    System.out.println("Creating a new member...\n");
-    System.out.print("Enter the member's name: ");
-    final String name = scanner.nextLine();
+  public void displayChangeOptions() {
+    System.out.println("\nWhat information would you like to change? ");
+    System.out.println("1. Change name");
+    System.out.println("2. Change Email");
+    System.out.println("3. Change Phone Number");
+    System.out.println("4. Back");
+  }
 
-    System.out.print("Enter the member's email: ");
-    final String email = scanner.nextLine();
+  /**
+   * Display member created.
 
-    System.out.print("Enter the member's phone number: ");
-    final int phoneNr = scanner.nextInt();
-
-    scanner.nextLine();
-    
-    Member newMember = data.getMemberRegistry().createMember(name, email, phoneNr);
+   * @param newMember The member.
+   * @return True if member created.
+   */
+  public boolean displayMemberCreated(Member newMember) {
     System.out.println("New member created with Member ID: " + newMember.getMemberId());
-    
     return true;
+  }
+
+  /**
+   * Getting member name from user input.
+
+   * @return  Member name.
+   */
+  public String promptMemberName() {
+    System.out.print("Enter the member's name: ");
+    String name = scanner.nextLine();
+    return name;
+  }
+
+  /**
+   * Prompt for member email.
+
+   * @return The email.
+   */
+  public String promtMemberEmail() {
+    System.out.print("Enter the member's Email: ");
+    String changeEmail = scanner.nextLine();
+    return changeEmail;
+  }
+
+  /**
+   * Getting member phone number from user input.
+
+   * @return  Phone number.
+   */
+  public int promptMemberPhone() {
+    System.out.print("Enter the member's phone number: ");
+    int phoneNr = scanner.nextInt();
+    scanner.nextLine();
+    return phoneNr;
   }
 
   /**
    * Method to delete member based on user input.
    */
   public void displayDelete() {
-    System.out.print("\nEnter the member's email to be deleted: ");
-    String deleteEmail = scanner.nextLine();
-    data.getMemberRegistry().deleteMember(deleteEmail);
     System.out.println("\nMember successfully deleted! ");
-  }
-
-  /**
-   * Display all member detail.
-
-   * @return The email.
-   */
-  public String toDisplayMemberInfo() {
-    System.out.print("Enter the member's email to view information: ");
-    String viewEmail = scanner.nextLine();
-    return viewEmail;
   }
 
   /**
    * Displays all members in a simple way.
    */
-  public void displaySimpleList() {
-    List<Member> members = data.getMemberRegistry().getMembers();
+  public void displaySimpleList(List<Member> members) {
     for (Member member : members) {
       String memberEmail = member.getEmail();
       System.out.println("\nMember Information for Member email " + memberEmail + ":");
-      printMemberInfo(memberEmail);
+      printMemberInfo(member);
     }
   }
 
   /**
    * Lists all members in a verbose way.
    */
-  public void displayVerboseList() {
-    List<Member> members = data.getMemberRegistry().getMembers();
+  public void displayVerboseList(List<Member> members) {
     for (Member member : members) {
       System.out.println("\nMember Information:");
       System.out.println("Name: " + member.getName());
@@ -134,6 +147,49 @@ public class MemberView {
   }
 
   /**
+   * Prompt for the name to change.
+   */
+  public String promptChangeName() {
+    System.out.print("Enter new name: ");
+    String newName = scanner.nextLine();
+    return newName;
+  }
+
+  /**
+   * Prompt user to change email.
+   */
+  public String promtChangeEmail() {
+    System.out.print("Enter new email: ");
+    String newEmail = scanner.nextLine();
+    return newEmail;
+  }
+
+  /**
+   * Prompt phone number to change.
+   */
+  public int promtChangePhone() {
+    System.out.print("Enter new phone number: ");
+    int newPhoneNr = scanner.nextInt();
+    scanner.nextLine(); // Just to consumer the next line.
+    return newPhoneNr;
+  } 
+
+  /**
+   * Printing all member information.
+
+   * @param member  Member passed in.
+   */
+  public void printMemberInfo(Member member) {
+    System.out.println("\nMember Information:");
+    System.out.println("Name: " + member.getName());
+    System.out.println("Email: " + member.getEmail());
+    System.out.println("Phone Number: " + member.getPhoneNr());
+    System.out.println("Member ID: " + member.getMemberId());
+    System.out.println("Number of owned Items: " + member.getOwnedItemCount());
+    System.out.println("Credits: " + member.getCredits());
+  }
+
+  /**
    * Getting the user input.
 
    * @return The user input.
@@ -147,77 +203,4 @@ public class MemberView {
     }
     return input;
   }
-
-  /**
-   * Display all change options.
-   */
-  public void displayChangeOptions() {
-    System.out.println("\nWhat information would you like to change? ");
-    System.out.println("1. Change name");
-    System.out.println("2. Change Email");
-    System.out.println("3. Change Phone Number");
-    System.out.println("4. Back");
-  }
-
-  /**
-   * Prompt for member email.
-
-   * @return The email.
-   */
-  public String promtMemberEmail() {
-    System.out.print("Enter the member's Email to change information: ");
-    String changeEmail = scanner.nextLine();
-    return changeEmail;
-  }
-
-  /**
-   * Prompt for the name to change.
-
-   * @param changeEmail Email to change.
-   */
-  public void promptChangeName(String changeEmail) {
-    System.out.print("Enter new name: ");
-    String newName = scanner.nextLine();
-    data.getMemberRegistry().updateMemberName(changeEmail, newName);
-  }
-
-  /**
-   * Prompt user to change email.
-
-   * @param changeEmail Email to change.
-   */
-  public void promtChangeEmail(String changeEmail) {
-    System.out.print("Enter new email: ");
-    String newEmail = scanner.nextLine();
-    data.getMemberRegistry().updateMemberEmail(changeEmail, newEmail);
-  }
-
-  /**
-   * Prompt phone number to change.
-
-   * @param changeEmail Email to change.
-   */
-  public void promtChangePhone(String changeEmail) {
-    System.out.print("Enter new phone number: ");
-    int newPhoneNr = scanner.nextInt();
-    data.getMemberRegistry().updateMemberPhoneNr(changeEmail, newPhoneNr);
-    scanner.nextLine(); // Just to consumer the next line.
-  } 
-
-  /**
-   * Prints all member info.
-
-   * @param email Email passed in.
-   */
-  public void printMemberInfo(String email) {
-    Member member = data.getMemberRegistry().searchMember(email);
-
-    System.out.println("\nMember Information:");
-    System.out.println("Name: " + member.getName());
-    System.out.println("Email: " + member.getEmail());
-    System.out.println("Phone Number: " + member.getPhoneNr());
-    System.out.println("Number of owned Items: " + member.getOwnedItemCount());
-    System.out.println("Credits: " + member.getCredits());
-  }
-
 }

@@ -4,19 +4,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 import model.Contract;
-import model.DataManager;
 
 /**
  * Class for contract UI stuff.
  */
 public class ContractView {
   private Scanner scanner;
-  private DataManager data;
 
-
-  public ContractView(DataManager d) {
+  public ContractView() {
     this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-    this.data = d;
   }
 
   /**
@@ -68,9 +64,7 @@ public class ContractView {
   /**
    * Method to list all contracts.
    */
-  public void listAllContracts() {
-    List<Contract> contracts = data.getContractRegistry().getAllContracts();
-
+  public void listAllContracts(List<Contract> contracts) {
     if (contracts.isEmpty()) {
       System.out.println("No contracts found.");
     } else {

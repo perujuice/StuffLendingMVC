@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import model.Contract;
 import model.DataManager;
 import model.Item;
@@ -48,7 +49,8 @@ public class ContractController {
           continueManagingContracts = createNewContract();
           break;
         case LIST:
-          view.listAllContracts();
+          List<Contract> contracts = data.getContractRegistry().getAllContracts();
+          view.listAllContracts(contracts);
           break;
         case BACK:
           continueManagingContracts = false;

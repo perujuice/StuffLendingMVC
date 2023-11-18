@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.List;
+import model.DataManager;
+import model.Member;
 import view.MemberView;
 
 /**
@@ -8,10 +11,19 @@ import view.MemberView;
 public class MemberController {
   MemberView view;
   UserInterface ui;
+  DataManager data;
 
-  public MemberController(MemberView v, UserInterface ui) {
+  /**
+   * Constructor for member controller.
+
+   * @param v Member view.
+   * @param ui  User interface.
+   * @param d Data.
+   */
+  public MemberController(MemberView v, UserInterface ui, DataManager d) {
     this.view = v;
     this.ui = ui;
+    this.data = d;
   }
 
   private enum MemberOptions {
@@ -44,23 +56,32 @@ public class MemberController {
 
       switch (selectedOption) {
         case CREATE_MEMBER:
-          continueManagingMembers = view.memberCreateInput();
+          String name = view.promptMemberName();
+          String newEmail = view.promtMemberEmail();
+          int phoneNr = view.promptMemberPhone();
+          Member newMember = data.getMemberRegistry().createMember(name, newEmail, phoneNr);
+          continueManagingMembers = view.displayMemberCreated(newMember);
           break;
         case DELETE_MEMBER:
+          String deleteEmail = view.promtMemberEmail();
+          data.getMemberRegistry().deleteMember(deleteEmail);
           view.displayDelete();
           break;
         case VIEW_MEMBER_INFORMATION:
-          String email = view.toDisplayMemberInfo();
-          view.printMemberInfo(email);
+          String email = view.promtMemberEmail();
+          Member member = data.getMemberRegistry().searchMember(email);
+          view.printMemberInfo(member);
           break;
         case CHANGE_MEMBER_INFORMATION:
           changeMemberInfo();
           break;
         case LIST_MEMBERS_SIMPLE:
-          view.displaySimpleList();
+          List<Member> members = data.getMemberRegistry().getMembers();
+          view.displaySimpleList(members);
           break;
         case LIST_MEMBERS_VERBOSE:
-          view.displayVerboseList();
+          List<Member> membersVerbose = data.getMemberRegistry().getMembers();
+          view.displayVerboseList(membersVerbose);
           break;
         case BACK:
           continueManagingMembers = false;
@@ -101,13 +122,16 @@ public class MemberController {
     String changeEmail = view.promtMemberEmail();
     switch (option) {
       case NAME:
-        view.promptChangeName(changeEmail);
+        String newName = view.promptChangeName();
+        data.getMemberRegistry().updateMemberName(changeEmail, newName);
         break;
       case EMAIL:
-        view.promtChangeEmail(changeEmail);
+        String newEmail = view.promtChangeEmail();
+        data.getMemberRegistry().updateMemberEmail(changeEmail, newEmail);
         break;
       case PHONE:
-        view.promtChangePhone(changeEmail);
+        int newPhoneNr = view.promtChangePhone();
+        data.getMemberRegistry().updateMemberPhoneNr(changeEmail, newPhoneNr);
         break;
       case BACK:
         break;

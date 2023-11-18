@@ -99,10 +99,6 @@ public class Member {
     return credits;
   }
 
-  public void setCredits(int credits) {
-    this.credits = credits;
-  }
-
   /**
    * Links items to its owner.
 
