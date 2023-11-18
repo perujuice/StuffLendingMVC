@@ -75,6 +75,7 @@ public class ItemView {
    * @return Item name.
    */
   public String promptItemName() {
+    scanner.nextLine();
     System.out.print("Enter Item Name: ");
     String name = scanner.nextLine();
     return name;

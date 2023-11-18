@@ -60,7 +60,12 @@ public class MemberController {
           String newEmail = view.promtMemberEmail();
           int phoneNr = view.promptMemberPhone();
           Member newMember = data.getMemberRegistry().createMember(name, newEmail, phoneNr);
-          continueManagingMembers = view.displayMemberCreated(newMember);
+          if (newMember != null) {
+            continueManagingMembers = view.displayMemberCreated(newMember);
+          } else {
+            continueManagingMembers = false;
+            handleMemberManagement();
+          }
           break;
         case DELETE_MEMBER:
           String deleteEmail = view.promtMemberEmail();
