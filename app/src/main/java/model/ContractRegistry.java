@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +47,7 @@ public class ContractRegistry {
     }
     
     // Check if the item is available based on existing contracts
-    boolean isItemAvailable = contracts.values().stream()
-        .noneMatch(contract -> contract.getItem().equals(item) && contract.isActive(startDate, endDate));
+    boolean isItemAvailable = item.isAvailable(timeManager.getCurrentDay());
 
     if (!isItemAvailable) {
       System.out.println("Contract is not valid. The item is not available during the specified period.");
@@ -68,6 +68,20 @@ public class ContractRegistry {
 
   // list all contracts
   public List<Contract> getAllContracts() {
-    return new ArrayList<>(contracts.values());
-  }
+    List<Contract> activeContracts = new ArrayList<>();
+    Iterator<Map.Entry<String, Contract>> iterator = contracts.entrySet().iterator();
+
+    while (iterator.hasNext()) {
+        Map.Entry<String, Contract> entry = iterator.next();
+        Contract contract = entry.getValue();
+        if (contract.isActive(timeManager.getCurrentDay())) {
+            activeContracts.add(contract);
+        } else {
+            System.out.println("Contract not active anymore! ");
+            iterator.remove(); // Remove the inactive contract from the map
+        }
+    }
+
+    return activeContracts;
+}
 }

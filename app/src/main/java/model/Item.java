@@ -112,10 +112,10 @@ public class Item {
    * @param endDate The end day.
    * @return Boolean.
    */
-  public boolean isAvailable(int startDate, int endDate) {
+  public boolean isAvailable(int currentDate) {
     for (Contract contract : contracts) {
       // Check if the item is unavailable during the specified time period
-      if (contract.isActive(startDate, endDate)) {
+      if (contract.isActive(currentDate)) {
         return false;
       }
     }

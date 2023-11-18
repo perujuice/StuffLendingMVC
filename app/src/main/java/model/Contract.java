@@ -58,8 +58,11 @@ public class Contract {
     return diffInDays * pricePerDay;
   }
 
-  public boolean isActive(int newStartDate, int newEndDate) {
-    return startDate <= newEndDate && endDate >= newStartDate;
+  public boolean isActive(int currentDate) {
+    if (startDate <= currentDate && endDate >= currentDate) {
+      return true;
+    }
+    return false;
   }
 
   public double getTotalCost() {
@@ -120,15 +123,4 @@ public class Contract {
     return endDate;
   }
 
-  /**
-   * Method to check for validity of contract.
-
-   * @return Boolean.
-   */
-  public boolean isValid() {
-    // Check if the contract is valid (e.g., lender has enough credits, item is
-    // available)
-    return lender.getCredits() >= totalCost;
-    // && item.isAvailable(startDate, endDate);
-  }
 }
