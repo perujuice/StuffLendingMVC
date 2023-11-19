@@ -10,12 +10,10 @@ import java.util.Map;
  */
 public class ItemRegistry {
   private Map<String, Item> items = new HashMap<>();
-  private MemberRegistry memberRegistry;
   private TimeManager time;
 
 
-  public ItemRegistry(MemberRegistry memberRegistry, TimeManager time) {
-    this.memberRegistry = memberRegistry;
+  public ItemRegistry(TimeManager time) {
     this.time = time;
   }
 
@@ -26,21 +24,16 @@ public class ItemRegistry {
    * @param name       Name of item.
    * @param shortDesc  Short description of an item.
    * @param costPerDay Cost per day to borrow an item.
-   * @param email   Member who owns the item.
+   * @param owner   Member who owns the item.
    * @return New Item.
    */
-  public Item createItem(ItemCategory category, String name, String shortDesc, int costPerDay, String email) {
-    Member owner = memberRegistry.searchMember(email);
-
+  public Item createItem(ItemCategory category, String name, String shortDesc, int costPerDay, Member owner) {
     if (owner != null) {
       // Create a new item
       Item newItem = new Item(category, name, shortDesc, costPerDay, owner);
 
       // Add the item to the owner and get the updated owner
       owner.addItem(newItem);
-
-      // Replace the existing member in the HashMap with the updated member
-      memberRegistry.updateMember(owner);
 
       // Add the item to the items list
       items.put(newItem.getItemId(), newItem);
@@ -58,11 +51,10 @@ public class ItemRegistry {
    * Method to delete an Item.
    *
    * @param itemId   The ID of the item to delete.
-   * @param memberEmail Member who owns the item.
+   * @param owner Member who owns the item.
    * @return True if the item is deleted successfully, false otherwise.
    */
-  public boolean deleteItem(String itemId, String memberEmail) {
-    Member owner = memberRegistry.searchMember(memberEmail);
+  public boolean deleteItem(String itemId, Member owner) {
     System.out.println(owner.getName());
 
     Item itemToRemove = items.get(itemId);

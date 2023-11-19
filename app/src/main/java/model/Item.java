@@ -121,16 +121,6 @@ public class Item {
     return true;
   }
 
-  /**
-   * Link the item to its owner.
-
-   * @param owner The specific member.
-   */
-  public void setOwner(Member owner) {
-    this.owner = owner;
-    owner.addItem(this);
-  }
-
   public Member getOwner() {
     // Return a new copy of the owner object
     return new Member(this.owner);

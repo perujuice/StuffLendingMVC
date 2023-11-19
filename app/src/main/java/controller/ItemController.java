@@ -67,7 +67,9 @@ public class ItemController {
             String name = view.promptItemName();
             String description = view.promptItemDesc();
             int costPerDay = view.promptsItemCost();
-            Item newItem = data.getItemRegistry().createItem(category, name, description, costPerDay, email);
+            Item newItem = data.getItemRegistry().createItem(category, name, description, costPerDay, owner);
+            // Replace the existing member in the HashMap with the updated member
+            data.getMemberRegistry().updateMember(owner);
             continueManagingItems = view.displayItemCreate(newItem);
           } else {
             System.out.println("Member not found with the specified memberId.");
@@ -81,7 +83,7 @@ public class ItemController {
           String deleteId = view.promtItemId();
           Item deleteItem = data.getItemRegistry().searchItem(deleteId);
           Member itemOwner = deleteItem.getOwner();
-          data.getItemRegistry().deleteItem(deleteId, itemOwner.getEmail());
+          data.getItemRegistry().deleteItem(deleteId, itemOwner);
           view.displayItemDelete(deleteItem);
           break;
         case CHANGE:

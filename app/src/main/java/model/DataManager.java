@@ -15,7 +15,7 @@ public class DataManager {
    */
   public DataManager(TimeManager t) {
     members = new MemberRegistry(t);
-    items = new ItemRegistry(members, t);
+    items = new ItemRegistry(t);
     contracts = new ContractRegistry(t);
   }
 
@@ -43,37 +43,37 @@ public class DataManager {
     Member member6 = members.createMember("Mallory", "mallory@example.com", 888888888);
 
     final Item item1 = items.createItem(ItemCategory.TOOL,
-        "Hammer", "Works fine! ", 10, member1.getEmail());
+        "Hammer", "Works fine! ", 10, member1);
     final Item item2 = items.createItem(ItemCategory.TOOL,
-        "Hammer", "Works fine! ", 10, member2.getEmail());
+        "Hammer", "Works fine! ", 10, member2);
     final Item item3 = items.createItem(ItemCategory.VEHICLE,
-        "Car", "Runs smoothly", 500, member1.getEmail());
+        "Car", "Runs smoothly", 500, member1);
     items.createItem(ItemCategory.GAME,
-        "Board Game", "Fun for the family", 2, member4.getEmail());
+        "Board Game", "Fun for the family", 2, member4);
     final Item item5 = items.createItem(ItemCategory.TOY,
-        "Action Figure", "Collectible toy", 12, member3.getEmail());
+        "Action Figure", "Collectible toy", 12, member3);
     final Item item6 = items.createItem(ItemCategory.SPORT,
-        "Basketball", "High-quality ball", 30, member2.getEmail());
+        "Basketball", "High-quality ball", 30, member2);
     items.createItem(ItemCategory.OTHER,
-        "Book", "Bestseller novel", 10, member5.getEmail());
+        "Book", "Bestseller novel", 10, member5);
     items.createItem(ItemCategory.TOOL,
-        "Drill", "Powerful drill", 150, member6.getEmail());
+        "Drill", "Powerful drill", 150, member6);
     items.createItem(ItemCategory.VEHICLE,
-        "Bicycle", "Great for commuting", 2, member4.getEmail());
+        "Bicycle", "Great for commuting", 2, member4);
     items.createItem(ItemCategory.GAME,
-        "Video Game", "Exciting gameplay", 40, member2.getEmail());
+        "Video Game", "Exciting gameplay", 40, member2);
     final Item item11 = items.createItem(ItemCategory.TOY,
-        "Puzzle", "Challenging puzzle", 2, member6.getEmail());
+        "Puzzle", "Challenging puzzle", 2, member6);
     items.createItem(ItemCategory.SPORT,
-        "Soccer Ball", "Official size", 2, member3.getEmail());
+        "Soccer Ball", "Official size", 2, member3);
     items.createItem(ItemCategory.OTHER,
-        "Cookware Set", "High-quality pots", 7, member4.getEmail());
+        "Cookware Set", "High-quality pots", 7, member4);
     final Item item14 = items.createItem(ItemCategory.TOOL,
-        "Screwdriver Set", "Versatile tools", 3, member3.getEmail());
+        "Screwdriver Set", "Versatile tools", 3, member3);
     items.createItem(ItemCategory.VEHICLE,
-        "Scooter", "Fuel-efficient", 3, member6.getEmail());
+        "Scooter", "Fuel-efficient", 3, member6);
     items.createItem(ItemCategory.GAME,
-        "Chess Set", "Classic strategy game", 15, member1.getEmail());
+        "Chess Set", "Classic strategy game", 15, member1);
 
     contracts.createContract(member1, member2, item1, 2);
     contracts.createContract(member1, member3, item11, 2);
