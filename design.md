@@ -18,11 +18,5 @@ This sequence diagram illustrates the method calls and communication between the
 
 
 ### Object Diagram
-![object diagram](img/object_diagram.jpg)
+![object diagram](img/object-diagram.jpeg)
 
-The User interacts with the UserInterface to provide input and receive output.
-The UserInterface communicates with the MemberManagement for user-related actions.
-The MemberManagement interacts with the MemberController for member-related operations.
-The MemberController may interact with the Member class to perform actions on member data.
-The MemberController may also interact with the TimeManager class for time-related operations.
-The App class oversees the overall flow of the application but is not directly connected to individual objects in this representation.
